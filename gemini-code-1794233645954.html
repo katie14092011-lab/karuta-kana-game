@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karuta Kana - Trò Chơi Học Bảng Chữ Cái & Từ Vựng Nhật Bản</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Noto+Serif+JP:wght@600;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        matcha: '#4A7C59',
+                        matchaLight: '#6B9E7A',
+                        matchaSoft: '#EAF2EC',
+                        matchaDark: '#2E5038',
+                        cream: '#FFFDF6',
+                        creamCard: '#F7F4EB',
+                        beigeBorder: '#E2DBCB',
+                        sakuraPink: '#FFB7C5',
+                        woodAccent: '#C8A97E',
+                        textMain: '#2C3531'
+                    },
+                    fontFamily: {
+                        brush: ['"Shippori Mincho"', '"Noto Serif JP"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F7F4EB;
+            background-image: 
+                radial-gradient(circle at 100% 150%, #EAF2EC 24%, #F7F4EB 25%, #F7F4EB 28%, #EAF2EC 29%, #EAF2EC 36%, #F7F4EB 37%),
+                radial-gradient(circle at 0 150%, #EAF2EC 24%, #F7F4EB 25%, #F7F4EB 28%, #EAF2EC 29%, #EAF2EC 36%, #F7F4EB 37%);
+            background-size: 80px 40px;
+        }
+
+        .perspective-1000 { perspective: 1000px; }
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .card.flipped .card-inner { transform: rotateY(180deg); }
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 1rem;
+        }
+        .card-back { transform: rotateY(180deg); }
+
+        .karuta-border {
+            border: 3px solid #6B9E7A;
+            box-shadow: 0 6px 15px rgba(74, 124, 89, 0.12), inset 0 0 0 2px #FFFDF6;
+        }
+        .karuta-solved {
+            border: 3px solid #C8A97E;
+            box-shadow: 0 4px 12px rgba(200, 169, 126, 0.3);
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+        .animate-shake { animation: shake 0.35s ease-in-out; }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        .animate-float { animation: floatSlow 3s ease-in-out infinite; }
+    </style>
+</head>
+<body class="font-sans text-textMain min-h-screen flex flex-col justify-between selection:bg-matchaLight selection:text-white">
+
+    <!-- Header -->
+    <header class="border-b border-beigeBorder bg-cream/90 backdrop-blur-md sticky top-0 z-30 px-4 py-3 shadow-sm">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="resetToMenu()">
+                <div class="w-10 h-10 rounded-2xl bg-matcha flex items-center justify-center font-brush font-bold text-2xl text-cream shadow-md border-2 border-woodAccent">
+                    歌
+                </div>
+                <div>
+                    <h1 class="font-brush font-bold text-xl tracking-wider text-matchaDark flex items-center gap-2">
+                        KARUTA KANA <span class="text-[10px] bg-matchaSoft text-matchaDark border border-matcha/30 px-2 py-0.5 rounded-full font-sans">かるた</span>
+                    </h1>
+                    <p class="text-[11px] text-gray-500 hidden sm:block" data-i18n="subtitle">Học chữ cái & từ vựng Tiếng Nhật qua lá bài Karuta</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-3">
+                <!-- Language Selector -->
+                <button onclick="toggleLanguage()" class="flex items-center gap-1 bg-creamCard hover:bg-matchaSoft px-3 py-1.5 rounded-xl border border-beigeBorder text-xs font-bold text-matchaDark transition">
+                    <i data-lucide="globe" class="w-4 h-4 text-matcha"></i>
+                    <span id="lang-btn-text">EN</span>
+                </button>
+
+                <!-- Stats bar (In Game) -->
+                <div id="game-stats" class="hidden flex items-center space-x-2 sm:space-x-3">
+                    <div class="flex items-center space-x-1 bg-creamCard px-2.5 py-1.5 rounded-xl border border-beigeBorder text-xs font-semibold">
+                        <i data-lucide="layers" class="w-3.5 h-3.5 text-matcha"></i>
+                        <span id="progress-text" class="font-mono text-matchaDark">0/12</span>
+                    </div>
+                    <div class="flex items-center space-x-1 bg-amber-50 px-2.5 py-1.5 rounded-xl border border-amber-200 text-xs font-semibold">
+                        <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-600"></i>
+                        <span id="timer-display" class="font-mono text-amber-800">60s</span>
+                    </div>
+                    <div class="flex items-center space-x-1 bg-creamCard px-2.5 py-1.5 rounded-xl border border-beigeBorder text-xs font-semibold">
+                        <i data-lucide="trophy" class="w-3.5 h-3.5 text-woodAccent"></i>
+                        <span id="score-display" class="font-mono text-matchaDark">0</span>
+                    </div>
+                    <button onclick="openBadgeBook()" class="p-1.5 bg-creamCard hover:bg-matchaSoft rounded-xl border border-beigeBorder text-matchaDark transition" title="Badge Book">
+                        <i data-lucide="award" class="w-4 h-4"></i>
+                    </button>
+                    <button onclick="resetToMenu()" class="p-1.5 hover:bg-red-50 rounded-xl text-gray-400 hover:text-red-500 transition" title="Menu">
+                        <i data-lucide="log-out" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-6xl mx-auto w-full px-4 py-4 flex-grow flex flex-col justify-center">
+
+        <!-- SCREEN 1: MENU CHỌN MÀN CHƠI -->
+        <section id="screen-menu" class="space-y-6 max-w-3xl mx-auto w-full text-center py-2">
+            <div class="space-y-2">
+                <span class="inline-block bg-matchaSoft text-matchaDark border border-matcha/30 px-3 py-1 rounded-full text-xs font-semibold" data-i18n="tagline">
+                    🌸 Trải nghiệm Học Tiếng Nhật Phong Cách Karuta Nhã Nhặn
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-brush font-extrabold text-matchaDark tracking-wide" data-i18n="mainTitle">
+                    HỌC PHÁT ÂM & TỪ VỰNG KANA
+                </h2>
+                <p class="text-gray-600 text-xs sm:text-sm max-w-lg mx-auto" data-i18n="mainDesc">
+                    Chọn màn chơi phù hợp để bắt đầu thử thách lật thẻ Karuta cùng cô gái Kimono Sakura-chan!
+                </p>
+            </div>
+
+            <!-- Các màn chơi chính -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+                <!-- Stage 1 -->
+                <div onclick="selectStage(1)" class="group bg-creamCard hover:bg-cream border-2 border-beigeBorder hover:border-matcha p-5 rounded-2xl cursor-pointer transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-matchaSoft text-matcha font-brush font-bold text-xl flex items-center justify-center">
+                            あ
+                        </div>
+                        <span class="text-[10px] bg-matcha/10 text-matcha font-bold px-2 py-0.5 rounded-full" data-i18n="s1Tag">MÀN 1</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-matchaDark group-hover:text-matcha transition" data-i18n="s1Title">Đơn Ký Tự Kana</h3>
+                    <p class="text-xs text-gray-500 mt-1" data-i18n="s1Desc">Luyện thuộc lòng mặt chữ Hiragana & Katakana đơn lẻ.</p>
+                    <div id="master-s1-badge" class="mt-3 text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full inline-block hidden">
+                        ✓ MASTERED
+                    </div>
+                </div>
+
+                <!-- Stage 2 -->
+                <div id="stage-2-card" onclick="selectStage(2)" class="group bg-creamCard border-2 border-beigeBorder p-5 rounded-2xl transition-all duration-300 shadow-sm relative overflow-hidden">
+                    <div id="stage-2-lock-overlay" class="absolute inset-0 bg-stone-900/40 backdrop-blur-[2px] flex flex-col items-center justify-center z-10 text-white p-3 text-center">
+                        <i data-lucide="lock" class="w-8 h-8 mb-1 text-amber-300"></i>
+                        <span class="text-xs font-bold text-amber-200" data-i18n="lockedTitle">ĐANG KHÓA</span>
+                        <span class="text-[10px] text-gray-200" data-i18n="lockedDesc">Master Màn 1 (Độ chính xác ≥ 80%) để mở</span>
+                    </div>
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-500 font-brush font-bold text-xl flex items-center justify-center">
+                            猫
+                        </div>
+                        <span class="text-[10px] bg-rose-100 text-rose-600 font-bold px-2 py-0.5 rounded-full" data-i18n="s2Tag">MÀN 2</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-matchaDark" data-i18n="s2Title">Từ Vựng & Anime</h3>
+                    <p class="text-xs text-gray-500 mt-1" data-i18n="s2Desc">Ghép từ vựng đời sống & tên nhân vật Anime nổi tiếng.</p>
+                </div>
+
+                <!-- Stage 3 -->
+                <div id="stage-3-card" onclick="selectStage(3)" class="group bg-creamCard border-2 border-beigeBorder p-5 rounded-2xl transition-all duration-300 shadow-sm relative overflow-hidden">
+                    <div id="stage-3-lock-overlay" class="absolute inset-0 bg-stone-900/40 backdrop-blur-[2px] flex flex-col items-center justify-center z-10 text-white p-3 text-center">
+                        <i data-lucide="lock" class="w-8 h-8 mb-1 text-amber-300"></i>
+                        <span class="text-xs font-bold text-amber-200" data-i18n="lockedTitle">ĐANG KHÓA</span>
+                        <span class="text-[10px] text-gray-200" data-i18n="lockedDesc">Master Màn 1 (Độ chính xác ≥ 80%) để mở</span>
+                    </div>
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 font-brush font-bold text-xl flex items-center justify-center">
+                            姫
+                        </div>
+                        <span class="text-[10px] bg-amber-100 text-amber-700 font-bold px-2 py-0.5 rounded-full" data-i18n="s3Tag">MÀN 3</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-matchaDark" data-i18n="s3Title">Thách Thức Sakura</h3>
+                    <p class="text-xs text-gray-500 mt-1" data-i18n="s3Desc">Màn hỏi đáp siêu tốc với cô gái Kimono để nhân đôi điểm.</p>
+                </div>
+            </div>
+
+            <!-- Tùy chọn cho Màn 1 & Thời gian -->
+            <div class="bg-creamCard border border-beigeBorder p-4 rounded-2xl max-w-lg mx-auto text-left space-y-3">
+                <div class="flex justify-between items-center text-xs sm:text-sm">
+                    <span class="font-semibold text-gray-700" data-i18n="modeLabel">Chế độ bảng chữ (Màn 1):</span>
+                    <select id="sub-mode-select" class="bg-cream border border-beigeBorder text-matchaDark rounded-lg px-2.5 py-1 text-xs focus:outline-none focus:border-matcha">
+                        <option value="hiragana">Hiragana</option>
+                        <option value="katakana">Katakana</option>
+                        <option value="both" selected data-i18n="optBoth">Cả hai (Hiragana & Katakana)</option>
+                    </select>
+                </div>
+                <div class="flex justify-between items-center text-xs sm:text-sm">
+                    <span class="font-semibold text-gray-700" data-i18n="timerLabel">Thời gian đếm ngược:</span>
+                    <select id="timer-setting-select" class="bg-cream border border-beigeBorder text-matchaDark rounded-lg px-2.5 py-1 text-xs focus:outline-none focus:border-matcha">
+                        <option value="45" data-i18n="t45">45 Giây (Thách thức)</option>
+                        <option value="60" selected data-i18n="t60">60 Giây (Vừa đủ)</option>
+                        <option value="90" data-i18n="t90">90 Giây (Thoải mái)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex justify-center gap-3">
+                <button onclick="openBadgeBook()" class="bg-woodAccent hover:bg-amber-600 text-white font-bold py-2.5 px-5 rounded-xl shadow-md transition flex items-center gap-2 text-sm">
+                    <i data-lucide="book-open" class="w-4 h-4"></i> <span data-i18n="btnBadges">Sổ Huy Hiệu Tỉnh Thành</span>
+                </button>
+                <button onclick="openLeaderboard()" class="bg-creamCard border border-beigeBorder hover:bg-matchaSoft text-matchaDark font-bold py-2.5 px-5 rounded-xl transition flex items-center gap-2 text-sm">
+                    <i data-lucide="bar-chart-2" class="w-4 h-4"></i> <span data-i18n="btnRank">Bảng Xếp Hạng</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- SCREEN 2: BÀN CHƠI KARUTA KÈM CÔ GÁI KIMONO -->
+        <section id="screen-game" class="hidden space-y-4">
+            <!-- Cô gái Kimono Sakura-chan ngồi đối diện -->
+            <div class="bg-gradient-to-r from-matchaSoft via-creamCard to-matchaSoft border border-matcha/30 p-3 sm:p-4 rounded-2xl shadow-sm flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <!-- SVG Nhân vật Sakura-chan được thiết kế đẹp hơn -->
+                    <div class="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 animate-float">
+                        <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-md">
+                            <!-- Hair Back & Buns -->
+                            <circle cx="50" cy="42" r="34" fill="#1C1B1B"/>
+                            <circle cx="16" cy="32" r="11" fill="#1C1B1B"/>
+                            <circle cx="84" cy="32" r="11" fill="#1C1B1B"/>
+                            <!-- Sakura Hair Ornaments -->
+                            <path d="M 12 28 C 12 24, 20 24, 20 28 C 20 32, 12 32, 12 28 Z" fill="#FF85A2"/>
+                            <path d="M 80 28 C 80 24, 88 24, 88 28 C 88 32, 80 32, 80 28 Z" fill="#FF85A2"/>
+                            <circle cx="16" cy="28" r="3" fill="#FFFDF6"/>
+                            <circle cx="84" cy="28" r="3" fill="#FFFDF6"/>
+                            
+                            <!-- Face -->
+                            <circle cx="50" cy="48" r="25" fill="#FFF0E6"/>
+                            <!-- Bangs -->
+                            <path d="M 27 40 Q 50 32 73 40 Q 50 44 27 40 Z" fill="#1C1B1B"/>
+                            <!-- Eyes -->
+                            <ellipse id="sakura-eye-left" cx="40" cy="48" rx="2.8" ry="4" fill="#2D2B2A"/>
+                            <ellipse id="sakura-eye-right" cx="60" cy="48" rx="2.8" ry="4" fill="#2D2B2A"/>
+                            <circle cx="39" cy="46" r="1" fill="#FFF"/>
+                            <circle cx="59" cy="46" r="1" fill="#FFF"/>
+                            <!-- Cheeks -->
+                            <circle cx="34" cy="54" r="4" fill="#FFB7C5" opacity="0.8"/>
+                            <circle cx="66" cy="54" r="4" fill="#FFB7C5" opacity="0.8"/>
+                            <!-- Mouth -->
+                            <path id="kimono-avatar-mouth" d="M 45 57 Q 50 61 55 57" stroke="#D9534F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                            
+                            <!-- Kimono Body -->
+                            <path d="M 20 84 C 20 66, 32 60, 50 60 C 68 60, 80 84, 80 84 L 80 100 L 20 100 Z" fill="#FFB7C5"/>
+                            <!-- Kimono Flower Patterns -->
+                            <circle cx="32" cy="74" r="2.5" fill="#FFF" opacity="0.7"/>
+                            <circle cx="68" cy="78" r="2.5" fill="#FFF" opacity="0.7"/>
+                            <circle cx="48" cy="88" r="2.5" fill="#FFF" opacity="0.7"/>
+                            <!-- Kimono Collar -->
+                            <path d="M 38 60 L 50 74 L 62 60" stroke="#FFFDF6" stroke-width="4" fill="none"/>
+                            <path d="M 40 60 L 50 72 L 60 60" stroke="#4A7C59" stroke-width="2" fill="none"/>
+                            <!-- Obi Belt -->
+                            <path d="M 28 80 L 72 80" stroke="#C8A97E" stroke-width="6"/>
+                            <path d="M 28 80 L 72 80" stroke="#FFFDF6" stroke-width="1.5" stroke-dasharray="3,3"/>
+                        </svg>
+                    </div>
+
+                    <!-- Lời thoại động của Sakura-chan -->
+                    <div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="font-bold text-sm text-matchaDark">Sakura-chan</span>
+                            <span class="text-[10px] bg-matcha/20 text-matchaDark px-1.5 py-0.5 rounded font-mono">さくら</span>
+                        </div>
+                        <p id="kimono-dialogue" class="text-xs sm:text-sm text-gray-700 mt-0.5 italic">
+                            "Hãy lật 1 thẻ bài Karuta bên dưới và trả lời đúng nhé!"
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tên màn chơi hiện tại -->
+                <div class="hidden sm:block text-right">
+                    <span id="game-stage-badge" class="text-xs font-bold bg-matcha text-cream px-3 py-1 rounded-full uppercase tracking-wider">
+                        MÀN 1
+                    </span>
+                </div>
+            </div>
+
+            <!-- Thanh tiến trình -->
+            <div class="w-full bg-creamCard h-2 rounded-full overflow-hidden border border-beigeBorder">
+                <div id="progress-bar" class="bg-gradient-to-r from-matchaLight to-woodAccent h-full w-0 transition-all duration-300"></div>
+            </div>
+
+            <!-- Lưới thẻ Karuta -->
+            <div id="cards-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            </div>
+        </section>
+
+        <!-- SCREEN 3: MÀN HÌNH TỔNG KẾT & NHẬN HUY HIỆU -->
+        <section id="screen-result" class="hidden text-center space-y-5 max-w-md mx-auto py-4">
+            <div class="bg-creamCard border-2 border-matcha p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden">
+                <div class="w-16 h-16 mx-auto bg-matchaSoft rounded-full flex items-center justify-center text-matcha mb-3">
+                    <i data-lucide="award" class="w-8 h-8"></i>
+                </div>
+
+                <h2 id="result-title" class="font-brush font-black text-2xl sm:text-3xl text-matchaDark">
+                    HOÀN THÀNH XUẤT SẮC!
+                </h2>
+                <p id="result-subtitle" class="text-xs text-gray-500 mt-1">Sakura-chan rất tự hào về bạn!</p>
+
+                <!-- Thống kê màn chơi -->
+                <div class="grid grid-cols-2 gap-2.5 my-4 text-left">
+                    <div class="bg-cream p-3 rounded-xl border border-beigeBorder">
+                        <span class="text-[10px] text-gray-500 block uppercase" data-i18n="resScore">Tổng Điểm</span>
+                        <span id="final-score" class="text-xl font-bold font-mono text-matchaDark">0</span>
+                    </div>
+                    <div class="bg-cream p-3 rounded-xl border border-beigeBorder">
+                        <span class="text-[10px] text-gray-500 block uppercase" data-i18n="resCorrect">Số Câu Đúng</span>
+                        <span id="final-correct" class="text-xl font-bold font-mono text-emerald-600">0</span>
+                    </div>
+                    <div class="bg-cream p-3 rounded-xl border border-beigeBorder">
+                        <span class="text-[10px] text-gray-500 block uppercase" data-i18n="resWrong">Số Câu Sai</span>
+                        <span id="final-wrong" class="text-xl font-bold font-mono text-rose-500">0</span>
+                    </div>
+                    <div class="bg-cream p-3 rounded-xl border border-beigeBorder">
+                        <span class="text-[10px] text-gray-500 block uppercase" data-i18n="resAccuracy">Độ Chính Xác</span>
+                        <span id="final-accuracy" class="text-xl font-bold font-mono text-matcha">100%</span>
+                    </div>
+                </div>
+
+                <!-- Thông báo Unlock Stage -->
+                <div id="stage-unlocked-banner" class="bg-emerald-50 border border-emerald-300 p-3 rounded-2xl mb-3 text-xs text-emerald-800 font-bold hidden">
+                    🎉 chúc mừng! Bạn đã Master Màn 1 và mở khóa Màn 2 & Màn 3!
+                </div>
+
+                <!-- Vùng hiển thị Huy Hiệu nhận được -->
+                <div id="unlocked-badge-box" class="bg-amber-50 border border-amber-200 p-4 rounded-2xl mb-4 hidden">
+                    <span class="text-[11px] font-bold text-amber-700 uppercase tracking-widest block mb-1" data-i18n="newBadgeTag">🎉 Nhận Huy Hiệu Mới!</span>
+                    <div class="flex items-center justify-center space-x-3">
+                        <span id="new-badge-icon" class="text-3xl">🏯</span>
+                        <div class="text-left">
+                            <h4 id="new-badge-name" class="font-bold text-sm text-matchaDark">Huy hiệu Tokyo</h4>
+                            <p id="new-badge-desc" class="text-[11px] text-gray-600">Tháp Tokyo & Thủ đô hiện đại</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nút điều hướng -->
+                <div class="flex gap-2">
+                    <button onclick="restartStage()" class="flex-1 bg-matcha hover:bg-matchaDark text-white font-bold py-2.5 rounded-xl transition text-xs sm:text-sm flex items-center justify-center gap-1.5">
+                        <i data-lucide="rotate-ccw" class="w-4 h-4"></i> <span data-i18n="btnReplay">Chơi Lại</span>
+                    </button>
+                    <button onclick="resetToMenu()" class="flex-1 bg-cream border border-beigeBorder hover:bg-matchaSoft text-matchaDark font-bold py-2.5 rounded-xl transition text-xs sm:text-sm flex items-center justify-center gap-1.5">
+                        <i data-lucide="home" class="w-4 h-4"></i> <span data-i18n="btnMenu">Menu</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL NHẬP ROMAJI & XEM CHI TIẾT TỪ VỰNG -->
+    <div id="answer-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div id="modal-box" class="bg-creamCard border-2 border-matcha max-w-sm w-full p-5 sm:p-6 rounded-3xl shadow-2xl relative text-center space-y-4">
+            
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="space-y-1">
+                <span id="modal-char-type" class="text-[10px] font-bold text-matcha tracking-widest uppercase bg-matchaSoft px-2 py-0.5 rounded-full">HIRAGANA</span>
+                <div class="py-2 bg-cream rounded-2xl border border-beigeBorder mt-2">
+                    <div id="modal-kana-char" class="text-5xl sm:text-6xl font-brush font-black text-matchaDark">
+                        あ
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phát âm & Gợi ý -->
+            <div class="flex justify-center gap-2">
+                <button onclick="playAudioCurrent()" class="bg-cream hover:bg-matchaSoft text-matchaDark border border-beigeBorder px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 transition">
+                    <i data-lucide="volume-2" class="w-3.5 h-3.5"></i> <span data-i18n="btnListen">Nghe</span>
+                </button>
+                <button onclick="showHint()" class="bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 transition">
+                    <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i> <span data-i18n="btnHint">Gợi ý</span>
+                </button>
+            </div>
+
+            <!-- Vùng hiện gợi ý -->
+            <div id="hint-display" class="hidden text-xs text-amber-800 bg-amber-50 border border-amber-200 p-2 rounded-xl">
+                <span data-i18n="hintStart">Bắt đầu bằng chữ:</span> <span id="hint-text" class="font-bold uppercase"></span>
+            </div>
+
+            <!-- Vùng báo SAI & SỬA ĐÁP ÁN (Yêu cầu 5) -->
+            <div id="wrong-feedback-box" class="hidden text-left bg-rose-50 border border-rose-300 p-3 rounded-xl space-y-2">
+                <div class="flex items-center text-rose-600 font-bold text-xs gap-1">
+                    <i data-lucide="x-circle" class="w-4 h-4"></i>
+                    <span data-i18n="wrongTitle">Rất tiếc, bạn đã trả lời chưa chính xác!</span>
+                </div>
+                <div class="text-xs text-gray-700">
+                    <span data-i18n="correctAnswerLabel">Đáp án đúng là:</span> 
+                    <span id="correct-answer-text" class="font-mono font-bold text-matchaDark text-sm uppercase px-1.5 py-0.5 bg-white rounded border"></span>
+                </div>
+                <button onclick="confirmNextAfterWrong()" class="w-full mt-1 bg-rose-500 hover:bg-rose-600 text-white font-bold py-1.5 rounded-lg text-xs transition flex items-center justify-center gap-1">
+                    <span data-i18n="btnNextCard">Chuyển qua câu mới</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </button>
+            </div>
+
+            <!-- Form Nhập Romaji -->
+            <form id="answer-form" onsubmit="submitAnswer(event)" class="space-y-3">
+                <input type="text" id="romaji-input" autocomplete="off" placeholder="Nhập Romaji..." 
+                       class="w-full bg-cream border-2 border-beigeBorder focus:border-matcha text-matchaDark font-mono text-center text-lg py-2.5 px-4 rounded-xl focus:outline-none transition">
+                
+                <button type="submit" class="w-full bg-matcha hover:bg-matchaDark text-white font-bold py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-sm">
+                    <span data-i18n="btnSubmit">Xác Nhận</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL SỔ HUY HIỆU TỈNH THÀNH -->
+    <div id="badge-book-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-creamCard border-2 border-woodAccent max-w-2xl w-full p-5 sm:p-6 rounded-3xl shadow-2xl relative max-h-[85vh] flex flex-col">
+            <div class="flex justify-between items-center border-b border-beigeBorder pb-3">
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="book-open" class="w-5 h-5 text-woodAccent"></i>
+                    <h3 class="font-bold text-lg text-matchaDark" data-i18n="badgeBookTitle">Sổ Sưu Tập Huy Hiệu Tỉnh Thành Nhật Bản</h3>
+                </div>
+                <button onclick="closeBadgeBook()" class="text-gray-400 hover:text-gray-600">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <p class="text-xs text-gray-500 my-2" data-i18n="badgeBookDesc">
+                Chiến thắng các màn chơi để mở khóa các huy hiệu biểu trưng độc đáo của các Tỉnh thành Nhật Bản!
+            </p>
+            <div id="badge-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-3 overflow-y-auto pr-1 my-2 flex-grow">
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL BẢNG XẾP HẠNG -->
+    <div id="leaderboard-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-creamCard border-2 border-matcha max-w-md w-full p-5 sm:p-6 rounded-3xl shadow-2xl relative">
+            <div class="flex justify-between items-center border-b border-beigeBorder pb-3 mb-4">
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="trophy" class="w-5 h-5 text-woodAccent"></i>
+                    <h3 class="font-bold text-lg text-matchaDark" data-i18n="leaderboardTitle">Bảng Xếp Hạng Cao Thủ</h3>
+                </div>
+                <button onclick="closeLeaderboard()" class="text-gray-400 hover:text-gray-600">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div id="leaderboard-list" class="space-y-2 max-h-60 overflow-y-auto">
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-beigeBorder bg-cream/80 py-2.5 px-4 text-center text-xs text-gray-500">
+        <p>Karuta Kana Game • Tone Màu Matcha & Cream Nhã Nhặn • Web Speech API</p>
+    </footer>
+
+    <!-- JavaScript Game Logic -->
+    <script>
+        // 1. DỮ LIỆU ĐA NGÔN NGỮ (I18N)
+        let currentLang = 'vi';
+        const translations = {
+            vi: {
+                subtitle: 'Học chữ cái & từ vựng Tiếng Nhật qua lá bài Karuta',
+                tagline: '🌸 Trải nghiệm Học Tiếng Nhật Phong Cách Karuta Nhã Nhặn',
+                mainTitle: 'HỌC PHÁT ÂM & TỪ VỰNG KANA',
+                mainDesc: 'Chọn màn chơi phù hợp để bắt đầu thử thách lật thẻ Karuta cùng cô gái Kimono Sakura-chan!',
+                s1Tag: 'MÀN 1',
+                s1Title: 'Đơn Ký Tự Kana',
+                s1Desc: 'Luyện thuộc lòng mặt chữ Hiragana & Katakana đơn lẻ.',
+                s2Tag: 'MÀN 2',
+                s2Title: 'Từ Vựng & Anime',
+                s2Desc: 'Ghép từ vựng đời sống & tên nhân vật Anime nổi tiếng.',
+                s3Tag: 'MÀN 3',
+                s3Title: 'Thách Thức Sakura',
+                s3Desc: 'Màn hỏi đáp siêu tốc với cô gái Kimono để nhân đôi điểm.',
+                lockedTitle: 'ĐANG KHÓA',
+                lockedDesc: 'Master Màn 1 (Độ chính xác ≥ 80%) để mở',
+                modeLabel: 'Chế độ bảng chữ (Màn 1):',
+                optBoth: 'Cả hai (Hiragana & Katakana)',
+                timerLabel: 'Thời gian đếm ngược:',
+                t45: '45 Giây (Thách thức)',
+                t60: '60 Giây (Vừa đủ)',
+                t90: '90 Giây (Thoải mái)',
+                btnBadges: 'Sổ Huy Hiệu Tỉnh Thành',
+                btnRank: 'Bảng Xếp Hạng',
+                btnListen: 'Nghe',
+                btnHint: 'Gợi ý',
+                hintStart: 'Bắt đầu bằng chữ:',
+                wrongTitle: 'Rất tiếc, bạn đã trả lời chưa chính xác!',
+                correctAnswerLabel: 'Đáp án đúng là:',
+                btnNextCard: 'Chuyển qua câu mới',
+                btnSubmit: 'Xác Nhận',
+                resScore: 'Tổng Điểm',
+                resCorrect: 'Số Câu Đúng',
+                resWrong: 'Số Câu Sai',
+                resAccuracy: 'Độ Chính Xác',
+                newBadgeTag: '🎉 Nhận Huy Hiệu Mới!',
+                btnReplay: 'Chơi Lại',
+                btnMenu: 'Menu',
+                badgeBookTitle: 'Sổ Sưu Tập Huy Hiệu Tỉnh Thành Nhật Bản',
+                badgeBookDesc: 'Chiến thắng các màn chơi để mở khóa các huy hiệu biểu trưng độc đáo của các Tỉnh thành Nhật Bản!',
+                leaderboardTitle: 'Bảng Xếp Hạng Cao Thủ'
+            },
+            en: {
+                subtitle: 'Learn Japanese Alphabet & Vocabulary with Karuta Cards',
+                tagline: '🌸 Authentic Karuta-style Japanese Learning Experience',
+                mainTitle: 'KANA PRONUNCIATION & VOCAB',
+                mainDesc: 'Choose a stage to start the Karuta card flipping challenge with Kimono girl Sakura-chan!',
+                s1Tag: 'STAGE 1',
+                s1Title: 'Single Kana Characters',
+                s1Desc: 'Master individual Hiragana & Katakana characters.',
+                s2Tag: 'STAGE 2',
+                s2Title: 'Vocab & Anime',
+                s2Desc: 'Match daily life vocabulary & famous Anime character names.',
+                s3Tag: 'STAGE 3',
+                s3Title: 'Sakura Challenge',
+                s3Desc: 'Fast-paced Q&A with Kimono girl for double bonus points.',
+                lockedTitle: 'LOCKED',
+                lockedDesc: 'Master Stage 1 (Accuracy ≥ 80%) to unlock',
+                modeLabel: 'Character Set (Stage 1):',
+                optBoth: 'Both (Hiragana & Katakana)',
+                timerLabel: 'Timer Count:',
+                t45: '45 Seconds (Hard)',
+                t60: '60 Seconds (Normal)',
+                t90: '90 Seconds (Relaxed)',
+                btnBadges: 'Prefecture Badges',
+                btnRank: 'Leaderboard',
+                btnListen: 'Listen',
+                btnHint: 'Hint',
+                hintStart: 'Starts with letter:',
+                wrongTitle: 'Oops, that answer is incorrect!',
+                correctAnswerLabel: 'The correct answer is:',
+                btnNextCard: 'Next Question',
+                btnSubmit: 'Submit',
+                resScore: 'Total Score',
+                resCorrect: 'Correct Answers',
+                resWrong: 'Wrong Answers',
+                resAccuracy: 'Accuracy',
+                newBadgeTag: '🎉 New Badge Unlocked!',
+                btnReplay: 'Play Again',
+                btnMenu: 'Menu',
+                badgeBookTitle: 'Japanese Prefecture Badges Album',
+                badgeBookDesc: 'Win games to unlock iconic badges of 47 Japanese Prefectures!',
+                leaderboardTitle: 'Top Players Leaderboard'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'vi' ? 'en' : 'vi';
+            document.getElementById('lang-btn-text').innerText = currentLang === 'vi' ? 'EN' : 'VI';
+            applyTranslations();
+        }
+
+        function applyTranslations() {
+            const lang = translations[currentLang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (lang[key]) {
+                    el.innerText = lang[key];
+                }
+            });
+        }
+
+        // 2. DỮ LIỆU ĐƠN CHỮ KANA & TỪ VỰNG
+        const singleKanaData = [
+            { hiragana: 'あ', katakana: 'ア', romaji: 'a' },
+            { hiragana: 'い', katakana: 'イ', romaji: 'i' },
+            { hiragana: 'う', katakana: 'ウ', romaji: 'u' },
+            { hiragana: 'え', katakana: 'エ', romaji: 'e' },
+            { hiragana: 'お', katakana: 'オ', romaji: 'o' },
+            { hiragana: 'か', katakana: 'カ', romaji: 'ka' },
+            { hiragana: 'き', katakana: 'キ', romaji: 'ki' },
+            { hiragana: 'く', katakana: 'ク', romaji: 'ku' },
+            { hiragana: 'け', katakana: 'ケ', romaji: 'ke' },
+            { hiragana: 'こ', katakana: 'コ', romaji: 'ko' },
+            { hiragana: 'さ', katakana: 'サ', romaji: 'sa' },
+            { hiragana: 'し', katakana: 'シ', romaji: 'shi' },
+            { hiragana: 'す', katakana: 'ス', romaji: 'su' },
+            { hiragana: 'せ', katakana: 'セ', romaji: 'se' },
+            { hiragana: 'そ', katakana: 'ソ', romaji: 'so' },
+            { hiragana: 'た', katakana: 'タ', romaji: 'ta' },
+            { hiragana: 'ち', katakana: 'チ', romaji: 'chi' },
+            { hiragana: 'つ', katakana: 'ツ', romaji: 'tsu' },
+            { hiragana: 'て', katakana: 'テ', romaji: 'te' },
+            { hiragana: 'と', katakana: 'ト', romaji: 'to' },
+            { hiragana: 'な', katakana: 'ナ', romaji: 'na' },
+            { hiragana: 'に', katakana: 'ニ', romaji: 'ni' },
+            { hiragana: 'ぬ', katakana: 'ヌ', romaji: 'nu' },
+            { hiragana: 'ね', katakana: 'ネ', romaji: 'ne' },
+            { hiragana: 'の', katakana: 'ノ', romaji: 'no' },
+            { hiragana: 'は', katakana: 'ハ', romaji: 'ha' },
+            { hiragana: 'ひ', katakana: 'ヒ', romaji: 'hi' },
+            { hiragana: 'ふ', katakana: 'フ', romaji: 'fu' },
+            { hiragana: 'へ', katakana: 'ヘ', romaji: 'he' },
+            { hiragana: 'ほ', katakana: 'ホ', romaji: 'ho' },
+            { hiragana: 'ま', katakana: 'マ', romaji: 'ma' },
+            { hiragana: 'み', katakana: 'ミ', romaji: 'mi' },
+            { hiragana: 'む', katakana: 'ム', romaji: 'mu' },
+            { hiragana: 'め', katakana: 'メ', romaji: 'me' },
+            { hiragana: 'も', katakana: 'モ', romaji: 'mo' },
+            { hiragana: 'や', katakana: 'ヤ', romaji: 'ya' },
+            { hiragana: 'ゆ', katakana: 'ユ', romaji: 'yu' },
+            { hiragana: 'よ', katakana: 'ヨ', romaji: 'yo' },
+            { hiragana: 'ら', katakana: 'ラ', romaji: 'ra' },
+            { hiragana: 'り', katakana: 'リ', romaji: 'ri' },
+            { hiragana: 'る', katakana: 'ル', romaji: 'ru' },
+            { hiragana: 'れ', katakana: 'レ', romaji: 're' },
+            { hiragana: 'ろ', katakana: 'ロ', romaji: 'ro' },
+            { hiragana: 'わ', katakana: 'ワ', romaji: 'wa' },
+            { hiragana: 'ん', katakana: 'ン', romaji: 'n' }
+        ];
+
+        const vocabData = [
+            { char: 'さくら', romaji: 'sakura', meaning: 'Hoa Anh Đào', type: 'Đời sống' },
+            { char: 'ねこ', romaji: 'neko', meaning: 'Con Mèo', type: 'Đời sống' },
+            { char: 'いぬ', romaji: 'inu', meaning: 'Con Chó', type: 'Đời sống' },
+            { char: 'すし', romaji: 'sushi', meaning: 'Món Sushi', type: 'Đời sống' },
+            { char: 'ラーメン', romaji: 'ramen', meaning: 'Mì Ramen', type: 'Đời sống' },
+            { char: 'ふじさん', romaji: 'fujisan', meaning: 'Núi Phú Sĩ', type: 'Địa danh' },
+            { char: 'ナルト', romaji: 'naruto', meaning: 'Nhẫn giả Naruto', type: 'Anime' },
+            { char: 'トトロ', romaji: 'totoro', meaning: 'Linh vật Totoro', type: 'Anime' },
+            { char: 'ピカチュウ', romaji: 'pikachu', meaning: 'Pokémon Pikachu', type: 'Anime' },
+            { char: 'ルフィ', romaji: 'luffy', meaning: 'Vua Hải Tặc Luffy', type: 'Anime' },
+            { char: 'ねずこ', romaji: 'nezuko', meaning: 'Cô bé Nezuko', type: 'Anime' },
+            { char: 'ごじょう', romaji: 'gojo', meaning: 'Thầy Gojo Satoru', type: 'Anime' }
+        ];
+
+        const bossQuizData = [
+            { char: 'ありがとう', romaji: 'arigatou', meaning: 'Cảm ơn nhiều', type: 'Giao tiếp' },
+            { char: 'こんにちは', romaji: 'konnichiwa', meaning: 'Xin chào', type: 'Giao tiếp' },
+            { char: 'さようなら', romaji: 'sayounara', meaning: 'Tạm biệt', type: 'Giao tiếp' },
+            { char: 'おいしい', romaji: 'oishii', meaning: 'Ngon miệng', type: 'Tính từ' },
+            { char: 'かわいい', romaji: 'kawaii', meaning: 'Đáng yêu', type: 'Tính từ' },
+            { char: 'すごい', romaji: 'sugoi', meaning: 'Tuyệt vời', type: 'Tính từ' }
+        ];
+
+        const prefectureBadges = [
+            { id: 'tokyo', name: 'Tokyo (東京)', icon: '🏯', desc: 'Tháp Tokyo & Thủ đô nhộn nhịp', unlocked: false },
+            { id: 'kyoto', name: 'Kyoto (京都)', icon: '⛩️', desc: 'Cố đô cổ kính & Chùa Vàng', unlocked: false },
+            { id: 'osaka', name: 'Osaka (大阪)', icon: '🍢', desc: 'Bánh Takoyaki & Lâu đài Osaka', unlocked: false },
+            { id: 'hokkaido', name: 'Hokkaido (北海道)', icon: '❄️', desc: 'Tuyết trắng & Hải sản tươi ngon', unlocked: false },
+            { id: 'shizuoka', name: 'Shizuoka (静岡)', icon: '🗻', desc: 'Núi Phú Sĩ & Trà xanh Matcha', unlocked: false },
+            { id: 'hiroshima', name: 'Hiroshima (広島)', icon: '⛩️', desc: 'Cổng Torii nổi trên mặt biển', unlocked: false },
+            { id: 'nara', name: 'Nara (奈良)', icon: '🦌', desc: 'Công viên Nai thân thiện', unlocked: false },
+            { id: 'okinawa', name: 'Okinawa (沖縄)', icon: '🌺', desc: 'Biển xanh nắng vàng ngập tràn', unlocked: false }
+        ];
+
+        // Câu thoại Nhật Bản của Sakura-chan khi trả lời ĐÚNG (Yêu cầu 1)
+        const sakuraJapanesePraises = [
+            { ja: "素晴らしい！ (Subarashii!)", audio: "素晴らしい！" },
+            { ja: "すごいですね！ (Sugoi desu ne!)", audio: "すごいですね！" },
+            { ja: "正解です！よくできました！ (Seikai desu!)", audio: "正解です！よくできました！" },
+            { ja: "さすがです！ (Sasuga desu!)", audio: "さすがです！" },
+            { ja: "その調子です！ (Sono choushi desu!)", audio: "その調子です！" }
+        ];
+
+        // 3. TRẠNG THÁI GAME
+        let isStage1Mastered = localStorage.getItem('karuta_stage1_mastered') === 'true';
+        let currentStage = 1;
+        let activeCards = [];
+        let selectedCard = null;
+        let score = 0;
+        let streak = 0;
+        let maxStreak = 0;
+        let correctAnswersCount = 0;
+        let wrongAnswersCount = 0;
+        let completedCount = 0;
+        let timeLeft = 60;
+        let timerInterval = null;
+
+        lucide.createIcons();
+        loadBadgeStorage();
+        updateLockStatusUI();
+
+        function updateLockStatusUI() {
+            const masterBadge = document.getElementById('master-s1-badge');
+            const s2Lock = document.getElementById('stage-2-lock-overlay');
+            const s3Lock = document.getElementById('stage-3-lock-overlay');
+
+            if (isStage1Mastered) {
+                masterBadge.classList.remove('hidden');
+                s2Lock.classList.add('hidden');
+                s3Lock.classList.add('hidden');
+            } else {
+                masterBadge.classList.add('hidden');
+                s2Lock.classList.remove('hidden');
+                s3Lock.classList.remove('hidden');
+            }
+        }
+
+        // 4. BẮT ĐẦU VÁN CHƠI
+        function selectStage(stageNum) {
+            if ((stageNum === 2 || stageNum === 3) && !isStage1Mastered) {
+                alert(currentLang === 'vi' 
+                    ? "Màn chơi này đang bị khóa! Hãy hoàn thành Màn 1 với độ chính xác ≥ 80% để mở khóa nhé!" 
+                    : "This stage is locked! Master Stage 1 with accuracy ≥ 80% to unlock!");
+                return;
+            }
+
+            currentStage = stageNum;
+            const subMode = document.getElementById('sub-mode-select').value;
+            timeLeft = parseInt(document.getElementById('timer-setting-select').value) || 60;
+
+            score = 0;
+            streak = 0;
+            maxStreak = 0;
+            correctAnswersCount = 0;
+            wrongAnswersCount = 0;
+            completedCount = 0;
+
+            updateStatsDisplay();
+
+            let pool = [];
+            if (stageNum === 1) {
+                let shuffled = [...singleKanaData].sort(() => Math.random() - 0.5).slice(0, 12);
+                pool = shuffled.map((item, idx) => {
+                    let displayChar = item.hiragana;
+                    let typeLabel = 'Hiragana';
+                    if (subMode === 'katakana') {
+                        displayChar = item.katakana;
+                        typeLabel = 'Katakana';
+                    } else if (subMode === 'both') {
+                        const isHira = Math.random() > 0.5;
+                        displayChar = isHira ? item.hiragana : item.katakana;
+                        typeLabel = isHira ? 'Hiragana' : 'Katakana';
+                    }
+                    return {
+                        id: idx,
+                        char: displayChar,
+                        romaji: item.romaji,
+                        meaning: `Chữ ${item.romaji.toUpperCase()}`,
+                        type: typeLabel,
+                        solved: false,
+                        flipped: false
+                    };
+                });
+            } else if (stageNum === 2) {
+                let shuffled = [...vocabData].sort(() => Math.random() - 0.5).slice(0, 12);
+                pool = shuffled.map((item, idx) => ({
+                    id: idx,
+                    char: item.char,
+                    romaji: item.romaji,
+                    meaning: item.meaning,
+                    type: item.type,
+                    solved: false,
+                    flipped: false
+                }));
+            } else if (stageNum === 3) {
+                let shuffled = [...bossQuizData].sort(() => Math.random() - 0.5).slice(0, 6);
+                pool = shuffled.map((item, idx) => ({
+                    id: idx,
+                    char: item.char,
+                    romaji: item.romaji,
+                    meaning: item.meaning,
+                    type: 'Thách Thức',
+                    solved: false,
+                    flipped: false
+                }));
+            }
+
+            activeCards = pool;
+
+            document.getElementById('screen-menu').classList.add('hidden');
+            document.getElementById('screen-result').classList.add('hidden');
+            document.getElementById('screen-game').classList.remove('hidden');
+            document.getElementById('game-stats').classList.remove('hidden');
+
+            document.getElementById('game-stage-badge').innerText = `${currentLang === 'vi' ? 'MÀN' : 'STAGE'} ${stageNum}`;
+            
+            const initMsg = currentLang === 'vi' 
+                ? `Chào mừng bạn đến với Màn ${stageNum}! Hãy tập trung lật thẻ nhé!` 
+                : `Welcome to Stage ${stageNum}! Let's flip cards and learn!`;
+            updateSakuraDialogue(initMsg, 'normal');
+
+            renderCards();
+
+            clearInterval(timerInterval);
+            document.getElementById('timer-display').innerText = `${timeLeft}s`;
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer-display').innerText = `${timeLeft}s`;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    finishGame(false);
+                }
+            }, 1000);
+        }
+
+        function renderCards() {
+            const container = document.getElementById('cards-container');
+            container.innerHTML = '';
+
+            activeCards.forEach(card => {
+                const cardEl = document.createElement('div');
+                cardEl.className = `card perspective-1000 h-32 sm:h-40 cursor-pointer select-none ${card.flipped ? 'flipped' : ''}`;
+                cardEl.onclick = () => handleCardClick(card);
+
+                cardEl.innerHTML = `
+                    <div class="card-inner">
+                        <div class="card-front karuta-border bg-creamCard flex flex-col items-center justify-between p-3 rounded-2xl hover:border-matcha transition">
+                            <span class="text-[9px] font-bold text-matcha">かるた</span>
+                            <div class="w-10 h-10 rounded-full bg-matchaSoft border border-matcha/30 flex items-center justify-center text-matcha font-brush font-bold">
+                                🌸
+                            </div>
+                            <span class="text-[9px] text-stone-400">KARUTA</span>
+                        </div>
+                        <div class="card-back ${card.solved ? 'bg-amber-50 karuta-solved' : 'bg-cream karuta-border'} p-3 flex flex-col items-center justify-between rounded-2xl shadow-md">
+                            <span class="text-[9px] font-bold tracking-wider ${card.solved ? 'text-amber-700' : 'text-matcha'}">${card.type}</span>
+                            <div class="text-2xl sm:text-3xl font-brush font-black ${card.solved ? 'text-amber-800' : 'text-matchaDark'} text-center">
+                                ${card.char}
+                            </div>
+                            ${card.solved ? 
+                                `<div class="text-[10px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded border border-amber-300">${card.romaji}</div>` : 
+                                `<div class="text-[9px] text-gray-400">${currentLang === 'vi' ? 'Nhấn chọn' : 'Select'}</div>`
+                            }
+                        </div>
+                    </div>
+                `;
+                container.appendChild(cardEl);
+            });
+
+            lucide.createIcons();
+            const percent = (completedCount / activeCards.length) * 100;
+            document.getElementById('progress-bar').style.width = `${percent}%`;
+        }
+
+        function handleCardClick(card) {
+            if (card.solved) return;
+            selectedCard = card;
+            card.flipped = true;
+            renderCards();
+
+            playJapaneseSpeech(card.char);
+
+            setTimeout(() => {
+                openAnswerModal(card);
+            }, 300);
+        }
+
+        function openAnswerModal(card) {
+            const modal = document.getElementById('answer-modal');
+            document.getElementById('modal-kana-char').innerText = card.char;
+            document.getElementById('modal-char-type').innerText = `${card.type} - ${card.meaning}`;
+            
+            const input = document.getElementById('romaji-input');
+            input.value = '';
+            document.getElementById('hint-display').classList.add('hidden');
+
+            // Reset trạng thái báo sai
+            document.getElementById('wrong-feedback-box').classList.add('hidden');
+            document.getElementById('answer-form').classList.remove('hidden');
+
+            modal.classList.remove('hidden');
+            setTimeout(() => input.focus(), 150);
+        }
+
+        function closeModal() {
+            document.getElementById('answer-modal').classList.add('hidden');
+            if (selectedCard && !selectedCard.solved) {
+                selectedCard.flipped = false;
+                renderCards();
+            }
+            selectedCard = null;
+        }
+
+        function showHint() {
+            if (!selectedCard) return;
+            document.getElementById('hint-text').innerText = selectedCard.romaji.charAt(0);
+            document.getElementById('hint-display').classList.remove('hidden');
+        }
+
+        function playAudioCurrent() {
+            if (selectedCard) playJapaneseSpeech(selectedCard.char);
+        }
+
+        function playJapaneseSpeech(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'ja-JP';
+                utterance.rate = 0.85;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // 5. NÂNG CẤP XỬ LÝ TRẢ LỜI (ĐÚNG / SAI)
+        function submitAnswer(e) {
+            e.preventDefault();
+            if (!selectedCard) return;
+
+            const input = document.getElementById('romaji-input');
+            const userAns = input.value.trim().toLowerCase();
+            const correctAns = selectedCard.romaji.toLowerCase();
+
+            if (userAns === correctAns) {
+                // --- TRẢ LỜI ĐÚNG ---
+                selectedCard.solved = true;
+                completedCount++;
+                correctAnswersCount++;
+                streak++;
+                if (streak > maxStreak) maxStreak = streak;
+
+                const multiplier = currentStage === 3 ? 2 : 1;
+                score += (100 + (streak - 1) * 20) * multiplier;
+
+                updateStatsDisplay();
+
+                // Sakura-chan cười rạng rỡ và nói 1 câu chúc mừng tiếng Nhật (Yêu cầu 1)
+                const praiseObj = sakuraJapanesePraises[Math.floor(Math.random() * sakuraJapanesePraises.length)];
+                updateSakuraDialogue(praiseObj.ja, 'happy');
+                playJapaneseSpeech(praiseObj.audio);
+
+                if (streak >= 3) {
+                    confetti({ particleCount: 35, spread: 50, origin: { y: 0.7 } });
+                }
+
+                closeModal();
+                renderCards();
+
+                if (completedCount === activeCards.length) {
+                    setTimeout(() => finishGame(true), 400);
+                }
+            } else {
+                // --- TRẢ LỜI SAI (Yêu cầu 5) ---
+                streak = 0;
+                wrongAnswersCount++;
+                updateStatsDisplay();
+
+                updateSakuraDialogue(
+                    currentLang === 'vi' ? 'Tiếc quá! Hãy ghi nhớ đáp án nhé!' : 'Too bad! Take note of the right answer!', 
+                    'sad'
+                );
+
+                // Hiển thị khung báo sai + đáp án đúng + ẩn form nhập
+                document.getElementById('correct-answer-text').innerText = selectedCard.romaji.toUpperCase();
+                document.getElementById('wrong-feedback-box').classList.remove('hidden');
+                document.getElementById('answer-form').classList.add('hidden');
+
+                const modalBox = document.getElementById('modal-box');
+                modalBox.classList.add('animate-shake');
+                setTimeout(() => modalBox.classList.remove('animate-shake'), 400);
+            }
+        }
+
+        function confirmNextAfterWrong() {
+            // Khi bấm Next sau câu sai: Không tính điểm, chuyển sang câu tiếp
+            if (selectedCard) {
+                selectedCard.solved = true; // Đánh dấu đã qua câu này
+                completedCount++;
+            }
+
+            closeModal();
+            renderCards();
+
+            if (completedCount === activeCards.length) {
+                setTimeout(() => finishGame(true), 400);
+            }
+        }
+
+        function updateStatsDisplay() {
+            document.getElementById('score-display').innerText = score;
+            document.getElementById('progress-text').innerText = `${completedCount}/${activeCards.length}`;
+        }
+
+        function updateSakuraDialogue(text, mood) {
+            document.getElementById('kimono-dialogue').innerText = `"${text}"`;
+            const mouth = document.getElementById('kimono-avatar-mouth');
+            const eyeL = document.getElementById('sakura-eye-left');
+            const eyeR = document.getElementById('sakura-eye-right');
+
+            if (mood === 'happy') {
+                // Miệng cười tươi
+                mouth.setAttribute('d', 'M 42 55 Q 50 67 58 55');
+                // Mắt híp cười (Crescent shape)
+                eyeL.setAttribute('ry', '1.5');
+                eyeR.setAttribute('ry', '1.5');
+            } else if (mood === 'sad') {
+                // Miệng thoáng buồn khích lệ
+                mouth.setAttribute('d', 'M 44 59 Q 50 53 56 59');
+                eyeL.setAttribute('ry', '4');
+                eyeR.setAttribute('ry', '4');
+            } else {
+                // Bình thường
+                mouth.setAttribute('d', 'M 45 57 Q 50 61 55 57');
+                eyeL.setAttribute('ry', '4');
+                eyeR.setAttribute('ry', '4');
+            }
+        }
+
+        // 6. KẾT THÚC MÀN CHƠI & TỔNG KẾT (Yêu cầu 3 & Yêu cầu 4)
+        function finishGame(isWin) {
+            clearInterval(timerInterval);
+
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('game-stats').classList.add('hidden');
+            document.getElementById('screen-result').classList.remove('hidden');
+
+            const total = correctAnswersCount + wrongAnswersCount;
+            const accuracy = total > 0 ? Math.round((correctAnswersCount / total) * 100) : 0;
+
+            // Cập nhật các chỉ số tổng kết (Yêu cầu 3)
+            document.getElementById('final-score').innerText = score;
+            document.getElementById('final-correct').innerText = correctAnswersCount;
+            document.getElementById('final-wrong').innerText = wrongAnswersCount;
+            document.getElementById('final-accuracy').innerText = `${accuracy}%`;
+
+            const stageUnlockedBanner = document.getElementById('stage-unlocked-banner');
+            stageUnlockedBanner.classList.add('hidden');
+
+            // Kiếm tra Master Màn 1 (Yêu cầu 4)
+            if (currentStage === 1 && accuracy >= 80 && isWin) {
+                if (!isStage1Mastered) {
+                    isStage1Mastered = true;
+                    localStorage.setItem('karuta_stage1_mastered', 'true');
+                    updateLockStatusUI();
+                    stageUnlockedBanner.classList.remove('hidden');
+                }
+            }
+
+            const badgeBox = document.getElementById('unlocked-badge-box');
+
+            if (isWin) {
+                confetti({ particleCount: 90, spread: 70, origin: { y: 0.5 } });
+                document.getElementById('result-title').innerText = currentLang === 'vi' ? "HOÀN THÀNH MÀN CHƠI!" : "STAGE COMPLETED!";
+                
+                // Mở khóa huy hiệu ngẫu nhiên
+                const lockedBadges = prefectureBadges.filter(b => !b.unlocked);
+                if (lockedBadges.length > 0) {
+                    const newBadge = lockedBadges[Math.floor(Math.random() * lockedBadges.length)];
+                    newBadge.unlocked = true;
+                    saveBadgeStorage();
+
+                    document.getElementById('new-badge-icon').innerText = newBadge.icon;
+                    document.getElementById('new-badge-name').innerText = newBadge.name;
+                    document.getElementById('new-badge-desc').innerText = newBadge.desc;
+                    badgeBox.classList.remove('hidden');
+                } else {
+                    badgeBox.classList.add('hidden');
+                }
+
+                saveLeaderboard(score);
+            } else {
+                document.getElementById('result-title').innerText = currentLang === 'vi' ? "HẾT GIỜ RỒI!" : "TIME'S UP!";
+                document.getElementById('result-subtitle').innerText = currentLang === 'vi' ? "Đừng nản lòng, hãy thử lại màn này nhé!" : "Don't give up, try again!";
+                badgeBox.classList.add('hidden');
+            }
+        }
+
+        function restartStage() {
+            selectStage(currentStage);
+        }
+
+        function resetToMenu() {
+            clearInterval(timerInterval);
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-result').classList.add('hidden');
+            document.getElementById('game-stats').classList.add('hidden');
+            document.getElementById('screen-menu').classList.remove('hidden');
+        }
+
+        // 7. SỔ HUY HIỆU & LEADERBOARD
+        function openBadgeBook() {
+            const grid = document.getElementById('badge-grid');
+            grid.innerHTML = '';
+
+            prefectureBadges.forEach(badge => {
+                const item = document.createElement('div');
+                item.className = `p-3 rounded-2xl border text-center transition ${badge.unlocked ? 'bg-cream border-woodAccent shadow-sm' : 'bg-gray-100 border-gray-200 opacity-60'}`;
+                item.innerHTML = `
+                    <div class="text-3xl mb-1">${badge.unlocked ? badge.icon : '🔒'}</div>
+                    <h4 class="font-bold text-xs text-matchaDark">${badge.name}</h4>
+                    <p class="text-[10px] text-gray-500 mt-0.5">${badge.unlocked ? badge.desc : (currentLang === 'vi' ? 'Đang khóa' : 'Locked')}</p>
+                `;
+                grid.appendChild(item);
+            });
+
+            document.getElementById('badge-book-modal').classList.remove('hidden');
+        }
+
+        function closeBadgeBook() {
+            document.getElementById('badge-book-modal').classList.add('hidden');
+        }
+
+        function saveBadgeStorage() {
+            const unlockedIds = prefectureBadges.filter(b => b.unlocked).map(b => b.id);
+            localStorage.setItem('karuta_unlocked_badges', JSON.stringify(unlockedIds));
+        }
+
+        function loadBadgeStorage() {
+            const saved = localStorage.getItem('karuta_unlocked_badges');
+            if (saved) {
+                const unlockedIds = JSON.parse(saved);
+                prefectureBadges.forEach(b => {
+                    if (unlockedIds.includes(b.id)) b.unlocked = true;
+                });
+            }
+        }
+
+        function saveLeaderboard(newScore) {
+            let history = JSON.parse(localStorage.getItem('karuta_leaderboard') || '[]');
+            history.push({ score: newScore, date: new Date().toLocaleDateString() });
+            history.sort((a, b) => b.score - a.score);
+            history = history.slice(0, 5);
+            localStorage.setItem('karuta_leaderboard', JSON.stringify(history));
+        }
+
+        function openLeaderboard() {
+            const list = document.getElementById('leaderboard-list');
+            list.innerHTML = '';
+            let history = JSON.parse(localStorage.getItem('karuta_leaderboard') || '[]');
+
+            if (history.length === 0) {
+                list.innerHTML = `<p class="text-xs text-gray-400 text-center py-4">${currentLang === 'vi' ? 'Chưa có kỷ lục nào.' : 'No records yet.'}</p>`;
+            } else {
+                history.forEach((item, idx) => {
+                    const row = document.createElement('div');
+                    row.className = "flex justify-between items-center p-2.5 bg-cream rounded-xl border border-beigeBorder text-xs";
+                    row.innerHTML = `
+                        <div class="flex items-center space-x-2">
+                            <span class="w-5 h-5 rounded-full bg-matchaSoft text-matchaDark font-bold flex items-center justify-center">${idx + 1}</span>
+                            <span class="font-bold text-matchaDark">${item.score} pts</span>
+                        </div>
+                        <span class="text-gray-400 font-mono">${item.date}</span>
+                    `;
+                    list.appendChild(row);
+                });
+            }
+
+            document.getElementById('leaderboard-modal').classList.remove('hidden');
+        }
+
+        function closeLeaderboard() {
+            document.getElementById('leaderboard-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
