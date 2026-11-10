@@ -167,7 +167,7 @@
                         <span class="text-[9px] bg-matcha/10 text-matcha font-bold px-2 py-0.5 rounded-full">MÀN 1</span>
                     </div>
                     <h3 class="font-bold text-sm text-matchaDark group-hover:text-matcha transition">Đơn Ký Tự Kana</h3>
-                    <p class="text-[11px] text-gray-500 mt-1">Luyện Hiragana & Katakana đơn lẻ.</p>
+                    <p class="text-[11px] text-gray-500 mt-1">Trọn bộ 46 Hiragana & Katakana.</p>
                 </div>
 
                 <!-- Stage 2 -->
@@ -181,7 +181,7 @@
                         <span class="text-[9px] bg-rose-100 text-rose-600 font-bold px-2 py-0.5 rounded-full">MÀN 2</span>
                     </div>
                     <h3 class="font-bold text-sm text-matchaDark">Ten-ten & Maru</h3>
-                    <p class="text-[11px] text-gray-500 mt-1">Học biến âm (゛) và Maru (゜).</p>
+                    <p class="text-[11px] text-gray-500 mt-1">Đầy đủ 25 biến âm (゛) & (゜).</p>
                 </div>
 
                 <!-- Stage 3 -->
@@ -195,7 +195,7 @@
                         <span class="text-[9px] bg-amber-100 text-amber-700 font-bold px-2 py-0.5 rounded-full">MÀN 3</span>
                     </div>
                     <h3 class="font-bold text-sm text-matchaDark">Từ Vựng Theo Chủ Đề</h3>
-                    <p class="text-[11px] text-gray-500 mt-1">Thay đổi chủ đề mỗi lần chơi (10 thẻ).</p>
+                    <p class="text-[11px] text-gray-500 mt-1">Đổi chủ đề ngẫu nhiên mỗi lần chơi.</p>
                 </div>
 
                 <!-- Stage 4 -->
@@ -209,7 +209,7 @@
                         <span class="text-[9px] bg-matcha/20 text-matchaDark font-bold px-2 py-0.5 rounded-full">MÀN 4</span>
                     </div>
                     <h3 class="font-bold text-sm text-matchaDark">Ẩm Thực Karuta 10s</h3>
-                    <p class="text-[11px] text-gray-500 mt-1">10 giây/câu cho 10 món ăn Nhật Bản.</p>
+                    <p class="text-[11px] text-gray-500 mt-1">10 giây/câu cho 10 món ăn Nhật.</p>
                 </div>
 
                 <!-- Stage 5 -->
@@ -223,7 +223,7 @@
                         <span class="text-[9px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-full">MÀN 5</span>
                     </div>
                     <h3 class="font-bold text-sm text-matchaDark">Đục Lỗ & Nối Thoại</h3>
-                    <p class="text-[11px] text-gray-500 mt-1">Điền từ & Nối hình nhân vật Anime.</p>
+                    <p class="text-[11px] text-gray-500 mt-1">Điền từ & Nối hình Anime.</p>
                 </div>
             </div>
 
@@ -334,7 +334,7 @@
             <div id="cards-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"></div>
         </section>
 
-        <!-- SCREEN MÀN 4: ĐẤU KARUTA ẨM THỰC 10s (FIX DESIGN MATCHA & THỜI GIAN TỪNG THẺ) -->
+        <!-- SCREEN MÀN 4: ĐẤU KARUTA ẨM THỰC 10s -->
         <section id="screen-karuta-speed" class="hidden space-y-4 max-w-4xl mx-auto">
             <div class="bg-creamCard border-2 border-matcha p-4 rounded-3xl shadow-md text-center space-y-2">
                 <div class="flex justify-between items-center px-2">
@@ -357,7 +357,7 @@
             <div id="karuta-arena-grid" class="grid grid-cols-2 sm:grid-cols-5 gap-3"></div>
         </section>
 
-        <!-- SCREEN MÀN 5: ĐỤC LỖ & NỐI THOẠI (MATCHA & BE DỰA TRÊN THIẾT KẾ GỐC) -->
+        <!-- SCREEN MÀN 5: ĐỤC LỖ & NỐI THOẠI -->
         <section id="screen-anime-fill" class="hidden space-y-6 max-w-3xl mx-auto">
             <!-- Part 1: Đục Lỗ -->
             <div id="anime-fill-part1" class="bg-creamCard border-2 border-matcha p-6 rounded-3xl shadow-xl text-center space-y-4">
@@ -369,11 +369,8 @@
                 </div>
 
                 <div class="bg-cream p-5 rounded-2xl border border-beigeBorder space-y-3">
-                    <!-- Câu Kana Kanji có Furigana -->
                     <div id="fill-jp-sentence" class="text-2xl font-brush font-black text-matchaDark leading-relaxed"></div>
-                    <!-- Dịch nghĩa Tiếng Việt bên dưới -->
                     <div id="fill-meaning-text" class="text-xs font-semibold text-gray-600 italic bg-matchaSoft/60 py-1.5 px-3 rounded-lg border border-matcha/20"></div>
-                    <!-- Câu Romaji đục lỗ -->
                     <div id="fill-romaji-hole" class="text-lg font-mono font-bold text-amber-800 tracking-wider"></div>
                 </div>
 
@@ -386,7 +383,7 @@
                 </form>
             </div>
 
-            <!-- Part 2: Nối Thoại Trình Bày Theo Cột Dọc kèm Avatar Nhân Vật -->
+            <!-- Part 2: Nối Thoại Trình Bày Theo Cột Dọc -->
             <div id="anime-fill-part2" class="hidden bg-creamCard border-2 border-matcha p-6 rounded-3xl shadow-xl text-center space-y-4">
                 <span class="text-xs font-bold bg-matchaSoft text-matchaDark border border-matcha/30 px-3 py-1 rounded-full">
                     🎉 MÀN 5 (VÒNG 2): NỐI CÂU THOẠI VỚI HÌNH ẢNH NHÂN VẬT
@@ -441,7 +438,7 @@
 
     </main>
 
-    <!-- MODAL NHẬP ROMAJI GỐC (KÈM DỊCH NGHĨA DÙ ĐÚNG HAY SAI) -->
+    <!-- MODAL NHẬP ROMAJI GỐC -->
     <div id="answer-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div id="modal-box" class="bg-creamCard border-2 border-matcha max-w-sm w-full p-5 sm:p-6 rounded-3xl shadow-2xl relative text-center space-y-4">
             
@@ -453,8 +450,7 @@
                 <span id="modal-char-type" class="text-[10px] font-bold text-matcha tracking-widest uppercase bg-matchaSoft px-2 py-0.5 rounded-full">HIRAGANA</span>
                 <div class="py-2 bg-cream rounded-2xl border border-beigeBorder mt-2 flex flex-col items-center justify-center">
                     <div id="modal-kana-char" class="text-4xl sm:text-5xl font-brush font-black text-matchaDark">あ</div>
-                    <!-- DỊCH NGHĨA LUÔN HIỂN THỊ DƯỚI TỪ KANA -->
-                    <div id="modal-meaning-sub" class="text-xs font-semibold text-gray-600 mt-1 italic">Dịch: Hoa anh đào</div>
+                    <div id="modal-meaning-sub" class="text-xs font-semibold text-gray-600 mt-1 italic">Dịch: Chữ A</div>
                 </div>
             </div>
 
@@ -487,7 +483,7 @@
         </div>
     </div>
 
-    <!-- MODAL ĐỒNG BỘ MATCHA CHO MÀN 4 (BỎ THÔNG BÁO ALERT BỊ LỖI DESIGN) -->
+    <!-- MODAL MÀN 4 MATCHA UI -->
     <div id="speed-result-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-creamCard border-2 border-matcha max-w-sm w-full p-6 rounded-3xl shadow-2xl text-center space-y-4">
             <div id="speed-modal-icon" class="text-4xl">⏱️</div>
@@ -524,9 +520,8 @@
         <p>Karuta Kana Game • Tone Màu Matcha Nhã Nhặn • Web Speech API 2 Speed Mode</p>
     </footer>
 
-    <!-- JavaScript Game Logic Complete -->
+    <!-- JavaScript Game Logic Full -->
     <script>
-        // ÂM THANH BÁO SAI & LỜI AN ỦI CỦA SAKURA-CHAN
         function playWrongSound() {
             if ('AudioContext' in window || 'webkitAudioContext' in window) {
                 const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -574,38 +569,101 @@
             { ja: "正解です！よくできました！ (Seikai desu!)", vi: "Đúng rồi! Bạn làm rất chuẩn!", en: "Correct! Well done!" }
         ];
 
-        // MÀN 1
+        // MÀN 1: BỔ SUNG TRỌN BỘ 46 KÝ TỰ BẢNG CHỮ CÁI HIRAGANA & KATAKANA
         const singleKanaDataFull = [
+            // Hàng A
             { hiragana: 'あ', katakana: 'ア', romaji: 'a', meaning: 'Chữ A' },
             { hiragana: 'い', katakana: 'イ', romaji: 'i', meaning: 'Chữ I' },
             { hiragana: 'う', katakana: 'ウ', romaji: 'u', meaning: 'Chữ U' },
             { hiragana: 'え', katakana: 'エ', romaji: 'e', meaning: 'Chữ E' },
             { hiragana: 'お', katakana: 'オ', romaji: 'o', meaning: 'Chữ O' },
+            // Hàng Ka
             { hiragana: 'か', katakana: 'カ', romaji: 'ka', meaning: 'Chữ Ka' },
             { hiragana: 'き', katakana: 'キ', romaji: 'ki', meaning: 'Chữ Ki' },
             { hiragana: 'く', katakana: 'ク', romaji: 'ku', meaning: 'Chữ Ku' },
             { hiragana: 'け', katakana: 'ケ', romaji: 'ke', meaning: 'Chữ Ke' },
             { hiragana: 'こ', katakana: 'コ', romaji: 'ko', meaning: 'Chữ Ko' },
+            // Hàng Sa
             { hiragana: 'さ', katakana: 'サ', romaji: 'sa', meaning: 'Chữ Sa' },
             { hiragana: 'し', katakana: 'シ', romaji: 'shi', meaning: 'Chữ Shi' },
             { hiragana: 'す', katakana: 'ス', romaji: 'su', meaning: 'Chữ Su' },
             { hiragana: 'せ', katakana: 'セ', romaji: 'se', meaning: 'Chữ Se' },
-            { hiragana: 'そ', katakana: 'ソ', romaji: 'so', meaning: 'Chữ So' }
+            { hiragana: 'そ', katakana: 'ソ', romaji: 'so', meaning: 'Chữ So' },
+            // Hàng Ta
+            { hiragana: 'た', katakana: 'タ', romaji: 'ta', meaning: 'Chữ Ta' },
+            { hiragana: 'ち', katakana: 'チ', romaji: 'chi', meaning: 'Chữ Chi' },
+            { hiragana: 'つ', katakana: 'ツ', romaji: 'tsu', meaning: 'Chữ Tsu' },
+            { hiragana: 'て', katakana: 'テ', romaji: 'te', meaning: 'Chữ Te' },
+            { hiragana: 'と', katakana: 'ト', romaji: 'to', meaning: 'Chữ To' },
+            // Hàng Na
+            { hiragana: 'な', katakana: 'ナ', romaji: 'na', meaning: 'Chữ Na' },
+            { hiragana: 'に', katakana: 'ニ', romaji: 'ni', meaning: 'Chữ Ni' },
+            { hiragana: 'ぬ', katakana: 'ヌ', romaji: 'nu', meaning: 'Chữ Nu' },
+            { hiragana: 'ね', katakana: 'ネ', romaji: 'ne', meaning: 'Chữ Ne' },
+            { hiragana: 'の', katakana: 'ノ', romaji: 'no', meaning: 'Chữ No' },
+            // Hàng Ha
+            { hiragana: 'は', katakana: 'ハ', romaji: 'ha', meaning: 'Chữ Ha' },
+            { hiragana: 'ひ', katakana: 'ヒ', romaji: 'hi', meaning: 'Chữ Hi' },
+            { hiragana: 'ふ', katakana: 'フ', romaji: 'fu', meaning: 'Chữ Fu' },
+            { hiragana: 'へ', katakana: 'ヘ', romaji: 'he', meaning: 'Chữ He' },
+            { hiragana: 'ほ', katakana: 'ホ', romaji: 'ho', meaning: 'Chữ Ho' },
+            // Hàng Ma
+            { hiragana: 'ま', katakana: 'マ', romaji: 'ma', meaning: 'Chữ Ma' },
+            { hiragana: 'み', katakana: 'ミ', romaji: 'mi', meaning: 'Chữ Mi' },
+            { hiragana: 'む', katakana: 'ム', romaji: 'mu', meaning: 'Chữ Mu' },
+            { hiragana: 'め', katakana: 'メ', romaji: 'me', meaning: 'Chữ Me' },
+            { hiragana: 'も', katakana: 'モ', romaji: 'mo', meaning: 'Chữ Mo' },
+            // Hàng Ya
+            { hiragana: 'や', katakana: 'ヤ', romaji: 'ya', meaning: 'Chữ Ya' },
+            { hiragana: 'ゆ', katakana: 'ユ', romaji: 'yu', meaning: 'Chữ Yu' },
+            { hiragana: 'よ', katakana: 'ヨ', romaji: 'yo', meaning: 'Chữ Yo' },
+            // Hàng Ra
+            { hiragana: 'ら', katakana: 'ラ', romaji: 'ra', meaning: 'Chữ Ra' },
+            { hiragana: 'り', katakana: 'リ', romaji: 'ri', meaning: 'Chữ Ri' },
+            { hiragana: 'る', katakana: 'ル', romaji: 'ru', meaning: 'Chữ Ru' },
+            { hiragana: 'れ', katakana: 'レ', romaji: 're', meaning: 'Chữ Re' },
+            { hiragana: 'ろ', katakana: 'ロ', romaji: 'ro', meaning: 'Chữ Ro' },
+            // Hàng Wa, N
+            { hiragana: 'わ', katakana: 'ワ', romaji: 'wa', meaning: 'Chữ Wa' },
+            { hiragana: 'を', katakana: 'ヲ', romaji: 'wo', meaning: 'Chữ Wo' },
+            { hiragana: 'ん', katakana: 'ン', romaji: 'n', meaning: 'Chữ N' }
         ];
 
-        // MÀN 2
+        // MÀN 2: BỔ SUNG ĐẦY ĐỦ 25 BIẾN ÂM TEN-TEN (゛) VÀ MARU (゜)
         const tentenMaruDataFull = [
-            { char: 'が', romaji: 'ga', meaning: 'Âm đục Ga' }, { char: 'ぎ', romaji: 'gi', meaning: 'Âm đục Gi' },
-            { char: 'ぐ', romaji: 'gu', meaning: 'Âm đục Gu' }, { char: 'げ', romaji: 'ge', meaning: 'Âm đục Ge' },
-            { char: 'ご', romaji: 'go', meaning: 'Âm đục Go' }, { char: 'ざ', romaji: 'za', meaning: 'Âm đục Za' },
-            { char: 'じ', romaji: 'ji', meaning: 'Âm đục Ji' }, { char: 'ず', romaji: 'zu', meaning: 'Âm đục Zu' },
-            { char: 'ぜ', romaji: 'ze', meaning: 'Âm đục Ze' }, { char: 'ぞ', romaji: 'zo', meaning: 'Âm đục Zo' },
-            { char: 'ぱ', romaji: 'pa', meaning: 'Bán đục Pa' }, { char: 'ぴ', romaji: 'pi', meaning: 'Bán đục Pi' },
-            { char: 'ぷ', romaji: 'pu', meaning: 'Bán đục Pu' }, { char: 'ぺ', romaji: 'pe', meaning: 'Bán đục Pe' },
+            // Dòng Ga (K -> G)
+            { char: 'が', romaji: 'ga', meaning: 'Âm đục Ga' },
+            { char: 'ぎ', romaji: 'gi', meaning: 'Âm đục Gi' },
+            { char: 'ぐ', romaji: 'gu', meaning: 'Âm đục Gu' },
+            { char: 'げ', romaji: 'ge', meaning: 'Âm đục Ge' },
+            { char: 'ご', romaji: 'go', meaning: 'Âm đục Go' },
+            // Dòng Za (S -> Z)
+            { char: 'ざ', romaji: 'za', meaning: 'Âm đục Za' },
+            { char: 'じ', romaji: 'ji', meaning: 'Âm đục Ji' },
+            { char: 'ず', romaji: 'zu', meaning: 'Âm đục Zu' },
+            { char: 'ぜ', romaji: 'ze', meaning: 'Âm đục Ze' },
+            { char: 'ぞ', romaji: 'zo', meaning: 'Âm đục Zo' },
+            // Dòng Da (T -> D)
+            { char: 'だ', romaji: 'da', meaning: 'Âm đục Da' },
+            { char: 'ぢ', romaji: 'ji', meaning: 'Âm đục Ji (Dzi)' },
+            { char: 'づ', romaji: 'zu', meaning: 'Âm đục Zu (Dzu)' },
+            { char: 'で', romaji: 'de', meaning: 'Âm đục De' },
+            { char: 'ど', romaji: 'do', meaning: 'Âm đục Do' },
+            // Dòng Ba (H -> B)
+            { char: 'ば', romaji: 'ba', meaning: 'Âm đục Ba' },
+            { char: 'び', romaji: 'bi', meaning: 'Âm đục Bi' },
+            { char: 'ぶ', romaji: 'bu', meaning: 'Âm đục Bu' },
+            { char: 'べ', romaji: 'be', meaning: 'Âm đục Be' },
+            { char: 'ぼ', romaji: 'bo', meaning: 'Âm đục Bo' },
+            // Dòng Pa (H -> P Maru)
+            { char: 'ぱ', romaji: 'pa', meaning: 'Bán đục Pa' },
+            { char: 'ぴ', romaji: 'pi', meaning: 'Bán đục Pi' },
+            { char: 'ぷ', romaji: 'pu', meaning: 'Bán đục Pu' },
+            { char: 'ぺ', romaji: 'pe', meaning: 'Bán đục Pe' },
             { char: 'ぽ', romaji: 'po', meaning: 'Bán đục Po' }
         ];
 
-        // MÀN 3: PHÂN LOẠI CHỦ ĐỀ MỖI LẦN CHƠI KHÁC NHAU (ĐÃ SỬA PHIÊN ÂM CHUẨN ĐÚNG THEO YÊU CẦU)
+        // MÀN 3: 3 CHỦ ĐỀ CHUẨN XÁC VỚI 10 THẺ RIÊNG BIỆT DỄ HIỂU
         const stage3Themes = [
             {
                 name: 'Chủ đề: Nhân Vật Anime',
@@ -668,50 +726,15 @@
             { char: 'テンプラ', kanji: '天ぷら 🍤', romaji: 'tempura', meaning: 'Món Tempura' }
         ];
 
-        // MÀN 5 (VÒNG 1): ĐỤC LỖ CÂU NÓI CÓ FURIGANA VÀ DỊCH NGHĨA (KHÔNG HIỂN THỊ TÊN NHÂN VẬT)
+        // MÀN 5 (VÒNG 1): ĐỤC LỖ CÂU NÓI CÓ FURIGANA VÀ DỊCH NGHĨA
         const stage5FillQuestions = [
-            { 
-                jpHtml: '<ruby>真実<rt>しんじつ</rt></ruby>は いつも [ ___ ]！',
-                holeRomaji: 'shinjitsu wa itsumo [ ___ ]!', 
-                ans: 'hitotsu', 
-                meaning: 'Sự thật luôn luôn chỉ có một!'
-            },
-            { 
-                jpHtml: 'タケコプター！ [ ___ ] くん！', 
-                holeRomaji: 'takekoputa-! [ ___ ] kun!', 
-                ans: 'nobita', 
-                meaning: 'Chong chóng tre nè Nobita-kun!'
-            },
-            { 
-                jpHtml: '<ruby>自分<rt>じぶん</rt></ruby>を <ruby>変<rt>か</rt></ruby>えなければ <ruby>世界<rt>せかい</rt></ruby>は [ ___ ]！', 
-                holeRomaji: 'jibun wo karaenakeba sekai wa [ ___ ]!', 
-                ans: 'kaerarenai', 
-                meaning: 'Bạn không thể thay đổi thế giới nếu không thay đổi bản thân mình!'
-            },
-            { 
-                jpHtml: '<ruby>僕<rt>ぼく</rt></ruby>も <ruby>ヒーロー<rt>ひーろー</rt></ruby>に [ ___ ]！', 
-                holeRomaji: 'boku mo hi-ro- ni [ ___ ]!', 
-                ans: 'naritai', 
-                meaning: 'Em cũng muốn trở thành một anh hùng!'
-            },
-            { 
-                jpHtml: '<ruby>木ノ葉<rt>このは</rt></ruby>の <ruby>里<rt>さと</rt></ruby>へ [ ___ ]！', 
-                holeRomaji: 'konoha no sato he [ ___ ]!', 
-                ans: 'kaero', 
-                meaning: 'Hãy trở về lại làng Lá đi Sasuke!'
-            },
-            { 
-                jpHtml: 'A girl\'s best makeup is her [ ___ ]!', 
-                holeRomaji: 'A girl\'s best makeup is her [ ___ ]!', 
-                ans: 'smile', 
-                meaning: 'Lớp trang điểm đẹp nhất của một cô gái chính là nụ cười!'
-            },
-            { 
-                jpHtml: 'ドラえもん！ <ruby>助<rt>たす</rt></ruby>けて [ ___ ]！', 
-                holeRomaji: 'doraemon! tasukete [ ___ ]!', 
-                ans: 'yo', 
-                meaning: 'Doraemon ơi cứu tớ với!'
-            }
+            { jpHtml: '<ruby>真実<rt>しんじつ</rt></ruby>は いつも [ ___ ]！', holeRomaji: 'shinjitsu wa itsumo [ ___ ]!', ans: 'hitotsu', meaning: 'Sự thật luôn luôn chỉ có một!' },
+            { jpHtml: 'タケコプター！ [ ___ ] くん！', holeRomaji: 'takekoputa-! [ ___ ] kun!', ans: 'nobita', meaning: 'Chong chóng tre nè Nobita-kun!' },
+            { jpHtml: '<ruby>自分<rt>じぶん</rt></ruby>を <ruby>変<rt>か</rt></ruby>えなければ <ruby>世界<rt>せかい</rt></ruby>は [ ___ ]！', holeRomaji: 'jibun wo kaeranakeba sekai wa [ ___ ]!', ans: 'kaerarenai', meaning: 'Bạn không thể thay đổi thế giới nếu không thay đổi bản thân mình!' },
+            { jpHtml: '<ruby>僕<rt>ぼく</rt></ruby>も <ruby>ヒーロー<rt>ひーろー</rt></ruby>に [ ___ ]！', holeRomaji: 'boku mo hi-ro- ni [ ___ ]!', ans: 'naritai', meaning: 'Em cũng muốn trở thành một anh hùng!' },
+            { jpHtml: '<ruby>木ノ葉<rt>このは</rt></ruby>の <ruby>里<rt>さと</rt></ruby>へ [ ___ ]！', holeRomaji: 'konoha no sato he [ ___ ]!', ans: 'kaero', meaning: 'Hãy trở về lại làng Lá đi Sasuke!' },
+            { jpHtml: 'A girl\'s best makeup is her [ ___ ]!', holeRomaji: 'A girl\'s best makeup is her [ ___ ]!', ans: 'smile', meaning: 'Lớp trang điểm đẹp nhất của một cô gái chính là nụ cười!' },
+            { jpHtml: 'ドラえもん！ <ruby>助<rt>たす</rt></ruby>けて [ ___ ]！', holeRomaji: 'doraemon! tasukete [ ___ ]!', ans: 'yo', meaning: 'Doraemon ơi cứu tớ với!' }
         ];
 
         // MÀN 5 (VÒNG 2): NỐI 2 CỘT (CỘT NÓI & CỘT HÌNH ẢNH NHÂN VẬT)
@@ -741,7 +764,6 @@
         let timeLeft = 60;
         let timerInterval = null;
 
-        // BIẾN QUẢN LÝ MÀN 4 & 5
         let speedCurrentIndex = 0;
         let speedTimerInterval = null;
         let speedTimeLeft = 10;
@@ -804,17 +826,26 @@
             updateStatsDisplay();
 
             let rawPool = [];
+            const subMode = document.getElementById('sub-mode-select').value;
+
             if (currentStage === 1) {
-                rawPool = singleKanaDataFull.map((item, idx) => ({ id: idx, char: item.hiragana, romaji: item.romaji, meaning: item.meaning, type: 'Hiragana' }));
+                document.getElementById('game-stage-badge').innerText = "MÀN 1";
+                rawPool = singleKanaDataFull.map((item, idx) => {
+                    let displayChar = item.hiragana;
+                    if (subMode === 'katakana') displayChar = item.katakana;
+                    else if (subMode === 'both') displayChar = Math.random() > 0.5 ? item.hiragana : item.katakana;
+                    return { id: idx, char: displayChar, romaji: item.romaji, meaning: item.meaning, type: 'Kana' };
+                });
             } else if (currentStage === 2) {
+                document.getElementById('game-stage-badge').innerText = "MÀN 2";
                 rawPool = tentenMaruDataFull.map((item, idx) => ({ id: idx, char: item.char, romaji: item.romaji, meaning: item.meaning, type: 'Biến Âm' }));
             } else {
-                // CHỌN NGẪU NHIÊN 1 CHỦ ĐỀ CHO MÀN 3
                 const randomTheme = stage3Themes[Math.floor(Math.random() * stage3Themes.length)];
                 document.getElementById('game-stage-badge').innerText = randomTheme.name;
                 rawPool = randomTheme.cards.map((item, idx) => ({ id: idx, char: item.char, romaji: item.romaji, meaning: item.meaning, type: 'Màn 3' }));
             }
 
+            // RÚT NGẪU NHIÊN 10 LÁ BÀI CHO MỖI LẦN CHƠI
             let shuffled = [...rawPool].sort(() => Math.random() - 0.5).slice(0, 10);
             activeCards = shuffled.map(item => ({ ...item, solved: false, flipped: false }));
 
@@ -901,9 +932,7 @@
         function checkAnswerLogic(userInput, correctAnswer) {
             let cleanInput = userInput.trim().toLowerCase();
             let cleanCorrect = correctAnswer.trim().toLowerCase();
-            let normInput = cleanInput.replace(/ou/g, 'o').replace(/uu/g, 'u');
-            let normCorrect = cleanCorrect.replace(/ou/g, 'o').replace(/uu/g, 'u');
-            return cleanInput === cleanCorrect || normInput === normCorrect;
+            return cleanInput === cleanCorrect;
         }
 
         function submitAnswer(e) {
@@ -972,7 +1001,7 @@
             document.getElementById('progress-text').innerText = `${completedCount}/${activeCards.length}`;
         }
 
-        // MÀN 4: FIX TRIỆT ĐỂ LỖI THỜI GIAN TỪNG CÂU, TÍNH ĐIỂM VÀ THÔNG BÁO DỰA TRÊN MATCHA UI
+        // MÀN 4: THỜI GIAN 10S MỖI THẺ & TÍNH ĐIỂM ĐÚNG
         function startKarutaSpeedArena() {
             document.getElementById('screen-karuta-speed').classList.remove('hidden');
             document.getElementById('game-stats').classList.remove('hidden');
@@ -1018,7 +1047,6 @@
 
             playJapaneseSpeech(targetCard.char, 1.0);
 
-            // BẮT ĐẦU ĐẾM NGUỢC 10S CHO CÂU HIỆN TẠI
             clearInterval(speedTimerInterval);
             speedTimeLeft = 10;
             document.getElementById('timer-display').innerText = `${speedTimeLeft}s`;
@@ -1066,7 +1094,7 @@
             }
         }
 
-        // MÀN 5: CHUẨN DESIGN MATCHA VÀ FURIGANA DỊCH NGHĨA
+        // MÀN 5: ĐỤC LỖ & NỐI THOẠI
         function startAnimeFillStage() {
             document.getElementById('screen-anime-fill').classList.remove('hidden');
             document.getElementById('anime-fill-part1').classList.remove('hidden');
