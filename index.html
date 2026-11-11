@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karuta Kana - Phong Cách Matcha Tatami Nhật Bản</title>
+    <title>Ochakana - Học bảng chữ không khó</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
+    <!-- Google Fonts & Calligraphy Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Noto+Serif+JP:wght@600;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Noto+Serif+JP:wght@600;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Cinzel:wght@700&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Canvas Confetti -->
@@ -20,19 +20,19 @@
             theme: {
                 extend: {
                     colors: {
-                        matchaDark: '#2E5038',
-                        matchaGreen: '#4A7C59',
-                        freshLime: '#7AA520',
-                        lemonCream: '#EAF2EC',
-                        tatamiBase: '#E5D6B8',
-                        tatamiBorder: '#785A3C',
-                        inkBlack: '#1A1A1A',
+                        phutrucDark: '#1C3B2B',
+                        phutrucGreen: '#2A5A3F',
+                        phutrucLeaf: '#4A8B63',
+                        phutrucLight: '#E8F2EC',
+                        tatamiBorder: '#2E5038',
+                        tatamiBg: '#F3EAD8',
+                        inkBlack: '#111827',
                         creamCard: '#FDFBF7',
-                        beigeBorder: '#D8C8B0',
-                        woodAccent: '#9E7A52'
+                        beigeBorder: '#C8B89A'
                     },
                     fontFamily: {
                         brush: ['"Shippori Mincho"', '"Noto Serif JP"', 'serif'],
+                        calli: ['"Cinzel"', '"Shippori Mincho"', 'serif'],
                         sans: ['"Plus Jakarta Sans"', 'sans-serif']
                     }
                 }
@@ -41,27 +41,34 @@
     </script>
 
     <style>
+        /* HỌA TIẾN TẤM TATAMI & TÔNG MÀU LÁ TRÚC PHÙ TRÚC */
         body {
-            background-color: #EAF2EC;
+            background-color: #E8F2EC;
             background-image: 
-                repeating-linear-gradient(0deg, rgba(120, 90, 60, 0.05) 0px, rgba(120, 90, 60, 0.05) 1px, transparent 1px, transparent 4px),
-                repeating-linear-gradient(90deg, rgba(74, 124, 89, 0.04) 0px, rgba(74, 124, 89, 0.04) 2px, transparent 2px, transparent 8px);
+                repeating-linear-gradient(0deg, rgba(42, 90, 63, 0.05) 0px, rgba(42, 90, 63, 0.05) 1px, transparent 1px, transparent 4px),
+                repeating-linear-gradient(90deg, rgba(28, 59, 43, 0.04) 0px, rgba(28, 59, 43, 0.04) 2px, transparent 2px, transparent 8px);
             background-size: 100% 8px, 16px 100%;
         }
 
-        .tatami-card-border {
-            border: 3px solid #785A3C;
-            box-shadow: 0 6px 16px rgba(46, 80, 56, 0.15), inset 0 0 0 3px #FDFBF7;
+        /* NGUYÊN TẤM THỂ CÓ MÀU THEO KẾT QUẢ ĐÚNG / SAI */
+        .tatami-card {
+            border: 4px solid #2E5038;
+            background-color: #F3EAD8;
+            transition: all 0.3s ease;
         }
 
-        .card-correct {
-            border: 4px solid #10B981 !important;
-            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+        .card-correct-full {
+            background-color: #10B981 !important;
+            border-color: #047857 !important;
+            color: #FFFFFF !important;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
         }
 
-        .card-wrong {
-            border: 4px solid #EF4444 !important;
-            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+        .card-wrong-full {
+            background-color: #EF4444 !important;
+            border-color: #B91C1C !important;
+            color: #FFFFFF !important;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
         }
 
         .perspective-1000 { perspective: 1000px; }
@@ -91,46 +98,48 @@
         .animate-shake { animation: shake 0.35s ease-in-out; }
 
         ruby { ruby-position: over; }
-        rt { font-size: 0.65em; color: #7AA520; font-weight: bold; }
+        rt { font-size: 0.65em; color: #1C3B2B; font-weight: bold; }
     </style>
 </head>
-<body class="font-sans text-inkBlack min-h-screen flex flex-col justify-between selection:bg-matchaGreen selection:text-white">
+<body class="font-sans text-inkBlack min-h-screen flex flex-col justify-between selection:bg-phutrucGreen selection:text-white">
 
-    <header class="border-b-2 border-tatamiBorder bg-creamCard/95 backdrop-blur-md sticky top-0 z-30 px-4 py-3 shadow-md">
+    <!-- HEADER GIAO DIỆN -->
+    <header class="border-b-2 border-phutrucDark bg-creamCard/95 backdrop-blur-md sticky top-0 z-30 px-4 py-3 shadow-md">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-3 cursor-pointer" onclick="resetToMenu()">
-                <div class="w-11 h-11 rounded-2xl bg-matchaDark flex items-center justify-center font-brush font-bold text-2xl text-lemonCream shadow-lg border-2 border-tatamiBorder">
-                    抹茶
+                <div class="w-11 h-11 rounded-2xl bg-phutrucDark flex items-center justify-center font-calli font-bold text-2xl text-phutrucLight shadow-lg border-2 border-phutrucGreen">
+                    竹
                 </div>
                 <div>
-                    <h1 class="font-brush font-extrabold text-xl tracking-wider text-matchaDark flex items-center gap-2">
-                        KARUTA KANA <span class="text-[10px] bg-freshLime/20 text-matchaDark border border-freshLime/40 px-2 py-0.5 rounded-full font-sans font-bold">かるた</span>
+                    <h1 class="font-calli font-extrabold text-xl tracking-wider text-phutrucDark flex items-center gap-2">
+                        OCHAKANA <span class="text-[10px] bg-phutrucLight text-phutrucDark border border-phutrucGreen/40 px-2 py-0.5 rounded-full font-sans font-bold">茶かな</span>
                     </h1>
-                    <p id="ui-subtitle" class="text-[11px] text-stone-600 hidden sm:block">Học chữ cái & từ vựng Tiếng Nhật phong cách Matcha Tatami</p>
+                    <p id="ui-app-tagline" class="text-[11px] text-phutrucGreen font-semibold hidden sm:block">Học bảng chữ không khó</p>
                 </div>
             </div>
 
+            <!-- CHUYỂN ĐỔI NGÔN NGỮ VI / EN & STATS -->
             <div class="flex items-center space-x-3">
-                <button onclick="toggleLanguage()" class="flex items-center gap-1 bg-lemonCream hover:bg-matchaGreen hover:text-white px-3 py-1.5 rounded-xl border-2 border-matchaGreen text-xs font-bold text-matchaDark transition shadow-sm">
+                <button onclick="toggleLanguage()" class="flex items-center gap-1.5 bg-phutrucLight hover:bg-phutrucGreen hover:text-white px-3.5 py-1.5 rounded-xl border-2 border-phutrucDark text-xs font-bold text-phutrucDark transition shadow-sm">
                     <i data-lucide="globe" class="w-4 h-4"></i>
                     <span id="lang-btn-text">VI 🇻🇳</span>
                 </button>
 
                 <div id="game-stats" class="hidden flex items-center space-x-2 sm:space-x-3">
-                    <div class="flex items-center space-x-1 bg-creamCard px-2.5 py-1.5 rounded-xl border border-tatamiBorder text-xs font-semibold">
-                        <i data-lucide="layers" class="w-3.5 h-3.5 text-matchaGreen"></i>
-                        <span id="progress-text" class="font-mono text-matchaDark">0/10</span>
+                    <div class="flex items-center space-x-1 bg-creamCard px-2.5 py-1.5 rounded-xl border border-phutrucDark text-xs font-semibold">
+                        <i data-lucide="layers" class="w-3.5 h-3.5 text-phutrucGreen"></i>
+                        <span id="progress-text" class="font-mono text-phutrucDark">0/10</span>
                     </div>
                     <div class="flex items-center space-x-1 bg-amber-50 px-2.5 py-1.5 rounded-xl border border-amber-300 text-xs font-semibold">
                         <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-700"></i>
                         <span id="timer-display" class="font-mono text-amber-900">60s</span>
                     </div>
-                    <div class="flex items-center space-x-1 bg-creamCard px-2.5 py-1.5 rounded-xl border border-tatamiBorder text-xs font-semibold">
-                        <i data-lucide="trophy" class="w-3.5 h-3.5 text-freshLime"></i>
-                        <span id="score-display" class="font-mono text-matchaDark">0</span>
+                    <div class="flex items-center space-x-1 bg-creamCard px-2.5 py-1.5 rounded-xl border border-phutrucDark text-xs font-semibold">
+                        <i data-lucide="trophy" class="w-3.5 h-3.5 text-phutrucLeaf"></i>
+                        <span id="score-display" class="font-mono text-phutrucDark">0</span>
                     </div>
-                    <button onclick="openLeaderboard()" class="p-1.5 bg-creamCard hover:bg-lemonCream rounded-xl border border-tatamiBorder text-matchaDark transition" title="Bảng Xếp Hạng">
-                        <i data-lucide="bar-chart-2" class="w-4 h-4"></i>
+                    <button onclick="openBadgeBook()" class="p-1.5 bg-creamCard hover:bg-phutrucLight rounded-xl border border-phutrucDark text-phutrucDark transition" title="Sổ Huy Hiệu">
+                        <i data-lucide="award" class="w-4 h-4"></i>
                     </button>
                     <button onclick="resetToMenu()" class="p-1.5 hover:bg-red-50 rounded-xl text-stone-400 hover:text-red-500 transition">
                         <i data-lucide="log-out" class="w-4 h-4"></i>
@@ -140,119 +149,130 @@
         </div>
     </header>
 
+    <!-- MAIN CONTAINER -->
     <main class="max-w-6xl mx-auto w-full px-4 py-4 flex-grow flex flex-col justify-center">
 
+        <!-- SCREEN 1: MENU MAIN -->
         <section id="screen-menu" class="space-y-6 max-w-5xl mx-auto w-full text-center py-2">
             <div class="space-y-2">
-                <span class="inline-block bg-lemonCream text-matchaDark border border-matchaGreen/30 px-3 py-1 rounded-full text-xs font-semibold">
-                    🌸 Trải nghiệm Học Tiếng Nhật Nhã Nhặn Phong Cách Matcha
+                <span class="inline-block bg-phutrucLight text-phutrucDark border border-phutrucGreen/40 px-3.5 py-1 rounded-full text-xs font-bold">
+                    🎋 Ochakana • Học Bảng Chữ Cái Nhật Bản Thư Pháp
                 </span>
-                <h2 id="ui-menu-title" class="text-3xl sm:text-5xl font-brush font-extrabold text-matchaDark tracking-wide">
-                    HỌC PHÁT ÂM & TỪ VỰNG KANA
+                <h2 id="ui-menu-title" class="text-3xl sm:text-5xl font-calli font-extrabold text-phutrucDark tracking-wide">
+                    HỌC BẢNG CHỮ KHÔNG KHÓ
                 </h2>
-                <p id="ui-menu-desc" class="text-stone-600 text-xs sm:text-sm max-w-lg mx-auto">
-                    Hoàn thành từng màn chơi để mở khóa thử thách tiếp theo cùng Sakura-chan!
+                <p id="ui-menu-desc" class="text-phutrucGreen text-xs sm:text-sm max-w-lg mx-auto font-medium">
+                    Chọn chế độ và vượt qua các màn chơi để sưu tập đầy đủ Huy Hiệu Tỉnh Thành!
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 text-left">
-                <!-- Stage 1 -->
-                <div onclick="selectStage(1)" class="group bg-creamCard hover:bg-lemonCream border-2 border-tatamiBorder p-4 rounded-2xl cursor-pointer transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1">
-                    <div class="flex justify-between items-start mb-2">
-                        <div class="w-9 h-9 rounded-xl bg-matchaDark text-lemonCream font-brush font-bold text-lg flex items-center justify-center">あ</div>
-                        <span class="text-[9px] bg-matchaGreen/10 text-matchaGreen font-bold px-2 py-0.5 rounded-full">MÀN 1</span>
-                    </div>
-                    <h3 class="font-bold text-sm text-matchaDark group-hover:text-matchaGreen transition">Đơn Ký Tự Kana</h3>
-                    <p class="text-[11px] text-stone-500 mt-1">Trọn bộ 46 Hiragana & Katakana.</p>
-                </div>
-
-                <!-- Stage 2 -->
-                <div id="stage-card-2" onclick="selectStage(2)" class="group bg-creamCard border-2 border-tatamiBorder p-4 rounded-2xl cursor-pointer transition-all duration-300 shadow-sm relative overflow-hidden">
-                    <div id="lock-overlay-2" class="absolute inset-0 bg-inkBlack/60 backdrop-blur-[1px] flex flex-col items-center justify-center text-white z-10">
-                        <i data-lucide="lock" class="w-6 h-6 text-amber-300 mb-1"></i>
-                        <span class="text-[10px] font-bold text-amber-200">ĐANG KHÓA</span>
-                    </div>
-                    <div class="flex justify-between items-start mb-2">
-                        <div class="w-9 h-9 rounded-xl bg-rose-100 text-rose-700 font-brush font-bold text-lg flex items-center justify-center">が</div>
-                        <span class="text-[9px] bg-rose-200 text-rose-800 font-bold px-2 py-0.5 rounded-full">MÀN 2</span>
-                    </div>
-                    <h3 class="font-bold text-sm text-matchaDark">Ten-ten & Maru</h3>
-                    <p class="text-[11px] text-stone-500 mt-1">Đầy đủ 25 biến âm (゛) & (゜).</p>
-                </div>
-
-                <!-- Stage 3 -->
-                <div id="stage-card-3" onclick="selectStage(3)" class="group bg-creamCard border-2 border-tatamiBorder p-4 rounded-2xl cursor-pointer transition-all duration-300 shadow-sm relative overflow-hidden">
-                    <div id="lock-overlay-3" class="absolute inset-0 bg-inkBlack/60 backdrop-blur-[1px] flex flex-col items-center justify-center text-white z-10">
-                        <i data-lucide="lock" class="w-6 h-6 text-amber-300 mb-1"></i>
-                        <span class="text-[10px] font-bold text-amber-200">ĐANG KHÓA</span>
-                    </div>
-                    <div class="flex justify-between items-start mb-2">
-                        <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-800 font-brush font-bold text-lg flex items-center justify-center">猫</div>
-                        <span class="text-[9px] bg-amber-200 text-amber-900 font-bold px-2 py-0.5 rounded-full">MÀN 3</span>
-                    </div>
-                    <h3 class="font-bold text-sm text-matchaDark">Từ Vựng Theo Chủ Đề</h3>
-                    <p class="text-[11px] text-stone-500 mt-1">Đổi chủ đề ngẫu nhiên mỗi lần chơi.</p>
-                </div>
-
-                <!-- Stage 4 -->
-                <div id="stage-card-4" onclick="selectStage(4)" class="group bg-creamCard border-2 border-tatamiBorder p-4 rounded-2xl cursor-pointer transition-all duration-300 shadow-sm relative overflow-hidden">
-                    <div id="lock-overlay-4" class="absolute inset-0 bg-inkBlack/60 backdrop-blur-[1px] flex flex-col items-center justify-center text-white z-10">
-                        <i data-lucide="lock" class="w-6 h-6 text-amber-300 mb-1"></i>
-                        <span class="text-[10px] font-bold text-amber-200">ĐANG KHÓA</span>
-                    </div>
-                    <div class="flex justify-between items-start mb-2">
-                        <div class="w-9 h-9 rounded-xl bg-lemonCream text-matchaDark font-brush font-bold text-lg flex items-center justify-center">🍱</div>
-                        <span class="text-[9px] bg-freshLime/20 text-matchaDark font-bold px-2 py-0.5 rounded-full">MÀN 4</span>
-                    </div>
-                    <h3 class="font-bold text-sm text-matchaDark">Ẩm Thực Karuta 10s</h3>
-                    <p class="text-[11px] text-stone-500 mt-1">10 giây/câu cho 10 món ăn Nhật.</p>
-                </div>
-
-                <!-- Stage 5 -->
-                <div id="stage-card-5" onclick="selectStage(5)" class="group bg-creamCard border-2 border-tatamiBorder p-4 rounded-2xl cursor-pointer transition-all duration-300 shadow-sm relative overflow-hidden">
-                    <div id="lock-overlay-5" class="absolute inset-0 bg-inkBlack/60 backdrop-blur-[1px] flex flex-col items-center justify-center text-white z-10">
-                        <i data-lucide="lock" class="w-6 h-6 text-amber-300 mb-1"></i>
-                        <span class="text-[10px] font-bold text-amber-200">ĐANG KHÓA</span>
-                    </div>
-                    <div class="flex justify-between items-start mb-2">
-                        <div class="w-9 h-9 rounded-xl bg-tatamiBase text-tatamiBorder font-brush font-bold text-lg flex items-center justify-center">🧩</div>
-                        <span class="text-[9px] bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded-full">MÀN 5</span>
-                    </div>
-                    <h3 class="font-bold text-sm text-matchaDark">Đục Lỗ & Nối Thoại</h3>
-                    <p class="text-[11px] text-stone-500 mt-1">Điền từ & Nối hình Anime.</p>
+            <!-- CHỌN CHẾ ĐỘ BẢNG CHỮ (HIRAGANA / KATAKANA / MIX) -->
+            <div class="bg-creamCard border-2 border-phutrucDark p-3 rounded-2xl max-w-md mx-auto flex justify-between items-center text-xs sm:text-sm shadow-sm">
+                <span id="ui-mode-label" class="font-bold text-phutrucDark">Chế độ Màn 1 & 2:</span>
+                <div class="flex gap-1.5">
+                    <button onclick="setMode('hiragana')" id="btn-mode-hira" class="px-3 py-1 rounded-lg font-bold border border-phutrucDark bg-phutrucDark text-white transition">Hiragana</button>
+                    <button onclick="setMode('katakana')" id="btn-mode-kata" class="px-3 py-1 rounded-lg font-bold border border-phutrucDark bg-creamCard text-phutrucDark transition">Katakana</button>
+                    <button onclick="setMode('mix')" id="btn-mode-mix" class="px-3 py-1 rounded-lg font-bold border border-phutrucDark bg-creamCard text-phutrucDark transition">Mix 🎋</button>
                 </div>
             </div>
 
+            <!-- GRID 5 MÀN CHƠI -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 text-left">
+                <!-- Stage 1 -->
+                <div onclick="selectStage(1)" class="group bg-creamCard hover:bg-phutrucLight border-2 border-phutrucDark p-4 rounded-2xl cursor-pointer transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1">
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="w-9 h-9 rounded-xl bg-phutrucDark text-phutrucLight font-brush font-bold text-lg flex items-center justify-center">あ</div>
+                        <span class="text-[9px] bg-phutrucGreen/10 text-phutrucDark font-bold px-2 py-0.5 rounded-full">MÀN 1</span>
+                    </div>
+                    <h3 id="st1-title" class="font-bold text-sm text-phutrucDark group-hover:text-phutrucGreen transition">Đơn Ký Tự Kana (5 Vòng)</h3>
+                    <p id="st1-desc" class="text-[11px] text-stone-600 mt-1">Xoay vòng ngẫu nhiên Hàng A, S, N, M, R.</p>
+                </div>
+
+                <!-- Stage 2 -->
+                <div id="stage-card-2" onclick="selectStage(2)" class="group bg-creamCard border-2 border-phutrucDark p-4 rounded-2xl cursor-pointer transition-all duration-300 shadow-sm relative overflow-hidden">
+                    <div id="lock-overlay-2" class="absolute inset-0 bg-phutrucDark/60 backdrop-blur-[1px] flex flex-col items-center justify-center text-white z-10">
+                        <i data-lucide="lock" class="w-6 h-6 text-amber-300 mb-1"></i>
+                        <span id="lock-text-2" class="text-[10px] font-bold text-amber-200">ĐANG KHÓA</span>
+                    </div>
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="w-9 h-9 rounded-xl bg-rose-100 text-rose-800 font-brush font-bold text-lg flex items-center justify-center">が</div>
+                        <span class="text-[9px] bg-rose-200 text-rose-900 font-bold px-2 py-0.5 rounded-full">MÀN 2</span>
+                    </div>
+                    <h3 id="st2-title" class="font-bold text-sm text-phutrucDark">Ten-ten & Maru (3 Vòng)</h3>
+                    <p id="st2-desc" class="text-[11px] text-stone-600 mt-1">Hàng G-Z, D-B, và P ngẫu nhiên.</p>
+                </div>
+
+                <!-- Stage 3 -->
+                <div id="stage-card-3" onclick="selectStage(3)" class="group bg-creamCard border-2 border-phutrucDark p-4 rounded-2xl cursor-pointer transition-all duration-300 shadow-sm relative overflow-hidden">
+                    <div id="lock-overlay-3" class="absolute inset-0 bg-phutrucDark/60 backdrop-blur-[1px] flex flex-col items-center justify-center text-white z-10">
+                        <i data-lucide="lock" class="w-6 h-6 text-amber-300 mb-1"></i>
+                        <span id="lock-text-3" class="text-[10px] font-bold text-amber-200">ĐANG KHÓA</span>
+                    </div>
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-900 font-brush font-bold text-lg flex items-center justify-center">猫</div>
+                        <span class="text-[9px] bg-amber-200 text-amber-900 font-bold px-2 py-0.5 rounded-full">MÀN 3</span>
+                    </div>
+                    <h3 id="st3-title" class="font-bold text-sm text-phutrucDark">Từ Vựng Chủ Đề</h3>
+                    <p id="st3-desc" class="text-[11px] text-stone-600 mt-1">Anime, Chào hỏi, Địa danh.</p>
+                </div>
+
+                <!-- Stage 4 -->
+                <div id="stage-card-4" onclick="selectStage(4)" class="group bg-creamCard border-2 border-phutrucDark p-4 rounded-2xl cursor-pointer transition-all duration-300 shadow-sm relative overflow-hidden">
+                    <div id="lock-overlay-4" class="absolute inset-0 bg-phutrucDark/60 backdrop-blur-[1px] flex flex-col items-center justify-center text-white z-10">
+                        <i data-lucide="lock" class="w-6 h-6 text-amber-300 mb-1"></i>
+                        <span id="lock-text-4" class="text-[10px] font-bold text-amber-200">ĐANG KHÓA</span>
+                    </div>
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="w-9 h-9 rounded-xl bg-phutrucLight text-phutrucDark font-brush font-bold text-lg flex items-center justify-center">🎴</div>
+                        <span class="text-[9px] bg-phutrucGreen/20 text-phutrucDark font-bold px-2 py-0.5 rounded-full">MÀN 4</span>
+                    </div>
+                    <h3 id="st4-title" class="font-bold text-sm text-phutrucDark">Đấu Karuta Thật Sự (10s)</h3>
+                    <p id="st4-desc" class="text-[11px] text-stone-600 mt-1">Nghe đọc & Chọn thẻ (3 vòng).</p>
+                </div>
+
+                <!-- Stage 5 -->
+                <div id="stage-card-5" onclick="selectStage(5)" class="group bg-creamCard border-2 border-phutrucDark p-4 rounded-2xl cursor-pointer transition-all duration-300 shadow-sm relative overflow-hidden">
+                    <div id="lock-overlay-5" class="absolute inset-0 bg-phutrucDark/60 backdrop-blur-[1px] flex flex-col items-center justify-center text-white z-10">
+                        <i data-lucide="lock" class="w-6 h-6 text-amber-300 mb-1"></i>
+                        <span id="lock-text-5" class="text-[10px] font-bold text-amber-200">ĐANG KHÓA</span>
+                    </div>
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="w-9 h-9 rounded-xl bg-tatamiBg text-tatamiBorder font-brush font-bold text-lg flex items-center justify-center">🧩</div>
+                        <span class="text-[9px] bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded-full">MÀN 5</span>
+                    </div>
+                    <h3 id="st5-title" class="font-bold text-sm text-phutrucDark">Đục Lỗ & Nối Thoại</h3>
+                    <p id="st5-desc" class="text-[11px] text-stone-600 mt-1">Điền từ & Nối thoại Anime.</p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
             <div class="flex justify-center gap-3 pt-2">
-                <button onclick="openBadgeBook()" class="bg-woodAccent hover:bg-tatamiBorder text-white font-bold py-2.5 px-5 rounded-xl shadow-md transition flex items-center gap-2 text-sm border border-tatamiBorder">
-                    <i data-lucide="book-open" class="w-4 h-4"></i> <span>Sổ Huy Hiệu Tỉnh Thành</span>
-                </button>
-                <button onclick="openLeaderboard()" class="bg-creamCard border-2 border-tatamiBorder hover:bg-lemonCream text-matchaDark font-bold py-2.5 px-5 rounded-xl transition flex items-center gap-2 text-sm">
-                    <i data-lucide="bar-chart-2" class="w-4 h-4"></i> <span>Bảng Xếp Hạng Tiến Bộ</span>
+                <button onclick="openBadgeBook()" class="bg-phutrucGreen hover:bg-phutrucDark text-white font-bold py-2.5 px-5 rounded-xl shadow-md transition flex items-center gap-2 text-sm border border-phutrucDark">
+                    <i data-lucide="award" class="w-4 h-4"></i> <span id="ui-badge-btn">Sổ Huy Hiệu Tỉnh Thành</span>
                 </button>
             </div>
         </section>
 
         <!-- INTRO MODAL -->
-        <div id="intro-modal" class="fixed inset-0 bg-inkBlack/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-            <div class="bg-creamCard border-3 border-tatamiBorder max-w-lg w-full p-6 rounded-3xl shadow-2xl relative text-left space-y-4">
+        <div id="intro-modal" class="fixed inset-0 bg-phutrucDark/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+            <div class="bg-creamCard border-3 border-phutrucDark max-w-lg w-full p-6 rounded-3xl shadow-2xl relative text-left space-y-4">
                 <div class="flex items-center space-x-3">
-                    <div class="w-12 h-12 rounded-full bg-lemonCream border-2 border-matchaGreen flex items-center justify-center text-2xl">🌸</div>
+                    <div class="w-12 h-12 rounded-full bg-phutrucLight border-2 border-phutrucGreen flex items-center justify-center text-2xl">🎋</div>
                     <div>
-                        <h3 id="intro-title" class="font-bold text-lg text-matchaDark">Bài giảng từ Sakura-chan</h3>
+                        <h3 id="intro-title" class="font-bold text-lg text-phutrucDark">Bài giảng từ Sakura-chan</h3>
                         <p id="intro-sub" class="text-xs text-stone-500">Hãy ghi nhớ kiến thức trước khi bắt đầu lật thẻ nhé!</p>
                     </div>
                 </div>
-                <div id="intro-body" class="text-xs sm:text-sm text-inkBlack space-y-3 bg-lemonCream/50 p-4 rounded-2xl border border-beigeBorder leading-relaxed"></div>
-                <button onclick="confirmStartStage()" class="w-full bg-matchaDark hover:bg-matchaGreen text-white font-bold py-3 rounded-xl transition flex items-center justify-center gap-2 text-sm">
+                <div id="intro-body" class="text-xs sm:text-sm text-inkBlack space-y-3 bg-phutrucLight/60 p-4 rounded-2xl border border-beigeBorder leading-relaxed"></div>
+                <button onclick="confirmStartStage()" class="w-full bg-phutrucDark hover:bg-phutrucGreen text-white font-bold py-3 rounded-xl transition flex items-center justify-center gap-2 text-sm">
                     <span id="intro-btn-text">Đã hiểu, Bắt đầu chơi thôi! ➔</span>
                 </button>
             </div>
         </div>
 
-        <!-- SCREEN 2: BÀN CHƠI KARUTA GỐC -->
+        <!-- SCREEN 2: BÀN CHƠI KARUTA GỐC (MÀN 1, 2, 3) -->
         <section id="screen-game" class="hidden space-y-4">
-            <div class="bg-gradient-to-r from-lemonCream via-creamCard to-lemonCream border-2 border-tatamiBorder p-3 sm:p-4 rounded-2xl shadow-sm flex items-center justify-between">
+            <div class="bg-gradient-to-r from-phutrucLight via-creamCard to-phutrucLight border-2 border-phutrucDark p-3 sm:p-4 rounded-2xl shadow-sm flex items-center justify-between">
                 <div class="flex items-center space-x-3">
                     <div class="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 animate-float">
                         <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-md">
@@ -265,14 +285,14 @@
                             <circle cx="34" cy="54" r="4" fill="#FFB7C5" opacity="0.8"/>
                             <circle cx="66" cy="54" r="4" fill="#FFB7C5" opacity="0.8"/>
                             <path d="M 45 57 Q 50 61 55 57" stroke="#D9534F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                            <path d="M 20 84 C 20 66, 32 60, 50 60 C 68 60, 80 84, 80 84 L 80 100 L 20 100 Z" fill="#FFB7C5"/>
+                            <path d="M 20 84 C 20 66, 32 60, 50 60 C 68 60, 80 84, 80 84 L 80 100 L 20 100 Z" fill="#2A5A3F"/>
                         </svg>
                     </div>
 
                     <div>
                         <div class="flex items-center gap-1.5">
-                            <span class="font-bold text-sm text-matchaDark">Sakura-chan</span>
-                            <span class="text-[10px] bg-matchaGreen/20 text-matchaDark px-1.5 py-0.5 rounded font-mono font-bold">さくら</span>
+                            <span class="font-bold text-sm text-phutrucDark">Sakura-chan</span>
+                            <span class="text-[10px] bg-phutrucGreen/20 text-phutrucDark px-1.5 py-0.5 rounded font-mono font-bold">さくら</span>
                         </div>
                         <p id="kimono-dialogue" class="text-xs sm:text-sm text-inkBlack mt-0.5 italic">
                             "Hãy lật 1 thẻ bài Karuta bên dưới và trả lời đúng nhé!"
@@ -281,46 +301,115 @@
                 </div>
 
                 <div class="hidden sm:block text-right">
-                    <span id="game-stage-badge" class="text-xs font-bold bg-matchaDark text-lemonCream px-3 py-1 rounded-full uppercase tracking-wider border border-tatamiBorder">
+                    <span id="game-stage-badge" class="text-xs font-bold bg-phutrucDark text-phutrucLight px-3 py-1 rounded-full uppercase tracking-wider border border-phutrucDark">
                         MÀN 1
                     </span>
                 </div>
             </div>
 
-            <div class="w-full bg-creamCard h-2 rounded-full overflow-hidden border border-tatamiBorder">
-                <div id="progress-bar" class="bg-gradient-to-r from-matchaGreen to-freshLime h-full w-0 transition-all duration-300"></div>
+            <div class="w-full bg-creamCard h-2 rounded-full overflow-hidden border border-phutrucDark">
+                <div id="progress-bar" class="bg-gradient-to-r from-phutrucGreen to-phutrucLeaf h-full w-0 transition-all duration-300"></div>
             </div>
 
             <div id="cards-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"></div>
         </section>
 
-        <!-- SCREEN 3: MÀN HÌNH TỔNG KẾT GỐC -->
+        <!-- SCREEN MÀN 4: ĐẤU TRƯỜNG KARUTA 10s -->
+        <section id="screen-karuta-speed" class="hidden space-y-4 max-w-4xl mx-auto">
+            <div class="bg-creamCard border-2 border-phutrucDark p-4 rounded-3xl shadow-md text-center space-y-2">
+                <div class="flex justify-between items-center px-2">
+                    <span id="m4-header-tag" class="text-xs font-bold bg-phutrucLight text-phutrucDark border border-phutrucGreen/40 px-3 py-1 rounded-full">
+                        🎴 MÀN 4: ĐẤU TRƯỜNG KARUTA THẬT SỰ (10S / CÂU)
+                    </span>
+                    <span id="speed-card-counter" class="text-xs font-mono font-bold text-phutrucDark bg-phutrucLight px-2.5 py-1 rounded-lg border border-beigeBorder">Thẻ: 1/10</span>
+                </div>
+                <p id="m4-sub-text" class="text-xs text-stone-600">Nghe giọng Sakura-chan đọc bài và bấm đúng lá bài tương ứng trong 10 giây!</p>
+                <div class="flex justify-center gap-3 pt-1">
+                    <button onclick="playKarutaSpeedAudio(1.0)" class="bg-phutrucDark text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 hover:bg-phutrucGreen transition">
+                        🔊 Nghe chuẩn (1.0x)
+                    </button>
+                    <button onclick="playKarutaSpeedAudio(0.5)" class="bg-amber-100 text-amber-900 border border-amber-300 px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 hover:bg-amber-200 transition">
+                        🐢 Đọc chậm (0.5x)
+                    </button>
+                </div>
+            </div>
+
+            <div id="karuta-arena-grid" class="grid grid-cols-2 sm:grid-cols-5 gap-3"></div>
+        </section>
+
+        <!-- SCREEN MÀN 5: ĐỤC LỖ & NỐI THOẠI -->
+        <section id="screen-anime-fill" class="hidden space-y-6 max-w-3xl mx-auto">
+            <div id="anime-fill-part1" class="bg-creamCard border-2 border-phutrucDark p-6 rounded-3xl shadow-xl text-center space-y-4">
+                <div class="flex justify-between items-center">
+                    <span id="m5-p1-tag" class="text-xs font-bold bg-phutrucLight text-phutrucDark border border-phutrucGreen/40 px-3 py-1 rounded-full">
+                        🧩 MÀN 5 (VÒNG 1): ĐIỀN TỪ HOÀN THÀNH CÂU NÓI
+                    </span>
+                    <span id="fill-counter-text" class="text-xs font-mono font-bold text-phutrucDark">Câu: 1/5</span>
+                </div>
+
+                <div class="bg-phutrucLight/40 p-5 rounded-2xl border border-beigeBorder space-y-3">
+                    <div id="fill-jp-sentence" class="text-2xl font-brush font-black text-phutrucDark leading-relaxed"></div>
+                    <div id="fill-meaning-text" class="text-xs font-semibold text-stone-600 italic bg-white/80 py-1.5 px-3 rounded-lg border border-beigeBorder"></div>
+                    <div id="fill-romaji-hole" class="text-lg font-mono font-bold text-amber-900 tracking-wider"></div>
+                </div>
+
+                <form onsubmit="submitFillHole(event)" class="space-y-3">
+                    <input type="text" id="fill-input" placeholder="Nhập từ Romaji còn thiếu..." autocomplete="off"
+                           class="w-full bg-creamCard border-2 border-phutrucDark focus:border-phutrucGreen text-center font-mono font-bold text-lg py-3 rounded-xl focus:outline-none transition">
+                    <button type="submit" class="w-full bg-phutrucDark hover:bg-phutrucGreen text-white font-bold py-3 rounded-xl transition">
+                        Xác Nhận ➔
+                    </button>
+                </form>
+            </div>
+
+            <div id="anime-fill-part2" class="hidden bg-creamCard border-2 border-phutrucDark p-6 rounded-3xl shadow-xl text-center space-y-4">
+                <span id="m5-p2-tag" class="text-xs font-bold bg-phutrucLight text-phutrucDark border border-phutrucGreen/40 px-3 py-1 rounded-full">
+                    🎉 MÀN 5 (VÒNG 2): NỐI CÂU THOẠI VỚI HÌNH ẢNH NHÂN VẬT
+                </span>
+                <p id="m5-p2-sub" class="text-xs text-stone-600 mb-4">Chọn đúng nhân vật phát ngôn câu nói nổi tiếng bên dưới!</p>
+                <div class="flex flex-col gap-3 text-left text-xs" id="match-game-grid"></div>
+            </div>
+        </section>
+
+        <!-- SCREEN 3: KẾT QUẢ TỔNG KẾT -->
         <section id="screen-result" class="hidden text-center space-y-5 max-w-md mx-auto py-4">
-            <div class="bg-creamCard border-3 border-tatamiBorder p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden">
-                <div class="w-16 h-16 mx-auto bg-lemonCream rounded-full flex items-center justify-center text-matchaDark mb-3 border border-matchaGreen">
+            <div class="bg-creamCard border-3 border-phutrucDark p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden">
+                <div class="w-16 h-16 mx-auto bg-phutrucLight rounded-full flex items-center justify-center text-phutrucDark mb-3 border border-phutrucGreen">
                     <i data-lucide="award" class="w-8 h-8"></i>
                 </div>
 
-                <h2 id="result-title" class="font-brush font-black text-2xl sm:text-3xl text-matchaDark">HOÀN THÀNH XUẤT SẮC!</h2>
+                <h2 id="result-title" class="font-calli font-black text-2xl sm:text-3xl text-phutrucDark">HOÀN THÀNH XUẤT SẮC!</h2>
                 <p id="result-subtitle" class="text-xs text-stone-500 mt-1">Sakura-chan rất tự hào về bạn!</p>
 
                 <div class="grid grid-cols-2 gap-2.5 my-4 text-left">
-                    <div class="bg-lemonCream/40 p-3 rounded-xl border border-tatamiBorder">
-                        <span class="text-[10px] text-stone-500 block uppercase font-bold">Tổng Điểm</span>
-                        <span id="final-score" class="text-xl font-bold font-mono text-matchaDark">0</span>
+                    <div class="bg-phutrucLight/40 p-3 rounded-xl border border-phutrucDark">
+                        <span id="res-score-lbl" class="text-[10px] text-stone-500 block uppercase font-bold">Tổng Điểm</span>
+                        <span id="final-score" class="text-xl font-bold font-mono text-phutrucDark">0</span>
                     </div>
-                    <div class="bg-lemonCream/40 p-3 rounded-xl border border-tatamiBorder">
-                        <span class="text-[10px] text-stone-500 block uppercase font-bold">Số Câu Đúng</span>
+                    <div class="bg-phutrucLight/40 p-3 rounded-xl border border-phutrucDark">
+                        <span id="res-correct-lbl" class="text-[10px] text-stone-500 block uppercase font-bold">Số Câu Đúng</span>
                         <span id="final-correct" class="text-xl font-bold font-mono text-emerald-700">0 / 10</span>
                     </div>
                 </div>
 
+                <!-- KHU VỰC THƯỞNG HUY HIỆU -->
+                <div id="badge-reward-box" class="hidden bg-amber-50 border-2 border-amber-300 p-3.5 rounded-2xl mb-4 text-left space-y-1">
+                    <span class="text-[10px] font-bold text-amber-800 uppercase tracking-widest block">🎉 MỞ KHÓA HUY HIỆU TỈNH THÀNH!</span>
+                    <div class="flex items-center space-x-3 pt-1">
+                        <span id="reward-badge-icon" class="text-3xl">🏯</span>
+                        <div>
+                            <h4 id="reward-badge-name" class="font-bold text-xs text-phutrucDark">Huy hiệu Tokyo</h4>
+                            <p id="reward-badge-desc" class="text-[10px] text-stone-600">Thủ đô hiện đại & sầm uất</p>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="flex gap-2">
-                    <button onclick="restartStage()" class="flex-1 bg-matchaDark hover:bg-matchaGreen text-white font-bold py-2.5 rounded-xl transition text-xs sm:text-sm flex items-center justify-center gap-1.5">
-                        <i data-lucide="rotate-ccw" class="w-4 h-4"></i> <span>Chơi Lại</span>
+                    <button onclick="restartStage()" class="flex-1 bg-phutrucDark hover:bg-phutrucGreen text-white font-bold py-2.5 rounded-xl transition text-xs sm:text-sm flex items-center justify-center gap-1.5">
+                        <i data-lucide="rotate-ccw" class="w-4 h-4"></i> <span id="res-replay-btn">Chơi Lại</span>
                     </button>
-                    <button onclick="resetToMenu()" class="flex-1 bg-creamCard border-2 border-tatamiBorder hover:bg-lemonCream text-matchaDark font-bold py-2.5 rounded-xl transition text-xs sm:text-sm flex items-center justify-center gap-1.5">
-                        <i data-lucide="home" class="w-4 h-4"></i> <span>Menu</span>
+                    <button onclick="resetToMenu()" class="flex-1 bg-creamCard border-2 border-phutrucDark hover:bg-phutrucLight text-phutrucDark font-bold py-2.5 rounded-xl transition text-xs sm:text-sm flex items-center justify-center gap-1.5">
+                        <i data-lucide="home" class="w-4 h-4"></i> <span id="res-menu-btn">Menu</span>
                     </button>
                 </div>
             </div>
@@ -329,22 +418,22 @@
     </main>
 
     <!-- MODAL NHẬP ROMAJI GỐC -->
-    <div id="answer-modal" class="fixed inset-0 bg-inkBlack/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div id="modal-box" class="bg-creamCard border-3 border-tatamiBorder max-w-sm w-full p-5 sm:p-6 rounded-3xl shadow-2xl relative text-center space-y-4">
+    <div id="answer-modal" class="fixed inset-0 bg-phutrucDark/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div id="modal-box" class="bg-creamCard border-3 border-phutrucDark max-w-sm w-full p-5 sm:p-6 rounded-3xl shadow-2xl relative text-center space-y-4">
             
             <button onclick="closeModal()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-600">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
 
             <div class="space-y-1">
-                <span id="modal-char-type" class="text-[10px] font-bold text-matchaDark tracking-widest uppercase bg-lemonCream px-2 py-0.5 rounded-full border border-matchaGreen/30">HIRAGANA</span>
-                <div class="py-3 bg-lemonCream/30 rounded-2xl border border-tatamiBorder mt-2 flex flex-col items-center justify-center">
-                    <div id="modal-kana-char" class="text-5xl sm:text-6xl font-brush font-black text-matchaDark">あ</div>
+                <span id="modal-char-type" class="text-[10px] font-bold text-phutrucDark tracking-widest uppercase bg-phutrucLight px-2 py-0.5 rounded-full border border-phutrucGreen/40">HIRAGANA</span>
+                <div class="py-3 bg-phutrucLight/30 rounded-2xl border border-phutrucDark mt-2 flex flex-col items-center justify-center">
+                    <div id="modal-kana-char" class="text-5xl sm:text-6xl font-brush font-black text-phutrucDark">あ</div>
                 </div>
             </div>
 
             <div class="flex justify-center gap-2">
-                <button onclick="playAudioCurrent(1.0)" class="bg-creamCard hover:bg-lemonCream text-matchaDark border border-tatamiBorder px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 transition">
+                <button onclick="playAudioCurrent(1.0)" class="bg-creamCard hover:bg-phutrucLight text-phutrucDark border border-phutrucDark px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 transition">
                     <i data-lucide="volume-2" class="w-3.5 h-3.5"></i> Nghe chuẩn
                 </button>
                 <button onclick="playAudioCurrent(0.5)" class="bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 transition">
@@ -355,64 +444,82 @@
             <div id="result-feedback-box" class="hidden text-left p-3.5 rounded-xl space-y-2 border">
                 <div id="result-feedback-status" class="font-bold text-xs flex items-center gap-1.5"></div>
                 <div id="result-feedback-detail" class="text-xs"></div>
-                <button onclick="confirmNextCard()" class="w-full mt-2 bg-matchaDark hover:bg-matchaGreen text-white font-bold py-2 rounded-lg text-xs transition">
+                <button onclick="confirmNextCard()" class="w-full mt-2 bg-phutrucDark hover:bg-phutrucGreen text-white font-bold py-2 rounded-lg text-xs transition">
                     Chuyển qua câu mới ➔
                 </button>
             </div>
 
             <form id="answer-form" onsubmit="submitAnswer(event)" class="space-y-3">
                 <input type="text" id="romaji-input" autocomplete="off" placeholder="Nhập Romaji..." 
-                       class="w-full bg-creamCard border-2 border-tatamiBorder focus:border-matchaGreen text-matchaDark font-mono text-center text-lg py-2.5 px-4 rounded-xl focus:outline-none transition">
-                <button type="submit" class="w-full bg-matchaDark hover:bg-matchaGreen text-white font-bold py-2.5 rounded-xl transition text-sm">
+                       class="w-full bg-creamCard border-2 border-phutrucDark focus:border-phutrucGreen text-phutrucDark font-mono text-center text-lg py-2.5 px-4 rounded-xl focus:outline-none transition">
+                <button type="submit" class="w-full bg-phutrucDark hover:bg-phutrucGreen text-white font-bold py-2.5 rounded-xl transition text-sm">
                     Xác Nhận ➔
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- MODAL BẢNG XẾP HẠNG TIẾN BỘ -->
-    <div id="leaderboard-modal" class="fixed inset-0 bg-inkBlack/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-creamCard border-3 border-tatamiBorder max-w-md w-full p-5 sm:p-6 rounded-3xl shadow-2xl relative">
-            <div class="flex justify-between items-center border-b border-tatamiBorder pb-3 mb-4">
-                <h3 class="font-bold text-lg text-matchaDark">🏆 Bảng Theo Dõi Tiến Bộ & Ranking</h3>
-                <button onclick="closeLeaderboard()" class="text-stone-400 hover:text-stone-600"><i data-lucide="x" class="w-5 h-5"></i></button>
-            </div>
-            <div id="leaderboard-list" class="space-y-2 max-h-60 overflow-y-auto"></div>
-        </div>
-    </div>
-
-    <!-- MODAL SỔ HUY HIỆU -->
-    <div id="badge-book-modal" class="fixed inset-0 bg-inkBlack/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-creamCard border-3 border-tatamiBorder max-w-2xl w-full p-5 sm:p-6 rounded-3xl shadow-2xl relative max-h-[85vh] flex flex-col">
-            <div class="flex justify-between items-center border-b border-tatamiBorder pb-3">
-                <h3 class="font-bold text-lg text-matchaDark">🏅 Sổ Sưu Tập 47 Huy Hiệu Tỉnh Thành</h3>
+    <!-- MODAL SỔ HUY HIỆU TỈNH THÀNH -->
+    <div id="badge-book-modal" class="fixed inset-0 bg-phutrucDark/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-creamCard border-3 border-phutrucDark max-w-2xl w-full p-5 sm:p-6 rounded-3xl shadow-2xl relative max-h-[85vh] flex flex-col">
+            <div class="flex justify-between items-center border-b border-phutrucDark pb-3">
+                <h3 id="badge-book-title" class="font-bold text-lg text-phutrucDark">🏅 Sổ Sưu Tập Huy Hiệu Tỉnh Thành Nhật Bản</h3>
                 <button onclick="closeBadgeBook()" class="text-stone-400 hover:text-stone-600"><i data-lucide="x" class="w-5 h-5"></i></button>
             </div>
-            <div id="badge-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-3 overflow-y-auto pr-1 my-2 flex-grow"></div>
+            <div id="badge-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-3 overflow-y-auto pr-1 my-3 flex-grow"></div>
         </div>
     </div>
 
-    <footer class="border-t border-tatamiBorder bg-creamCard/80 py-2.5 px-4 text-center text-xs text-stone-600">
-        <p>Karuta Kana Game • Phong Cách Matcha Tatami Nhật Bản • Web Speech API 2 Speed</p>
+    <footer class="border-t border-phutrucDark bg-creamCard/80 py-2.5 px-4 text-center text-xs text-stone-600 font-medium">
+        <p>Ochakana • Học bảng chữ không khó • Style Thư Pháp Phù Trúc Green</p>
     </footer>
 
-    <!-- LOGIC GAME BẢO TOÀN -->
+    <!-- JARSCRIPT FULL GAME LOGIC -->
     <script>
         let currentLang = 'VI';
+        let selectedMode = 'hiragana'; // hiragana | katakana | mix
 
         function toggleLanguage() {
             currentLang = currentLang === 'VI' ? 'EN' : 'VI';
             document.getElementById('lang-btn-text').innerText = currentLang === 'VI' ? 'VI 🇻🇳' : 'EN 🇬🇧';
+            applyLanguageUI();
+        }
+
+        function setMode(mode) {
+            selectedMode = mode;
+            document.getElementById('btn-mode-hira').className = mode === 'hiragana' ? 'px-3 py-1 rounded-lg font-bold border border-phutrucDark bg-phutrucDark text-white transition' : 'px-3 py-1 rounded-lg font-bold border border-phutrucDark bg-creamCard text-phutrucDark transition';
+            document.getElementById('btn-mode-kata').className = mode === 'katakana' ? 'px-3 py-1 rounded-lg font-bold border border-phutrucDark bg-phutrucDark text-white transition' : 'px-3 py-1 rounded-lg font-bold border border-phutrucDark bg-creamCard text-phutrucDark transition';
+            document.getElementById('btn-mode-mix' ).className = mode === 'mix'      ? 'px-3 py-1 rounded-lg font-bold border border-phutrucDark bg-phutrucDark text-white transition' : 'px-3 py-1 rounded-lg font-bold border border-phutrucDark bg-creamCard text-phutrucDark transition';
+        }
+
+        function applyLanguageUI() {
+            const isEn = (currentLang === 'EN');
+            document.getElementById('ui-app-tagline').innerText = isEn ? 'Learning Kana is easy' : 'Học bảng chữ không khó';
+            document.getElementById('ui-menu-title').innerText = isEn ? 'LEARN KANA EASILY' : 'HỌC BẢNG CHỮ KHÔNG KHÓ';
+            document.getElementById('ui-menu-desc').innerText = isEn ? 'Choose a mode and complete stages to collect Province Badges!' : 'Chọn chế độ và vượt qua các màn chơi để sưu tập đầy đủ Huy Hiệu Tỉnh Thành!';
+            document.getElementById('ui-mode-label').innerText = isEn ? 'Stage 1 & 2 Mode:' : 'Chế độ Màn 1 & 2:';
+
+            document.getElementById('st1-title').innerText = isEn ? 'Single Kana (5 Rounds)' : 'Đơn Ký Tự Kana (5 Vòng)';
+            document.getElementById('st1-desc').innerText = isEn ? 'Random rotation of A, S, N, M, R rows.' : 'Xoay vòng ngẫu nhiên Hàng A, S, N, M, R.';
             
-            if (currentLang === 'EN') {
-                document.getElementById('ui-subtitle').innerText = 'Japanese Kana & Vocab Karuta Game in Matcha Tatami Style';
-                document.getElementById('ui-menu-title').innerText = 'LEARN KANA PRONUNCIATION';
-                document.getElementById('ui-menu-desc').innerText = 'Complete each stage to unlock the next challenge with Sakura-chan!';
-            } else {
-                document.getElementById('ui-subtitle').innerText = 'Học chữ cái & từ vựng Tiếng Nhật phong cách Matcha Tatami';
-                document.getElementById('ui-menu-title').innerText = 'HỌC PHÁT ÂM & TỪ VỰNG KANA';
-                document.getElementById('ui-menu-desc').innerText = 'Hoàn thành từng màn chơi để mở khóa thử thách tiếp theo cùng Sakura-chan!';
-            }
+            document.getElementById('st2-title').innerText = isEn ? 'Ten-ten & Maru (3 Rounds)' : 'Ten-ten & Maru (3 Vòng)';
+            document.getElementById('st2-desc').innerText = isEn ? 'Random G-Z, D-B, and P rows.' : 'Hàng G-Z, D-B, và P ngẫu nhiên.';
+
+            document.getElementById('st3-title').innerText = isEn ? 'Themed Vocabulary' : 'Từ Vựng Chủ Đề';
+            document.getElementById('st3-desc').innerText = isEn ? 'Anime, Greetings, Landmarks.' : 'Anime, Chào hỏi, Địa danh.';
+
+            document.getElementById('st4-title').innerText = isEn ? 'Real Karuta Arena (10s)' : 'Đấu Karuta Thật Sự (10s)';
+            document.getElementById('st4-desc').innerText = isEn ? 'Listen & Select card (3 rounds).' : 'Nghe đọc & Chọn thẻ (3 vòng).';
+
+            document.getElementById('st5-title').innerText = isEn ? 'Fill Hole & Match Quote' : 'Đục Lỗ & Nối Thoại';
+            document.getElementById('st5-desc').innerText = isEn ? 'Fill words & Match Anime quotes.' : 'Điền từ & Nối thoại Anime.';
+
+            document.getElementById('ui-badge-btn').innerText = isEn ? 'Province Badge Book' : 'Sổ Huy Hiệu Tỉnh Thành';
+            document.getElementById('badge-book-title').innerText = isEn ? '🏅 Japan Province Badge Collection Book' : '🏅 Sổ Sưu Tập Huy Hiệu Tỉnh Thành Nhật Bản';
+            document.getElementById('res-score-lbl').innerText = isEn ? 'TOTAL SCORE' : 'TỔNG ĐIỂM';
+            document.getElementById('res-correct-lbl').innerText = isEn ? 'CORRECT ANSWERS' : 'SỐ CÂU ĐÚNG';
+            document.getElementById('res-replay-btn').innerText = isEn ? 'Replay' : 'Chơi Lại';
+            document.getElementById('res-menu-btn').innerText = isEn ? 'Menu' : 'Menu';
         }
 
         function playWrongSound() {
@@ -449,15 +556,132 @@
             }
         }
 
-        const singleKanaDataFull = [
-            { hiragana: 'あ', katakana: 'ア', romaji: 'a' }, { hiragana: 'い', katakana: 'イ', romaji: 'i' },
-            { hiragana: 'う', katakana: 'ウ', romaji: 'u' }, { hiragana: 'え', katakana: 'エ', romaji: 'e' },
-            { hiragana: 'お', katakana: 'オ', romaji: 'o' }, { hiragana: 'か', katakana: 'カ', romaji: 'ka' },
-            { hiragana: 'き', katakana: 'キ', romaji: 'ki' }, { hiragana: 'く', katakana: 'ク', romaji: 'ku' },
-            { hiragana: 'け', katakana: 'ケ', romaji: 'ke' }, { hiragana: 'こ', katakana: 'コ', romaji: 'ko' }
+        /* DỮ LIỆU MÀN 1: chia đúng 5 vòng */
+        const stage1Rounds = [
+            // Vòng 1: A, I, U, E, O & Ka, Ki, Ku, Ke, Ko
+            [
+                { hira: 'あ', kata: 'ア', romaji: 'a' }, { hira: 'い', kata: 'イ', romaji: 'i' },
+                { hira: 'う', kata: 'ウ', romaji: 'u' }, { hira: 'え', kata: 'エ', romaji: 'e' },
+                { hira: 'お', kata: 'オ', romaji: 'o' }, { hira: 'か', kata: 'カ', romaji: 'ka' },
+                { hira: 'き', kata: 'キ', romaji: 'ki' }, { hira: 'く', kata: 'ク', romaji: 'ku' },
+                { hira: 'け', kata: 'ケ', romaji: 'ke' }, { hira: 'こ', kata: 'コ', romaji: 'ko' }
+            ],
+            // Vòng 2: Hàng S và Hàng T
+            [
+                { hira: 'さ', kata: 'サ', romaji: 'sa' }, { hira: 'し', kata: 'シ', romaji: 'shi' },
+                { hira: 'す', kata: 'ス', romaji: 'su' }, { hira: 'せ', kata: 'セ', romaji: 'se' },
+                { hira: 'そ', kata: 'ソ', romaji: 'so' }, { hira: 'た', kata: 'タ', romaji: 'ta' },
+                { hira: 'ち', kata: 'チ', romaji: 'chi' }, { hira: 'つ', kata: 'ツ', romaji: 'tsu' },
+                { hira: 'て', kata: 'テ', romaji: 'te' }, { hira: 'と', kata: 'ト', romaji: 'to' }
+            ],
+            // Vòng 3: Hàng N và Hàng H
+            [
+                { hira: 'な', kata: 'ナ', romaji: 'na' }, { hira: 'に', kata: 'ニ', romaji: 'ni' },
+                { hira: 'ぬ', kata: 'ヌ', romaji: 'nu' }, { hira: 'ね', kata: 'ネ', romaji: 'ne' },
+                { hira: 'の', kata: 'ノ', romaji: 'no' }, { hira: 'は', kata: 'ハ', romaji: 'ha' },
+                { hira: 'ひ', kata: 'ヒ', romaji: 'hi' }, { hira: 'ふ', kata: 'フ', romaji: 'fu' },
+                { hira: 'へ', kata: 'ヘ', romaji: 'he' }, { hira: 'ほ', kata: 'ホ', romaji: 'ho' }
+            ],
+            // Vòng 4: Hàng M và Hàng Y
+            [
+                { hira: 'ま', kata: 'マ', romaji: 'ma' }, { hira: 'み', kata: 'ミ', romaji: 'mi' },
+                { hira: 'む', kata: 'ム', romaji: 'mu' }, { hira: 'め', kata: 'メ', romaji: 'me' },
+                { hira: 'も', kata: 'モ', romaji: 'mo' }, { hira: 'や', kata: 'ヤ', romaji: 'ya' },
+                { hira: 'ゆ', kata: 'ユ', romaji: 'yu' }, { hira: 'よ', kata: 'ヨ', romaji: 'yo' },
+                { hira: 'あ', kata: 'ア', romaji: 'a' }, { hira: 'ん', kata: 'ン', romaji: 'n' }
+            ],
+            // Vòng 5: Hàng R và Hàng W, N
+            [
+                { hira: 'ら', kata: 'ラ', romaji: 'ra' }, { hira: 'り', kata: 'リ', romaji: 'ri' },
+                { hira: 'る', kata: 'ル', romaji: 'ru' }, { hira: 'れ', kata: 'レ', romaji: 're' },
+                { hira: 'ろ', kata: 'ロ', romaji: 'ro' }, { hira: 'わ', kata: 'ワ', romaji: 'wa' },
+                { hira: 'を', kata: 'ヲ', romaji: 'wo' }, { hira: 'ん', kata: 'ン', romaji: 'n' },
+                { hira: 'き', kata: 'キ', romaji: 'ki' }, { hira: 'す', kata: 'ス', romaji: 'su' }
+            ]
+        ];
+
+        /* DỮ LIỆU MÀN 2: chia đúng 3 vòng */
+        const stage2Rounds = [
+            // Vòng 1: Hàng G và Hàng Z
+            [
+                { hira: 'が', kata: 'ガ', romaji: 'ga' }, { hira: 'ぎ', kata: 'ギ', romaji: 'gi' },
+                { hira: 'ぐ', kata: 'グ', romaji: 'gu' }, { hira: 'げ', kata: 'ゲ', romaji: 'ge' },
+                { hira: 'ご', kata: 'ゴ', romaji: 'go' }, { hira: 'ざ', kata: 'ザ', romaji: 'za' },
+                { hira: 'じ', kata: 'ジ', romaji: 'ji' }, { hira: 'ず', kata: 'ズ', romaji: 'zu' },
+                { hira: 'ぜ', kata: 'ゼ', romaji: 'ze' }, { hira: 'ぞ', kata: 'ゾ', romaji: 'zo' }
+            ],
+            // Vòng 2: Hàng D và Hàng B
+            [
+                { hira: 'だ', kata: 'ダ', romaji: 'da' }, { hira: 'ぢ', kata: 'ヂ', romaji: 'ji' },
+                { hira: 'づ', kata: 'ヅ', romaji: 'zu' }, { hira: 'で', kata: 'デ', romaji: 'de' },
+                { hira: 'ど', kata: 'ド', romaji: 'do' }, { hira: 'ば', kata: 'バ', romaji: 'ba' },
+                { hira: 'び', kata: 'ビ', romaji: 'bi' }, { hira: 'ぶ', kata: 'ブ', romaji: 'bu' },
+                { hira: 'べ', kata: 'ベ', romaji: 'be' }, { hira: 'ぼ', kata: 'ボ', romaji: 'bo' }
+            ],
+            // Vòng 3: Hàng P
+            [
+                { hira: 'ぱ', kata: 'パ', romaji: 'pa' }, { hira: 'ぴ', kata: 'ピ', romaji: 'pi' },
+                { hira: 'ぷ', kata: 'プ', romaji: 'pu' }, { hira: 'ぺ', kata: 'ペ', romaji: 'pe' },
+                { hira: 'ぽ', kata: 'ポ', romaji: 'po' }, { hira: 'が', kata: 'ガ', romaji: 'ga' },
+                { hira: 'ざ', kata: 'ザ', romaji: 'za' }, { hira: 'ば', kata: 'バ', romaji: 'ba' },
+                { hira: 'ぎ', kata: 'ギ', romaji: 'gi' }, { hira: 'ぞ', kata: 'ゾ', romaji: 'zo' }
+            ]
+        ];
+
+        /* DỮ LIỆU MÀN 4: 3 vòng Karuta khác nhau hoàn toàn */
+        const stage4Rounds = [
+            // Vòng 1
+            [
+                { char: 'Sakura', display: '<ruby>桜<rt>さくら</rt></ruby>', romaji: 'sakura' },
+                { char: 'Neko', display: 'ねこ 🐱', romaji: 'neko' },
+                { char: 'Inu', display: 'いぬ 🐶', romaji: 'inu' },
+                { char: 'Fujisan', display: '<ruby>富士山<rt>ふじさん</rt></ruby>', romaji: 'fujisan' },
+                { char: 'Sushi', display: 'すし 🍣', romaji: 'sushi' },
+                { char: 'Ramen', display: 'らーめん 🍜', romaji: 'ramen' },
+                { char: 'Matcha', display: 'まっちゃ 🍵', romaji: 'matcha' },
+                { char: 'Mochi', display: 'もち 🍡', romaji: 'mochi' },
+                { char: 'Umi', display: 'うみ 🌊', romaji: 'umi' },
+                { char: 'Yama', display: 'やま ⛰️', romaji: 'yama' }
+            ],
+            // Vòng 2
+            [
+                { char: 'Doraemon', display: 'どらえもん 🐱‍👤', romaji: 'doraemon' },
+                { char: 'Totoro', display: 'ととろ 🌳', romaji: 'totoro' },
+                { char: 'Pikachu', display: 'ぴかちゅう ⚡', romaji: 'pikachu' },
+                { char: 'Konan', display: 'こなん 👓', romaji: 'konan' },
+                { char: 'Naruto', display: 'なると 🍥', romaji: 'naruto' },
+                { char: 'Kimono', display: '<ruby>着物<rt>きもの</rt></ruby>', romaji: 'kimono' },
+                { char: 'Origami', display: 'おりがみ 🕊️', romaji: 'origami' },
+                { char: 'Bento', display: 'べんとう 🍱', romaji: 'bento' },
+                { char: 'Hanami', display: '<ruby>花見<rt>はなみ</rt></ruby>', romaji: 'hanami' },
+                { char: 'Matsuri', display: '<ruby>祭り<rt>まつり</rt></ruby>', romaji: 'matsuri' }
+            ],
+            // Vòng 3
+            [
+                { char: 'Tokyo', display: '<ruby>東京<rt>とうきょう</rt></ruby>', romaji: 'tokyo' },
+                { char: 'Kyoto', display: '<ruby>京都<rt>きょうと</rt></ruby>', romaji: 'kyoto' },
+                { char: 'Osaka', display: '<ruby>大阪<rt>おおさか</rt></ruby>', romaji: 'osaka' },
+                { char: 'Otsukaresama', display: 'おつかれさま', romaji: 'otsukaresama' },
+                { char: 'Arigatou', display: 'ありがとう', romaji: 'arigatou' },
+                { char: 'Konnichiwa', display: 'こんにちは', romaji: 'konnichiwa' },
+                { char: 'Sayounara', display: 'さようなら', romaji: 'sayounara' },
+                { char: 'Itadakimasu', display: 'いただきます', romaji: 'itadakimasu' },
+                { char: 'Gochisousama', display: 'ごちそうさま', romaji: 'gochisousama' },
+                { char: 'Ganbatte', display: 'がんばって', romaji: 'ganbatte' }
+            ]
+        ];
+
+        /* DANH SÁCH HUY HIỆU TỈNH THÀNH */
+        const provinceBadges = [
+            { id: 'tokyo', name: 'Tokyo (東京)', icon: '🏯', desc: 'Thủ đô hiện đại sầm uất' },
+            { id: 'kyoto', name: 'Kyoto (京都)', icon: '⛩️', desc: 'Cố đô linh thiêng cổ kính' },
+            { id: 'osaka', name: 'Osaka (大阪)', icon: '🍢', desc: 'Thiên đường ẩm thực Takoyaki' },
+            { id: 'hokkaido', name: 'Hokkaido (北海道)', icon: '❄️', desc: 'Vùng đất tuyết trắng & hải sản' },
+            { id: 'okinawa', name: 'Okinawa (沖縄)', icon: '🌺', desc: 'Hòn đảo biển xanh ngập nắng' }
         ];
 
         let unlockedStages = [1];
+        let unlockedBadges = [];
         let currentStage = 1;
         let activeCards = [];
         let selectedCard = null;
@@ -465,7 +689,11 @@
         let correctCount = 0;
         let timeLeft = 60;
         let timerInterval = null;
-        let historyLogs = [];
+
+        let speedIndex = 0;
+        let speedTimerInterval = null;
+        let speedTimeLeft = 10;
+        let speedRoundData = [];
 
         lucide.createIcons();
         updateStageLocksUI();
@@ -480,19 +708,22 @@
 
         function selectStage(stageNum) {
             if (!unlockedStages.includes(stageNum)) {
-                alert(`🔒 Màn ${stageNum} đang bị khóa! Bạn cần hoàn thành Màn ${stageNum - 1} để mở khóa nhé!`);
+                const msg = currentLang === 'EN' ? `🔒 Stage ${stageNum} is locked!` : `🔒 Màn ${stageNum} đang bị khóa!`;
+                alert(msg);
                 return;
             }
 
             currentStage = stageNum;
             if (stageNum === 1) {
-                showIntroModal("🌸 Hướng dẫn Hiragana & Katakana", 
-                    `<p><b>• Hiragana (Chữ mềm):</b> Dùng để viết từ thuần Nhật.</p>
-                     <p><b>• Katakana (Chữ cứng):</b> Dùng phiên âm từ nước ngoài.</p>`);
+                showIntroModal("🌸 Màn 1: Đơn Ký Tự Kana", 
+                    currentLang === 'EN' 
+                    ? `<p>• Hiragana is used for native Japanese words.</p><p>• Katakana is used for foreign words.</p>`
+                    : `<p><b>• Hiragana:</b> Dùng viết từ thuần Nhật.</p><p><b>• Katakana:</b> Dùng phiên âm từ nước ngoài.</p>`);
             } else if (stageNum === 2) {
-                showIntroModal("🌸 Ký hiệu Ten-ten ( ゛ ) và Maru ( ゜ )", 
-                    `<p class="text-base font-bold text-matchaDark"><b>• Ten-ten ( ゛ ):</b> Biến âm thành Âm Đục (K➔G, S➔Z...).</p>
-                     <p class="text-base font-bold text-matchaDark"><b>• Maru ( ゜ ):</b> Biến dòng H thành âm P (は➔ぱ).</p>`);
+                showIntroModal("🌸 Màn 2: Ten-ten ( ゛ ) và Maru ( ゜ )", 
+                    currentLang === 'EN'
+                    ? `<p>• Ten-ten converts voiceless to voiced sounds.</p><p>• Maru converts H row to P row.</p>`
+                    : `<p><b>• Ten-ten ( ゛ ):</b> Biến âm thành Âm Đục (K➔G, S➔Z...).</p><p><b>• Maru ( ゜ ):</b> Biến dòng H thành âm P (は➔ぱ).</p>`);
             } else {
                 confirmStartStage();
             }
@@ -507,7 +738,14 @@
         function confirmStartStage() {
             document.getElementById('intro-modal').classList.add('hidden');
             document.getElementById('screen-menu').classList.add('hidden');
-            startStandardStage();
+
+            if (currentStage <= 3) {
+                startStandardStage();
+            } else if (currentStage === 4) {
+                startKarutaArena();
+            } else if (currentStage === 5) {
+                startAnimeFillStage();
+            }
         }
 
         function startStandardStage() {
@@ -518,9 +756,32 @@
             correctCount = 0;
             updateStatsDisplay();
 
-            let rawPool = singleKanaDataFull.map((item, idx) => ({ id: idx, char: item.hiragana, romaji: item.romaji, type: 'Kana' }));
-            let shuffled = [...rawPool].sort(() => Math.random() - 0.5).slice(0, 10);
-            activeCards = shuffled.map(item => ({ ...item, solved: false, flipped: false, status: 'normal' }));
+            let roundItems = [];
+            if (currentStage === 1) {
+                document.getElementById('game-stage-badge').innerText = `MÀN 1 (${selectedMode.toUpperCase()})`;
+                const randomRoundIndex = Math.floor(Math.random() * stage1Rounds.length);
+                roundItems = stage1Rounds[randomRoundIndex];
+            } else if (currentStage === 2) {
+                document.getElementById('game-stage-badge').innerText = `MÀN 2 (${selectedMode.toUpperCase()})`;
+                const randomRoundIndex = Math.floor(Math.random() * stage2Rounds.length);
+                roundItems = stage2Rounds[randomRoundIndex];
+            }
+
+            activeCards = roundItems.map((item, idx) => {
+                let charStr = item.hira;
+                if (selectedMode === 'katakana') charStr = item.kata;
+                else if (selectedMode === 'mix') charStr = Math.random() > 0.5 ? item.hira : item.kata;
+
+                return {
+                    id: idx,
+                    char: charStr,
+                    romaji: item.romaji,
+                    type: selectedMode.toUpperCase(),
+                    solved: false,
+                    flipped: false,
+                    status: 'normal'
+                };
+            });
 
             renderCards();
 
@@ -539,26 +800,23 @@
             container.innerHTML = '';
             activeCards.forEach(card => {
                 const cardEl = document.createElement('div');
-                let statusClass = 'tatami-card-border';
-                if (card.status === 'correct') statusClass = 'card-correct';
-                if (card.status === 'wrong') statusClass = 'card-wrong';
+                let fullStatusClass = 'tatami-card';
+                if (card.status === 'correct') fullStatusClass = 'tatami-card card-correct-full';
+                if (card.status === 'wrong') fullStatusClass = 'tatami-card card-wrong-full';
 
                 cardEl.className = `card perspective-1000 h-32 sm:h-40 cursor-pointer select-none ${card.flipped ? 'flipped' : ''}`;
                 cardEl.onclick = () => handleCardClick(card);
                 cardEl.innerHTML = `
                     <div class="card-inner">
-                        <div class="card-front ${statusClass} bg-creamCard flex flex-col items-center justify-between p-3 rounded-2xl hover:border-matchaGreen transition">
-                            <span class="text-[9px] font-bold text-matchaDark">かるた</span>
-                            <!-- LOGO LY TRÀ 🍵 KÈM CHỮ KÝ THANH TRÀ -->
-                            <div class="w-11 h-11 rounded-full bg-lemonCream border border-tatamiBorder flex flex-col items-center justify-center">
-                                <span class="text-xl">🍵</span>
-                            </div>
-                            <span class="text-[9px] font-brush font-bold text-woodAccent">Thanh Trà 🍃</span>
+                        <div class="card-front ${fullStatusClass} rounded-2xl flex flex-col items-center justify-between p-3 hover:border-phutrucGreen transition">
+                            <span class="text-[9px] font-bold">かるた</span>
+                            <div class="w-11 h-11 rounded-full bg-phutrucLight border border-phutrucDark flex items-center justify-center text-phutrucDark font-brush font-bold text-xl">🎋</div>
+                            <span class="text-[9px] font-brush font-bold">Thanh Trà 🍃</span>
                         </div>
-                        <div class="card-back ${card.solved ? 'bg-lemonCream tatami-card-border' : 'bg-creamCard tatami-card-border'} p-3 flex flex-col items-center justify-between rounded-2xl">
-                            <span class="text-[9px] font-bold text-matchaDark">${card.type}</span>
-                            <div class="text-3xl font-brush font-black text-matchaDark">${card.char}</div>
-                            ${card.solved ? `<div class="text-[10px] font-bold text-matchaDark bg-lemonCream px-2 py-0.5 rounded border border-tatamiBorder">${card.romaji}</div>` : `<div class="text-[9px] text-stone-400">Chọn</div>`}
+                        <div class="card-back ${fullStatusClass} rounded-2xl p-3 flex flex-col items-center justify-between">
+                            <span class="text-[9px] font-bold">${card.type}</span>
+                            <div class="text-3xl font-brush font-black">${card.char}</div>
+                            ${card.solved ? `<div class="text-[10px] font-bold bg-white/30 px-2 py-0.5 rounded border border-phutrucDark">${card.romaji}</div>` : `<div class="text-[9px]">Chọn</div>`}
                         </div>
                     </div>
                 `;
@@ -624,7 +882,7 @@
 
             if (isCorrect) {
                 playClapSound();
-                confetti({ particleCount: 30 });
+                confetti({ particleCount: 35, spread: 60 });
                 selectedCard.status = 'correct';
 
                 feedbackBox.className = "text-left p-3.5 rounded-xl space-y-2 border bg-emerald-50 border-emerald-300 text-emerald-900";
@@ -659,51 +917,150 @@
             document.getElementById('progress-text').innerText = `${correctCount}/10`;
         }
 
+        /* MÀN 4: ĐẤU TRƯỜNG KARUTA 10S THẬT SỰ */
+        function startKarutaArena() {
+            document.getElementById('screen-karuta-speed').classList.remove('hidden');
+            document.getElementById('game-stats').classList.remove('hidden');
+            
+            speedIndex = 0;
+            score = 0;
+            correctCount = 0;
+
+            const rIdx = Math.floor(Math.random() * stage4Rounds.length);
+            speedRoundData = stage4Rounds[rIdx];
+
+            loadKarutaArenaCard();
+        }
+
+        function loadKarutaArenaCard() {
+            if (speedIndex >= 10) {
+                finishGame(true);
+                return;
+            }
+
+            document.getElementById('speed-card-counter').innerText = `Thẻ: ${speedIndex + 1}/10`;
+            document.getElementById('progress-text').innerText = `${speedIndex}/10`;
+            document.getElementById('score-display').innerText = score;
+
+            const target = speedRoundData[speedIndex];
+            const grid = document.getElementById('karuta-arena-grid');
+            grid.innerHTML = '';
+
+            let shuffled = [...speedRoundData].sort(() => Math.random() - 0.5);
+
+            shuffled.forEach(item => {
+                const btn = document.createElement('div');
+                btn.className = "tatami-card p-4 rounded-2xl text-center shadow-md hover:border-phutrucGreen cursor-pointer transition flex flex-col items-center justify-center h-32 hover:-translate-y-1";
+                btn.innerHTML = `<div class="text-xl sm:text-2xl font-brush font-black text-phutrucDark">${item.display}</div>`;
+                btn.onclick = () => handleKarutaChoice(item.romaji === target.romaji);
+                grid.appendChild(btn);
+            });
+
+            playJapaneseSpeech(target.char, 1.0);
+
+            clearInterval(speedTimerInterval);
+            speedTimeLeft = 10;
+            document.getElementById('timer-display').innerText = `${speedTimeLeft}s`;
+
+            speedTimerInterval = setInterval(() => {
+                speedTimeLeft--;
+                document.getElementById('timer-display').innerText = `${speedTimeLeft}s`;
+                if (speedTimeLeft <= 0) {
+                    clearInterval(speedTimerInterval);
+                    playWrongSound();
+                    speedIndex++;
+                    loadKarutaArenaCard();
+                }
+            }, 1000);
+        }
+
+        function handleKarutaChoice(isCorrect) {
+            clearInterval(speedTimerInterval);
+            if (isCorrect) {
+                confetti({ particleCount: 30 });
+                playClapSound();
+                score += 10;
+                correctCount++;
+            } else {
+                playWrongSound();
+                score = Math.max(0, score - 10);
+            }
+            speedIndex++;
+            loadKarutaArenaCard();
+        }
+
+        function playKarutaSpeedAudio(rate) {
+            if (speedIndex < 10) playJapaneseSpeech(speedRoundData[speedIndex].char, rate);
+        }
+
+        /* MÀN 5 LOGIC */
+        function startAnimeFillStage() {
+            document.getElementById('screen-anime-fill').classList.remove('hidden');
+            document.getElementById('game-stats').classList.remove('hidden');
+        }
+
         function finishGame(isWin) {
             clearInterval(timerInterval);
+            clearInterval(speedTimerInterval);
+
             document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-karuta-speed').classList.add('hidden');
+            document.getElementById('screen-anime-fill').classList.add('hidden');
             document.getElementById('game-stats').classList.add('hidden');
             document.getElementById('screen-result').classList.remove('hidden');
 
             document.getElementById('final-score').innerText = score;
             document.getElementById('final-correct').innerText = `${correctCount} / 10`;
 
-            historyLogs.push({ date: new Date().toLocaleTimeString(), stage: currentStage, score: score, correct: correctCount });
-
+            // THƯỞNG HUY HIỆU TỈNH THÀNH KHI MASTER MÀN
             if (isWin) {
-                confetti({ particleCount: 90 });
+                confetti({ particleCount: 90, spread: 80 });
+                playClapSound();
+
+                const badge = provinceBadges[(currentStage - 1) % provinceBadges.length];
+                if (!unlockedBadges.includes(badge.id)) {
+                    unlockedBadges.push(badge.id);
+                    document.getElementById('reward-badge-icon').innerText = badge.icon;
+                    document.getElementById('reward-badge-name').innerText = badge.name;
+                    document.getElementById('reward-badge-desc').innerText = badge.desc;
+                    document.getElementById('badge-reward-box').classList.remove('hidden');
+                }
+
                 if (currentStage < 5 && !unlockedStages.includes(currentStage + 1)) {
                     unlockedStages.push(currentStage + 1);
                     updateStageLocksUI();
                 }
+            } else {
+                document.getElementById('badge-reward-box').classList.add('hidden');
             }
         }
 
         function restartStage() { selectStage(currentStage); }
         function resetToMenu() {
             clearInterval(timerInterval);
+            clearInterval(speedTimerInterval);
             document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-karuta-speed').classList.add('hidden');
+            document.getElementById('screen-anime-fill').classList.add('hidden');
             document.getElementById('screen-result').classList.add('hidden');
             document.getElementById('game-stats').classList.add('hidden');
             document.getElementById('screen-menu').classList.remove('hidden');
         }
 
-        function openLeaderboard() {
-            const list = document.getElementById('leaderboard-list');
-            if (historyLogs.length === 0) {
-                list.innerHTML = `<p class="text-xs text-stone-500 text-center py-4">Chưa có dữ liệu ván đấu. Hãy chơi thử 1 màn nhé!</p>`;
-            } else {
-                list.innerHTML = historyLogs.map((log, i) => `
-                    <div class="bg-lemonCream/50 p-2.5 rounded-xl border border-tatamiBorder flex justify-between items-center text-xs">
-                        <span class="font-bold text-matchaDark">Màn ${log.stage} (${log.date})</span>
-                        <span class="font-mono text-emerald-800 font-bold">${log.score} điểm (${log.correct}/10 câu)</span>
+        function openBadgeBook() {
+            const grid = document.getElementById('badge-grid');
+            grid.innerHTML = provinceBadges.map(b => {
+                const isUnlocked = unlockedBadges.includes(b.id);
+                return `
+                    <div class="p-3 rounded-2xl border text-center ${isUnlocked ? 'bg-phutrucLight border-phutrucDark' : 'bg-stone-200 border-stone-400 opacity-60'}">
+                        <div class="text-3xl mb-1">${isUnlocked ? b.icon : '🔒'}</div>
+                        <h4 class="font-bold text-xs text-phutrucDark">${b.name}</h4>
+                        <p class="text-[10px] text-stone-600">${isUnlocked ? b.desc : 'Hoàn thành màn để mở khóa'}</p>
                     </div>
-                `).join('');
-            }
-            document.getElementById('leaderboard-modal').classList.remove('hidden');
+                `;
+            }).join('');
+            document.getElementById('badge-book-modal').classList.remove('hidden');
         }
-        function closeLeaderboard() { document.getElementById('leaderboard-modal').classList.add('hidden'); }
-        function openBadgeBook() { document.getElementById('badge-book-modal').classList.remove('hidden'); }
         function closeBadgeBook() { document.getElementById('badge-book-modal').classList.add('hidden'); }
     </script>
 </body>
