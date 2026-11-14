@@ -6,10 +6,10 @@
     <title>Ochakana - Học bảng chữ không khó</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts (Dùng Noto Serif JP hỗ trợ đầy đủ dấu tiếng Việt như chữ HỌC) -->
+    <!-- Google Fonts: Playfair Display hỗ trợ đầy đủ dấu tiếng Việt (dấu nặng, dấu hỏi rõ nét) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Satisfy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700;900&family=Playfair+Display:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Satisfy&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Canvas Confetti -->
@@ -33,7 +33,8 @@
                         beigeBorder: '#C8B89A'
                     },
                     fontFamily: {
-                        brush: ['"Noto Serif JP"', 'serif'],
+                        brush: ['"Playfair Display"', '"Noto Serif JP"', 'serif'],
+                        jp: ['"Noto Serif JP"', 'serif'],
                         script: ['"Satisfy"', 'cursive'],
                         sans: ['"Plus Jakarta Sans"', 'sans-serif']
                     }
@@ -115,13 +116,13 @@
     <header class="border-b-2 border-matchaDark bg-creamCard/95 backdrop-blur-md sticky top-0 z-30 px-4 py-3 shadow-md">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <button onclick="openAdminModal()" title="Admin Unlock" class="w-12 h-11 rounded-2xl bg-matchaDark hover:bg-matchaGreen flex items-center justify-center font-brush font-bold text-base text-lemonCream shadow-lg border-2 border-matchaGreen transition cursor-pointer select-none">
+                <button onclick="openAdminModal()" title="Admin Unlock" class="w-12 h-11 rounded-2xl bg-matchaDark hover:bg-matchaGreen flex items-center justify-center font-jp font-bold text-base text-lemonCream shadow-lg border-2 border-matchaGreen transition cursor-pointer select-none">
                     仮名
                 </button>
                 <div class="cursor-pointer" onclick="resetToMenu()">
                     <h1 class="font-brush font-extrabold text-xl tracking-wider flex items-center gap-2">
                         <span class="title-gradient">OCHAKANA</span>
-                        <span class="text-[11px] bg-lemonCream text-matchaDark border border-matchaGreen/50 px-2.5 py-0.5 rounded-full font-brush font-bold shadow-xs">茶かな</span>
+                        <span class="text-[11px] bg-lemonCream text-matchaDark border border-matchaGreen/50 px-2.5 py-0.5 rounded-full font-jp font-bold shadow-xs">茶かな</span>
                     </h1>
                     <p id="ui-app-tagline" class="text-[11px] text-matchaGreen font-semibold hidden sm:block">Học bảng chữ không khó</p>
                 </div>
@@ -163,41 +164,54 @@
         <!-- THANH ĐỒNG HÀNH OCHA-CHAN XUẤT HIỆN Ở TẤT CẢ CÁC MÀN CHƠI (1, 2, 3, 4, 5) -->
         <div id="global-ocha-banner" class="hidden bg-gradient-to-r from-lemonCream via-creamCard to-lemonCream border-2 border-matchaDark p-3 sm:p-4 rounded-2xl shadow-sm flex items-center justify-between max-w-5xl mx-auto w-full">
             <div class="flex items-center space-x-3 sm:space-x-4">
-                <!-- AVATAR OCHA-CHAN CHIBI: BÚI TÓC TRÊN ĐỈNH, TRÂM VÀNG + HOA TRẮNG, MÁI CHÉO, KIMONO MATCHA ĐẬM ĐẾN NHẠT -->
+                <!-- AVATAR OCHA-CHAN CHIBI XINH XẮN: KHUÔN MẶT SÁNG SẠCH KHÔNG VIỀN NÂU DƯỚI CẰM, BÚI TÓC TRÊN ĐỈNH, MÁI CHÉO, KIMONO MATCHA -->
                 <div class="relative w-16 h-20 sm:w-20 sm:h-24 flex-shrink-0 animate-float">
                     <svg viewBox="0 0 120 150" class="w-full h-full drop-shadow-md">
+                        <!-- Lọn tóc sau gáy gọn gàng (chỉ ở nửa trên, tuyệt đối không che mặt/cằm) -->
+                        <path d="M 32 55 C 28 32, 92 32, 88 55 L 88 68 C 86 64, 83 60, 82 56 L 38 56 C 37 60, 34 64, 32 68 Z" fill="#3B231C"/>
                         <!-- Búi tóc tròn trên đỉnh đầu -->
-                        <circle cx="60" cy="22" r="18" fill="#3B2720" stroke="#241611" stroke-width="2.5"/>
-                        <circle cx="51" cy="18" r="2.2" fill="#FFFFFF"/>
-                        <circle cx="69" cy="18" r="2.2" fill="#FFFFFF"/>
+                        <circle cx="60" cy="21" r="16" fill="#3B231C" stroke="#24140F" stroke-width="2"/>
+                        <circle cx="52" cy="17" r="2" fill="#FFFFFF"/>
+                        <circle cx="68" cy="17" r="2" fill="#FFFFFF"/>
                         <!-- Trâm cài vàng trên búi tóc -->
-                        <path d="M 44 26 Q 52 21 60 24 Q 68 21 76 26 Q 74 31 60 29 Q 46 31 44 26 Z" fill="#FACC15" stroke="#B45309" stroke-width="1.5"/>
-                        <!-- Đầu & Tóc -->
-                        <circle cx="60" cy="54" r="32" fill="#3B2720" stroke="#241611" stroke-width="2.5"/>
-                        <!-- Khuôn mặt -->
-                        <path d="M 34 52 C 34 74, 86 74, 86 52 C 86 38, 34 38, 34 52 Z" fill="#FFF0E6"/>
-                        <!-- Mái chéo dễ thương -->
-                        <path d="M 30 48 Q 48 34 88 52 C 86 30, 34 28, 30 48 Z" fill="#3B2720"/>
-                        <path d="M 44 43 L 47 50 L 52 43" fill="#3B2720"/>
+                        <path d="M 45 25 Q 52 20 60 23 Q 68 20 75 25 Q 73 29 60 27 Q 47 29 45 25 Z" fill="#FACC15" stroke="#B45309" stroke-width="1.3"/>
+                        <!-- Cổ thon -->
+                        <rect x="54" y="72" width="12" height="11" rx="3" fill="#FFE7D6"/>
+                        <!-- Khuôn mặt chibi bầu bĩnh, sáng mịn (nằm trên lớp tóc sau nên hoàn toàn không có màu nâu quanh cằm) -->
+                        <path d="M 35 46 C 35 28, 85 28, 85 46 C 85 66, 75 76, 60 76 C 45 76, 35 66, 35 46 Z" fill="#FFF1E6" stroke="#3B231C" stroke-width="2"/>
+                        <!-- Tai nhỏ xinh -->
+                        <circle cx="34" cy="56" r="4" fill="#FFE7D6" stroke="#3B231C" stroke-width="1.5"/>
+                        <circle cx="86" cy="56" r="4" fill="#FFE7D6" stroke="#3B231C" stroke-width="1.5"/>
+                        <!-- Mái tóc trên trán & mái chéo mềm mại -->
+                        <path d="M 34 49 C 34 26, 86 26, 86 49 C 76 38, 62 36, 48 45 C 42 48, 37 49, 34 49 Z" fill="#3B231C"/>
+                        <path d="M 52 38 Q 64 42 74 47" stroke="#5C3A2E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
                         <!-- Hoa trắng cài tóc bên phải + dây ruy băng -->
-                        <line x1="84" y1="42" x2="104" y2="45" stroke="#FACC15" stroke-width="3" stroke-linecap="round"/>
-                        <path d="M 85 48 L 81 60 M 89 48 L 93 60" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
-                        <circle cx="87" cy="36" r="5" fill="#FFFFFF"/>
-                        <circle cx="94" cy="41" r="5" fill="#FFFFFF"/>
-                        <circle cx="91" cy="48" r="5" fill="#FFFFFF"/>
-                        <circle cx="83" cy="48" r="5" fill="#FFFFFF"/>
-                        <circle cx="80" cy="41" r="5" fill="#FFFFFF"/>
-                        <circle cx="87" cy="42" r="4" fill="#FACC15"/>
-                        <!-- Mắt, má hồng & miệng cười -->
-                        <circle cx="46" cy="58" r="3.5" fill="#241611"/>
-                        <circle cx="74" cy="58" r="3.5" fill="#241611"/>
-                        <ellipse cx="40" cy="64" rx="4.5" ry="2.5" fill="#FDA4AF" opacity="0.75"/>
-                        <ellipse cx="80" cy="64" rx="4.5" ry="2.5" fill="#FDA4AF" opacity="0.75"/>
-                        <path d="M 56 64 Q 60 68 64 64" stroke="#241611" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                        <line x1="83" y1="40" x2="103" y2="43" stroke="#FACC15" stroke-width="2.8" stroke-linecap="round"/>
+                        <path d="M 84 46 L 80 58 M 88 46 L 92 58" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round"/>
+                        <circle cx="86" cy="34" r="4.8" fill="#FFFFFF"/>
+                        <circle cx="93" cy="39" r="4.8" fill="#FFFFFF"/>
+                        <circle cx="90" cy="46" r="4.8" fill="#FFFFFF"/>
+                        <circle cx="82" cy="46" r="4.8" fill="#FFFFFF"/>
+                        <circle cx="79" cy="39" r="4.8" fill="#FFFFFF"/>
+                        <circle cx="86" cy="40" r="3.8" fill="#FACC15"/>
+                        <!-- Đôi mắt to tròn long lanh, lông mi & má hồng -->
+                        <ellipse cx="47" cy="56" rx="4.2" ry="4.8" fill="#24140F"/>
+                        <circle cx="45.8" cy="54.2" r="1.6" fill="#FFFFFF"/>
+                        <circle cx="48.2" cy="57.2" r="0.9" fill="#FFFFFF"/>
+                        <ellipse cx="73" cy="56" rx="4.2" ry="4.8" fill="#24140F"/>
+                        <circle cx="71.8" cy="54.2" r="1.6" fill="#FFFFFF"/>
+                        <circle cx="74.2" cy="57.2" r="0.9" fill="#FFFFFF"/>
+                        <!-- Lông mày thanh tú -->
+                        <path d="M 43 49 Q 47 47.5 51 49" stroke="#3B231C" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+                        <path d="M 69 49 Q 73 47.5 77 49" stroke="#3B231C" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+                        <!-- Má hồng & nụ cười xinh xắn -->
+                        <ellipse cx="41" cy="62" rx="4.5" ry="2.4" fill="#FDA4AF" opacity="0.75"/>
+                        <ellipse cx="79" cy="62" rx="4.5" ry="2.4" fill="#FDA4AF" opacity="0.75"/>
+                        <path d="M 56 63 Q 60 67.5 64 63" stroke="#B91C1C" stroke-width="2" fill="none" stroke-linecap="round"/>
                         <!-- Nơ Obi sau lưng (Xanh Matcha Đậm) -->
                         <path d="M 32 88 L 22 96 L 26 112 L 38 106 Z" fill="#1C3B2B" stroke="#0B1A12" stroke-width="2"/>
                         <path d="M 88 88 L 98 96 L 94 112 L 82 106 Z" fill="#2E5038" stroke="#0B1A12" stroke-width="2"/>
-                        <!-- Tay áo Furisode rủ dài (Gradient xanh matcha nhạt đến đậm) -->
+                        <!-- Tay áo Furisode rủ dài (Xanh matcha nhạt) -->
                         <path d="M 36 82 L 18 104 L 24 112 L 32 106 L 34 126 L 44 126 L 44 88 Z" fill="#B7D7BE" stroke="#1C3B2B" stroke-width="2"/>
                         <path d="M 84 82 L 102 104 L 96 112 L 88 106 L 86 126 L 76 126 L 76 88 Z" fill="#B7D7BE" stroke="#1C3B2B" stroke-width="2"/>
                         <!-- Thân áo Kimono Matcha Nhạt & Trung Bình -->
@@ -248,7 +262,7 @@
                 <span id="ui-menu-pill" class="inline-block bg-lemonCream text-matchaDark border border-matchaGreen/40 px-3.5 py-1 rounded-full text-xs font-bold">
                     🍃 Ochakana • Học Bảng Chữ Cái Nhật Bản Thư Pháp
                 </span>
-                <h2 id="ui-menu-title" class="text-3xl sm:text-5xl font-brush font-extrabold title-gradient tracking-wide">
+                <h2 id="ui-menu-title" class="text-3xl sm:text-5xl font-brush font-extrabold title-gradient tracking-wide leading-tight py-1">
                     HỌC BẢNG CHỮ KHÔNG KHÓ
                 </h2>
                 <p id="ui-menu-desc" class="text-matchaGreen text-xs sm:text-sm max-w-lg mx-auto font-medium">
@@ -281,7 +295,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 text-left">
                 <div onclick="selectStage(1)" class="group bg-creamCard hover:bg-lemonCream border-2 border-matchaDark p-4 rounded-2xl cursor-pointer transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1">
                     <div class="flex justify-between items-start mb-2">
-                        <div class="w-9 h-9 rounded-xl bg-matchaDark text-lemonCream font-brush font-bold text-lg flex items-center justify-center">あ</div>
+                        <div class="w-9 h-9 rounded-xl bg-matchaDark text-lemonCream font-jp font-bold text-lg flex items-center justify-center">あ</div>
                         <span id="st1-badge" class="text-[9px] bg-matchaGreen/10 text-matchaDark font-bold px-2 py-0.5 rounded-full">MÀN 1</span>
                     </div>
                     <h3 id="st1-title" class="font-bold text-sm text-matchaDark group-hover:text-matchaGreen transition">Đơn Ký Tự Kana (5 Vòng)</h3>
@@ -294,7 +308,7 @@
                         <span id="lock-text-2" class="text-[10px] font-bold text-amber-200">ĐANG KHÓA</span>
                     </div>
                     <div class="flex justify-between items-start mb-2">
-                        <div class="w-9 h-9 rounded-xl bg-rose-100 text-rose-800 font-brush font-bold text-lg flex items-center justify-center">が</div>
+                        <div class="w-9 h-9 rounded-xl bg-rose-100 text-rose-800 font-jp font-bold text-lg flex items-center justify-center">が</div>
                         <span id="st2-badge" class="text-[9px] bg-rose-200 text-rose-900 font-bold px-2 py-0.5 rounded-full">MÀN 2</span>
                     </div>
                     <h3 id="st2-title" class="font-bold text-sm text-matchaDark">Ten-ten & Maru (3 Vòng)</h3>
@@ -307,7 +321,7 @@
                         <span id="lock-text-3" class="text-[10px] font-bold text-amber-200">ĐANG KHÓA</span>
                     </div>
                     <div class="flex justify-between items-start mb-2">
-                        <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-900 font-brush font-bold text-lg flex items-center justify-center">猫</div>
+                        <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-900 font-jp font-bold text-lg flex items-center justify-center">猫</div>
                         <span id="st3-badge" class="text-[9px] bg-amber-200 text-amber-900 font-bold px-2 py-0.5 rounded-full">MÀN 3</span>
                     </div>
                     <h3 id="st3-title" class="font-bold text-sm text-matchaDark">Từ Vựng Nhập Tên (4 Chủ Đề)</h3>
@@ -320,7 +334,7 @@
                         <span id="lock-text-4" class="text-[10px] font-bold text-amber-200">ĐANG KHÓA</span>
                     </div>
                     <div class="flex justify-between items-start mb-2">
-                        <div class="w-9 h-9 rounded-xl bg-lemonCream text-matchaDark font-brush font-bold text-lg flex items-center justify-center">🎴</div>
+                        <div class="w-9 h-9 rounded-xl bg-lemonCream text-matchaDark font-jp font-bold text-lg flex items-center justify-center">🎴</div>
                         <span id="st4-badge" class="text-[9px] bg-matchaGreen/20 text-matchaDark font-bold px-2 py-0.5 rounded-full">MÀN 4</span>
                     </div>
                     <h3 id="st4-title" class="font-bold text-sm text-matchaDark">Iroha Karuta Thật Sự (10s)</h3>
@@ -333,11 +347,11 @@
                         <span id="lock-text-5" class="text-[10px] font-bold text-amber-200">ĐANG KHÓA</span>
                     </div>
                     <div class="flex justify-between items-start mb-2">
-                        <div class="w-9 h-9 rounded-xl bg-tatamiBase text-tatamiBorder font-brush font-bold text-lg flex items-center justify-center">🧩</div>
+                        <div class="w-9 h-9 rounded-xl bg-tatamiBase text-tatamiBorder font-jp font-bold text-lg flex items-center justify-center">🧩</div>
                         <span id="st5-badge" class="text-[9px] bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded-full">MÀN 5</span>
                     </div>
                     <h3 id="st5-title" class="font-bold text-sm text-matchaDark">Đục Lỗ & Nối Thoại</h3>
-                    <p id="st5-desc" class="text-[11px] text-stone-600 mt-1">Điền từ & Nối thoại Anime.</p>
+                    <p id="st5-desc" class="text-[11px] text-stone-600 mt-1">Điền từ (8 câu) & Nối thoại Anime.</p>
                 </div>
             </div>
 
@@ -384,7 +398,7 @@
                 </div>
 
                 <div id="s3-card-box" class="tatami-card-border p-6 rounded-2xl text-center space-y-2 transition-all">
-                    <div id="s3-jp-char" class="text-4xl sm:text-5xl font-brush font-black text-matchaDark">ナルト</div>
+                    <div id="s3-jp-char" class="text-4xl sm:text-5xl font-jp font-black text-matchaDark">ナルト</div>
                     <div id="s3-sub-meaning" class="hidden text-xs font-semibold italic mt-1"></div>
                 </div>
 
@@ -448,19 +462,19 @@
             <div id="karuta-arena-grid" class="grid grid-cols-2 sm:grid-cols-5 gap-3"></div>
         </section>
 
-        <!-- SCREEN MÀN 5: ĐỤC LỖ & NỐI CỘT NHÂN VẬT ANIME -->
+        <!-- SCREEN MÀN 5: VÒNG 1 ĐIỀN TỪ (8 CÂU) + BẢNG ĐIỂM RIÊNG VÒNG 1 + VÒNG 2 NỐI CỘT + BẢNG ĐIỂM RIÊNG VÒNG 2 -->
         <section id="screen-anime-fill" class="hidden space-y-6 max-w-4xl mx-auto w-full">
-            <!-- VÒNG 1: ĐIỀN TỪ CÒN THIẾU (KHÔNG LỘ TÊN NHÂN VẬT VÀ NGHĨA TRƯỚC KHI TRẢ LỜI) -->
+            <!-- VÒNG 1: ĐIỀN TỪ CÒN THIẾU -->
             <div id="anime-fill-part1" class="bg-creamCard border-2 border-matchaDark p-6 rounded-3xl shadow-xl text-center space-y-4 max-w-2xl mx-auto">
                 <div class="flex justify-between items-center">
                     <span id="m5-p1-tag" class="text-xs font-bold bg-lemonCream text-matchaDark border border-matchaGreen/40 px-3 py-1 rounded-full">
                         🧩 MÀN 5 (VÒNG 1): ĐIỀN TỪ HOÀN THÀNH CÂU NÓI
                     </span>
-                    <span id="fill-counter-text" class="text-xs font-mono font-bold text-matchaDark">Câu: 1/7</span>
+                    <span id="fill-counter-text" class="text-xs font-mono font-bold text-matchaDark">Câu: 1/8</span>
                 </div>
 
                 <div id="m5-card-box" class="tatami-card-border p-5 rounded-2xl space-y-3 transition-all">
-                    <div id="fill-jp-sentence" class="text-xl sm:text-2xl font-brush font-black text-matchaDark leading-relaxed"></div>
+                    <div id="fill-jp-sentence" class="text-xl sm:text-2xl font-jp font-black text-matchaDark leading-relaxed"></div>
                     <div id="fill-romaji-hole" class="text-base sm:text-lg font-mono font-bold text-amber-900 tracking-wider bg-lemonCream/60 py-2 px-3 rounded-xl border border-beigeBorder"></div>
                 </div>
 
@@ -491,13 +505,33 @@
                 </div>
             </div>
 
+            <!-- BẢNG THÔNG BÁO TÍNH ĐIỂM RIÊNG VÒNG 1 -->
+            <div id="anime-fill-p1-summary" class="hidden bg-creamCard border-3 border-matchaDark p-6 sm:p-8 rounded-3xl shadow-xl text-center space-y-4 max-w-md mx-auto">
+                <div class="w-14 h-14 mx-auto bg-lemonCream rounded-full flex items-center justify-center text-2xl border-2 border-matchaDark">🧩</div>
+                <h3 id="m5-p1-sum-title" class="font-brush font-black text-2xl text-matchaDark">HOÀN THÀNH VÒNG 1!</h3>
+                <p id="m5-p1-sum-sub" class="text-xs text-stone-600">Kết quả riêng phần Điền Từ Hoàn Thành Câu Nói:</p>
+                <div class="grid grid-cols-2 gap-3 text-left">
+                    <div class="bg-lemonCream/50 p-3 rounded-xl border border-matchaDark">
+                        <span id="m5-p1-score-lbl" class="text-[10px] text-stone-500 block uppercase font-bold">Điểm Vòng 1</span>
+                        <span id="m5-p1-score-val" class="text-xl font-bold font-mono text-matchaDark">0</span>
+                    </div>
+                    <div class="bg-lemonCream/50 p-3 rounded-xl border border-matchaDark">
+                        <span id="m5-p1-correct-lbl" class="text-[10px] text-stone-500 block uppercase font-bold">Số Câu Đúng</span>
+                        <span id="m5-p1-correct-val" class="text-xl font-bold font-mono text-emerald-700">0 / 8</span>
+                    </div>
+                </div>
+                <button onclick="startM5MatchingRound()" id="m5-goto-p2-btn" class="w-full bg-matchaDark hover:bg-matchaGreen text-white font-bold py-3 rounded-xl transition text-sm">
+                    Tiếp tục sang Vòng 2 (Nối Cột) ➔
+                </button>
+            </div>
+
             <!-- VÒNG 2: NỐI CỘT HÌNH NHÂN VẬT VỚI CÂU NÓI -->
             <div id="anime-fill-part2" class="hidden bg-creamCard border-2 border-matchaDark p-5 sm:p-6 rounded-3xl shadow-xl text-center space-y-4">
                 <div class="flex justify-between items-center">
                     <span id="m5-p2-tag" class="text-xs font-bold bg-lemonCream text-matchaDark border border-matchaGreen/40 px-3 py-1 rounded-full">
                         🎉 MÀN 5 (VÒNG 2): NỐI CỘT NHÂN VẬT & CÂU NÓI
                     </span>
-                    <span id="m5-match-counter" class="text-xs font-mono font-bold text-matchaDark">Đã nối: 0/7</span>
+                    <span id="m5-match-counter" class="text-xs font-mono font-bold text-matchaDark">Đã nối: 0/8</span>
                 </div>
                 <p id="m5-p2-sub" class="text-xs text-stone-600">Bấm chọn 1 Nhân vật ở cột trái, sau đó bấm chọn Câu nói tương ứng ở cột phải!</p>
                 
@@ -514,6 +548,26 @@
                         <div id="m5-col-quotes" class="space-y-2"></div>
                     </div>
                 </div>
+            </div>
+
+            <!-- BẢNG THÔNG BÁO TÍNH ĐIỂM RIÊNG VÒNG 2 -->
+            <div id="anime-fill-p2-summary" class="hidden bg-creamCard border-3 border-matchaDark p-6 sm:p-8 rounded-3xl shadow-xl text-center space-y-4 max-w-md mx-auto">
+                <div class="w-14 h-14 mx-auto bg-lemonCream rounded-full flex items-center justify-center text-2xl border-2 border-matchaDark">🎉</div>
+                <h3 id="m5-p2-sum-title" class="font-brush font-black text-2xl text-matchaDark">HOÀN THÀNH VÒNG 2!</h3>
+                <p id="m5-p2-sum-sub" class="text-xs text-stone-600">Kết quả riêng phần Nối Cột Nhân Vật & Câu Nói:</p>
+                <div class="grid grid-cols-2 gap-3 text-left">
+                    <div class="bg-lemonCream/50 p-3 rounded-xl border border-matchaDark">
+                        <span id="m5-p2-score-lbl" class="text-[10px] text-stone-500 block uppercase font-bold">Điểm Vòng 2</span>
+                        <span id="m5-p2-score-val" class="text-xl font-bold font-mono text-matchaDark">0</span>
+                    </div>
+                    <div class="bg-lemonCream/50 p-3 rounded-xl border border-matchaDark">
+                        <span id="m5-p2-correct-lbl" class="text-[10px] text-stone-500 block uppercase font-bold">Số Cặp Đúng</span>
+                        <span id="m5-p2-correct-val" class="text-xl font-bold font-mono text-emerald-700">0 / 8</span>
+                    </div>
+                </div>
+                <button onclick="finishGame(true)" id="m5-finish-all-btn" class="w-full bg-matchaDark hover:bg-matchaGreen text-white font-bold py-3 rounded-xl transition text-sm">
+                    Nhận Huy Hiệu & Tổng Kết Màn 5 🏆
+                </button>
             </div>
         </section>
 
@@ -573,7 +627,7 @@
             <div class="space-y-1">
                 <span id="modal-char-type" class="text-[10px] font-bold text-matchaDark tracking-widest uppercase bg-lemonCream px-2 py-0.5 rounded-full border border-matchaGreen/40">HIRAGANA</span>
                 <div class="py-3 bg-lemonCream/30 rounded-2xl border border-matchaDark mt-2 flex flex-col items-center justify-center">
-                    <div id="modal-kana-char" class="text-5xl sm:text-6xl font-brush font-black text-matchaDark">あ</div>
+                    <div id="modal-kana-char" class="text-5xl sm:text-6xl font-jp font-black text-matchaDark">あ</div>
                 </div>
             </div>
 
@@ -622,7 +676,7 @@
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
 
-            <div class="w-12 h-12 mx-auto rounded-2xl bg-matchaDark text-lemonCream flex items-center justify-center font-brush font-bold text-lg border-2 border-matchaGreen">
+            <div class="w-12 h-12 mx-auto rounded-2xl bg-matchaDark text-lemonCream flex items-center justify-center font-jp font-bold text-lg border-2 border-matchaGreen">
                 仮名
             </div>
             <div>
@@ -708,7 +762,6 @@
             { ja: "よくできました！完璧です！", vi: "Bạn làm rất tốt! Hoàn hảo luôn!", en: "Well done! Perfect answer!" }
         ];
 
-        // OCHA-CHAN ĐỌC TO LỜI KHEN BẰNG GIỌNG NHẬT KHI LÀM ĐÚNG Ở TẤT CẢ CÁC MÀN
         function ochaPraiseWithVoice() {
             const praise = ochaPraises[Math.floor(Math.random() * ochaPraises.length)];
             updateOchaDialogue(praise.ja, praise.vi, praise.en);
@@ -767,7 +820,7 @@
             document.getElementById('st4-title').innerText = isEn ? 'Real Iroha Karuta (10s)' : 'Iroha Karuta Thật Sự (10s)';
             document.getElementById('st4-desc').innerText = isEn ? 'Listen to proverbs & Pick Torifuda.' : 'Nghe ca dao & Chọn thẻ Torifuda.';
             document.getElementById('st5-title').innerText = isEn ? 'Fill Hole & Match Quote' : 'Đục Lỗ & Nối Thoại';
-            document.getElementById('st5-desc').innerText = isEn ? 'Fill words & Match Anime quotes.' : 'Điền từ & Nối thoại Anime.';
+            document.getElementById('st5-desc').innerText = isEn ? 'Fill words (8 quotes) & Match Anime.' : 'Điền từ (8 câu) & Nối thoại Anime.';
 
             document.getElementById('ui-badge-btn').innerText = isEn ? 'Province Badge Book' : 'Sổ Huy Hiệu Tỉnh Thành';
             document.getElementById('badge-book-title').innerText = isEn ? '🏅 Japan Province Badge Collection Book' : '🏅 Sổ Sưu Tập Huy Hiệu Tỉnh Thành Nhật Bản';
@@ -801,10 +854,22 @@
             document.getElementById('m5-submit-btn').innerText = isEn ? 'Confirm ➔' : 'Xác Nhận ➔';
             document.getElementById('m5-next-btn').innerText = isEn ? 'Next Question ➔' : 'Chuyển câu tiếp theo ➔';
 
+            document.getElementById('m5-p1-sum-title').innerText = isEn ? 'ROUND 1 COMPLETED!' : 'HOÀN THÀNH VÒNG 1!';
+            document.getElementById('m5-p1-sum-sub').innerText = isEn ? 'Separate score for Fill-in-the-blank round:' : 'Kết quả riêng phần Điền Từ Hoàn Thành Câu Nói:';
+            document.getElementById('m5-p1-score-lbl').innerText = isEn ? 'Round 1 Score' : 'Điểm Vòng 1';
+            document.getElementById('m5-p1-correct-lbl').innerText = isEn ? 'Correct Quotes' : 'Số Câu Đúng';
+            document.getElementById('m5-goto-p2-btn').innerText = isEn ? 'Continue to Round 2 (Match Columns) ➔' : 'Tiếp tục sang Vòng 2 (Nối Cột) ➔';
+
             document.getElementById('m5-p2-tag').innerText = isEn ? '🎉 STAGE 5 (ROUND 2): MATCH CHARACTERS & QUOTES' : '🎉 MÀN 5 (VÒNG 2): NỐI CỘT NHÂN VẬT & CÂU NÓI';
             document.getElementById('m5-p2-sub').innerText = isEn ? 'Click a Character on the left, then click their matching Quote on the right!' : 'Bấm chọn 1 Nhân vật ở cột trái, sau đó bấm chọn Câu nói tương ứng ở cột phải!';
             document.getElementById('m5-col1-title').innerText = isEn ? 'Column 1: Anime Character' : 'Cột 1: Nhân Vật Anime';
             document.getElementById('m5-col2-title').innerText = isEn ? 'Column 2: Famous Quote' : 'Cột 2: Câu Nói Nổi Tiếng';
+
+            document.getElementById('m5-p2-sum-title').innerText = isEn ? 'ROUND 2 COMPLETED!' : 'HOÀN THÀNH VÒNG 2!';
+            document.getElementById('m5-p2-sum-sub').innerText = isEn ? 'Separate score for Character Matching round:' : 'Kết quả riêng phần Nối Cột Nhân Vật & Câu Nói:';
+            document.getElementById('m5-p2-score-lbl').innerText = isEn ? 'Round 2 Score' : 'Điểm Vòng 2';
+            document.getElementById('m5-p2-correct-lbl').innerText = isEn ? 'Matched Pairs' : 'Số Cặp Đúng';
+            document.getElementById('m5-finish-all-btn').innerText = isEn ? 'Claim Badge & Stage 5 Summary 🏆' : 'Nhận Huy Hiệu & Tổng Kết Màn 5 🏆';
 
             document.getElementById('result-title').innerText = isEn ? 'EXCELLENT COMPLETION!' : 'HOÀN THÀNH XUẤT SẮC!';
             document.getElementById('result-subtitle').innerText = isEn ? 'Ocha-chan is so proud of you!' : 'Ocha-chan rất tự hào về bạn!';
@@ -1000,7 +1065,7 @@
             { proverb: "ぬすびとのひるね", head: "ぬ", vi: "Tên trộm ngủ ngày (Mọi việc đều có ý đồ)", en: "A thief's afternoon nap" }
         ];
 
-        /* DỮ LIỆU MÀN 5: 7 CÂU THOẠI & NHÂN VẬT ANIME */
+        /* DỮ LIỆU MÀN 5: ĐỦ 8 CÂU THOẠI & NHÂN VẬT ANIME */
         const stage5Quotes = [
             {
                 id: 'doraemon',
@@ -1092,6 +1157,19 @@
                 accepted: ['egao'],
                 vi: 'Đồ make up đẹp nhất của con gái chính là nụ cười đó.',
                 en: 'The best makeup for a girl is her smile.'
+            },
+            {
+                id: 'anzai',
+                charName: 'HLV Anzai (Slam Dunk)',
+                avatar: '🏀',
+                avatarBg: 'bg-orange-100 border-orange-500 text-orange-900',
+                fullJp: 'あきらめたらそこでしあいしゅうりょうですよ',
+                maskedJp: 'あきらめたらそこで ＿＿＿ しゅうりょうですよ',
+                maskedRomaji: 'Akirametara soko de [ _____ ] shuuryou desu yo',
+                missingWord: 'shiai',
+                accepted: ['shiai'],
+                vi: 'Nếu từ bỏ thì trận đấu sẽ kết thúc ngay tại đây.',
+                en: 'If you give up, the game is already over.'
             }
         ];
 
@@ -1122,9 +1200,26 @@
         let speedTimeLeft = 10;
         let m4WaitingNext = false;
 
+        // BIẾN CHO MÀN 5 (TÍNH ĐIỂM RIÊNG VÒNG 1 VÀ VÒNG 2 + XÁO TRỘN NGẪU NHIÊN)
+        let m5ShuffledQuotes = [];
         let m5FillIndex = 0;
+        let m5P1Score = 0;
+        let m5P1Correct = 0;
+        let m5P2Score = 0;
+        let m5P2Correct = 0;
         let m5SelectedCharId = null;
         let m5MatchedIds = [];
+        let m5ShuffledCharsCol = [];
+        let m5ShuffledQuotesCol = [];
+
+        function shuffleArray(arr) {
+            const copy = [...arr];
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
 
         lucide.createIcons();
         updateStageLocksUI();
@@ -1201,7 +1296,7 @@
                 document.getElementById('game-stage-badge').innerText = isEn ? 'STAGE 4 (KARUTA)' : 'MÀN 4 (KARUTA)';
                 startKarutaArena();
             } else if (currentStage === 5) {
-                totalQuestionsInStage = 14;
+                totalQuestionsInStage = 16;
                 document.getElementById('game-stage-badge').innerText = isEn ? 'STAGE 5 (ANIME)' : 'MÀN 5 (ANIME)';
                 startAnimeFillStage();
             }
@@ -1279,7 +1374,7 @@
                         </div>
                         <div class="card-back ${fullStatusClass} rounded-2xl p-3 flex flex-col items-center justify-between">
                             <span class="text-[9px] font-bold">${card.type}</span>
-                            <div class="text-3xl font-brush font-black">${card.char}</div>
+                            <div class="text-3xl font-jp font-black">${card.char}</div>
                             ${card.solved ? `<div class="text-[10px] font-bold bg-white/30 px-2 py-0.5 rounded border border-matchaDark">${card.romaji}</div>` : `<div class="text-[9px]">${pickTxt}</div>`}
                         </div>
                     </div>
@@ -1503,7 +1598,7 @@
             loadStage3Question();
         }
 
-        /* MÀN 4: IROHA KARUTA THẬT SỰ (CÓ BẢNG THÔNG BÁO ĐÚNG/SAI & DỊCH NGHĨA SAU KHI CHỌN THẺ) */
+        /* MÀN 4: IROHA KARUTA THẬT SỰ */
         function startKarutaArena() {
             document.getElementById('screen-karuta-speed').classList.remove('hidden');
             document.getElementById('game-stats').classList.remove('hidden');
@@ -1533,15 +1628,15 @@
             const grid = document.getElementById('karuta-arena-grid');
             grid.innerHTML = '';
 
-            let shuffled = [...stage4Proverbs].sort(() => Math.random() - 0.5);
+            let shuffled = shuffleArray(stage4Proverbs);
 
             shuffled.forEach(item => {
                 const btn = document.createElement('div');
                 btn.id = `torifuda-${item.head}`;
                 btn.className = "torifuda-card p-3 rounded-2xl text-center hover:border-matchaGreen cursor-pointer transition flex flex-col items-center justify-between h-36 hover:-translate-y-1 relative overflow-hidden";
                 btn.innerHTML = `
-                    <span class="absolute top-2 left-2 w-7 h-7 flex items-center justify-center text-sm font-brush font-black text-matchaDark bg-lemonCream rounded-lg border-2 border-matchaDark shadow-xs">${item.head}</span>
-                    <div class="mt-7 text-xs sm:text-sm font-brush font-extrabold text-matchaDark px-1 leading-snug">${item.proverb}</div>
+                    <span class="absolute top-2 left-2 w-7 h-7 flex items-center justify-center text-sm font-jp font-black text-matchaDark bg-lemonCream rounded-lg border-2 border-matchaDark shadow-xs">${item.head}</span>
+                    <div class="mt-7 text-xs sm:text-sm font-jp font-extrabold text-matchaDark px-1 leading-snug">${item.proverb}</div>
                     <div class="w-full flex justify-end items-center gap-1 pr-1 opacity-75">
                         <span class="text-[10px]">🍵</span>
                         <span class="text-[9px] font-script font-bold text-matchaDark">Thanh Trà</span>
@@ -1642,39 +1737,59 @@
             if (speedIndex < 10) playJapaneseSpeech(stage4Proverbs[speedIndex].proverb, rate);
         }
 
-        /* MÀN 5: VÒNG 1 ĐIỀN TỪ CÒN THIẾU & VÒNG 2 NỐI CỘT NHÂN VẬT - CÂU NÓI */
+        /* MÀN 5: VÒNG 1 (8 CÂU XÁO TRỘN) -> BẢNG ĐIỂM RIÊNG VÒNG 1 -> VÒNG 2 -> BẢNG ĐIỂM RIÊNG VÒNG 2 */
         function startAnimeFillStage() {
             document.getElementById('screen-anime-fill').classList.remove('hidden');
             document.getElementById('anime-fill-part1').classList.remove('hidden');
+            document.getElementById('anime-fill-p1-summary').classList.add('hidden');
             document.getElementById('anime-fill-part2').classList.add('hidden');
+            document.getElementById('anime-fill-p2-summary').classList.add('hidden');
             document.getElementById('game-stats').classList.remove('hidden');
+
+            // Xáo trộn thứ tự 8 câu mỗi lần vào màn để người chơi không nhớ vẹt
+            m5ShuffledQuotes = shuffleArray(stage5Quotes);
 
             score = 0;
             correctCount = 0;
             m5FillIndex = 0;
+            m5P1Score = 0;
+            m5P1Correct = 0;
+            m5P2Score = 0;
+            m5P2Correct = 0;
             updateStatsDisplay();
 
             loadM5FillQuestion();
+            startM5RoundTimer(1);
+        }
 
+        function startM5RoundTimer(roundNum) {
             clearInterval(timerInterval);
             timeLeft = selectedTimerSetting;
             document.getElementById('timer-display').innerText = `${timeLeft}s`;
             timerInterval = setInterval(() => {
                 timeLeft--;
                 document.getElementById('timer-display').innerText = `${timeLeft}s`;
-                if (timeLeft <= 0) { clearInterval(timerInterval); finishGame(false); }
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    if (roundNum === 1) {
+                        showM5Part1Summary();
+                    } else {
+                        showM5Part2Summary();
+                    }
+                }
             }, 1000);
         }
 
         function loadM5FillQuestion() {
-            if (m5FillIndex >= stage5Quotes.length) {
-                startM5MatchingRound();
+            if (m5FillIndex >= m5ShuffledQuotes.length) {
+                clearInterval(timerInterval);
+                showM5Part1Summary();
                 return;
             }
 
             const isEn = (currentLang === 'EN');
-            const q = stage5Quotes[m5FillIndex];
-            document.getElementById('fill-counter-text').innerText = isEn ? `Quote: ${m5FillIndex + 1}/7` : `Câu: ${m5FillIndex + 1}/7`;
+            const q = m5ShuffledQuotes[m5FillIndex];
+            document.getElementById('fill-counter-text').innerText = isEn ? `Quote: ${m5FillIndex + 1}/8` : `Câu: ${m5FillIndex + 1}/8`;
             document.getElementById('fill-jp-sentence').innerText = q.maskedJp;
             document.getElementById('fill-romaji-hole').innerText = q.maskedRomaji;
             document.getElementById('fill-input').value = '';
@@ -1687,8 +1802,8 @@
         }
 
         function playM5Audio(rate) {
-            if (m5FillIndex < stage5Quotes.length) {
-                playJapaneseSpeech(stage5Quotes[m5FillIndex].fullJp, rate);
+            if (m5FillIndex < m5ShuffledQuotes.length) {
+                playJapaneseSpeech(m5ShuffledQuotes[m5FillIndex].fullJp, rate);
             }
         }
 
@@ -1696,7 +1811,7 @@
             e.preventDefault();
             const isEn = (currentLang === 'EN');
             const input = document.getElementById('fill-input').value.trim().toLowerCase();
-            const target = stage5Quotes[m5FillIndex];
+            const target = m5ShuffledQuotes[m5FillIndex];
 
             const isCorrect = target.accepted.includes(input);
             document.getElementById('m5-form').classList.add('hidden');
@@ -1709,6 +1824,8 @@
                 confetti({ particleCount: 35 });
                 playClapSound();
                 ochaPraiseWithVoice();
+                m5P1Score += 10;
+                m5P1Correct++;
                 score += 10;
                 correctCount++;
                 updateStatsDisplay();
@@ -1736,32 +1853,40 @@
             loadM5FillQuestion();
         }
 
-        /* VÒNG 2 MÀN 5: NỐI CỘT NHÂN VẬT VỚI CÂU NÓI */
-        function startM5MatchingRound() {
+        function showM5Part1Summary() {
             document.getElementById('anime-fill-part1').classList.add('hidden');
+            document.getElementById('anime-fill-p1-summary').classList.remove('hidden');
+            document.getElementById('m5-p1-score-val').innerText = m5P1Score;
+            document.getElementById('m5-p1-correct-val').innerText = `${m5P1Correct} / 8`;
+            confetti({ particleCount: 50, spread: 65 });
+        }
+
+        /* VÒNG 2 MÀN 5: NỐI CỘT NHÂN VẬT VỚI CÂU NÓI (8 CẶP XÁO TRỘN) */
+        function startM5MatchingRound() {
+            document.getElementById('anime-fill-p1-summary').classList.add('hidden');
             document.getElementById('anime-fill-part2').classList.remove('hidden');
 
             m5SelectedCharId = null;
             m5MatchedIds = [];
+            m5ShuffledCharsCol = shuffleArray(stage5Quotes);
+            m5ShuffledQuotesCol = shuffleArray(stage5Quotes);
+
             renderM5MatchingColumns();
+            startM5RoundTimer(2);
         }
 
         function renderM5MatchingColumns() {
             const isEn = (currentLang === 'EN');
             document.getElementById('m5-match-counter').innerText = isEn
-                ? `Matched: ${m5MatchedIds.length}/7`
-                : `Đã nối: ${m5MatchedIds.length}/7`;
+                ? `Matched: ${m5MatchedIds.length}/8`
+                : `Đã nối: ${m5MatchedIds.length}/8`;
 
             const colChars = document.getElementById('m5-col-chars');
             const colQuotes = document.getElementById('m5-col-quotes');
             colChars.innerHTML = '';
             colQuotes.innerHTML = '';
 
-            // Trộn ngẫu nhiên thứ tự 2 cột
-            const shuffledChars = [...stage5Quotes].sort(() => aOrB());
-            const shuffledQuotes = [...stage5Quotes].sort(() => aOrB());
-
-            shuffledChars.forEach(item => {
+            m5ShuffledCharsCol.forEach(item => {
                 const isMatched = m5MatchedIds.includes(item.id);
                 const isSelected = (m5SelectedCharId === item.id);
 
@@ -1787,7 +1912,7 @@
                 colChars.appendChild(btn);
             });
 
-            shuffledQuotes.forEach(item => {
+            m5ShuffledQuotesCol.forEach(item => {
                 const isMatched = m5MatchedIds.includes(item.id);
                 const btn = document.createElement('button');
                 btn.type = 'button';
@@ -1806,10 +1931,6 @@
             });
         }
 
-        function aOrB() {
-            return Math.random() - 0.5;
-        }
-
         function handleM5QuoteMatch(quoteId) {
             if (!m5SelectedCharId) {
                 alert(currentLang === 'EN' ? 'Please select a Character in Column 1 first!' : 'Hãy bấm chọn 1 Nhân vật ở Cột 1 trước nhé!');
@@ -1822,22 +1943,34 @@
                 ochaPraiseWithVoice();
                 m5MatchedIds.push(quoteId);
                 m5SelectedCharId = null;
+                m5P2Score += 10;
+                m5P2Correct++;
                 score += 10;
                 correctCount++;
                 updateStatsDisplay();
                 renderM5MatchingColumns();
 
                 if (m5MatchedIds.length === stage5Quotes.length) {
-                    setTimeout(() => finishGame(true), 600);
+                    clearInterval(timerInterval);
+                    setTimeout(() => showM5Part2Summary(), 500);
                 }
             } else {
                 playWrongSound();
                 ochaComfortOnly();
+                m5P2Score = Math.max(0, m5P2Score - 5);
                 score = Math.max(0, score - 5);
                 updateStatsDisplay();
                 m5SelectedCharId = null;
                 renderM5MatchingColumns();
             }
+        }
+
+        function showM5Part2Summary() {
+            document.getElementById('anime-fill-part2').classList.add('hidden');
+            document.getElementById('anime-fill-p2-summary').classList.remove('hidden');
+            document.getElementById('m5-p2-score-val').innerText = m5P2Score;
+            document.getElementById('m5-p2-correct-val').innerText = `${m5P2Correct} / 8`;
+            confetti({ particleCount: 60, spread: 70 });
         }
 
         function finishGame(isWin) {
