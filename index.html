@@ -167,7 +167,7 @@
                 <!-- AVATAR OCHA-CHAN CHIBI XINH XẮN: KHUÔN MẶT SÁNG SẠCH KHÔNG VIỀN NÂU DƯỚI CẰM, BÚI TÓC TRÊN ĐỈNH, MÁI CHÉO, KIMONO MATCHA -->
                 <div class="relative w-16 h-20 sm:w-20 sm:h-24 flex-shrink-0 animate-float">
                     <svg viewBox="0 0 120 150" class="w-full h-full drop-shadow-md">
-                        <!-- Lọn tóc sau gáy gọn gàng (chỉ ở nửa trên, tuyệt đối không che mặt/cằm) -->
+                        <!-- Lọn tóc sau gáy gọn gàng -->
                         <path d="M 32 55 C 28 32, 92 32, 88 55 L 88 68 C 86 64, 83 60, 82 56 L 38 56 C 37 60, 34 64, 32 68 Z" fill="#3B231C"/>
                         <!-- Búi tóc tròn trên đỉnh đầu -->
                         <circle cx="60" cy="21" r="16" fill="#3B231C" stroke="#24140F" stroke-width="2"/>
@@ -177,7 +177,7 @@
                         <path d="M 45 25 Q 52 20 60 23 Q 68 20 75 25 Q 73 29 60 27 Q 47 29 45 25 Z" fill="#FACC15" stroke="#B45309" stroke-width="1.3"/>
                         <!-- Cổ thon -->
                         <rect x="54" y="72" width="12" height="11" rx="3" fill="#FFE7D6"/>
-                        <!-- Khuôn mặt chibi bầu bĩnh, sáng mịn (nằm trên lớp tóc sau nên hoàn toàn không có màu nâu quanh cằm) -->
+                        <!-- Khuôn mặt chibi bầu bĩnh, sáng mịn -->
                         <path d="M 35 46 C 35 28, 85 28, 85 46 C 85 66, 75 76, 60 76 C 45 76, 35 66, 35 46 Z" fill="#FFF1E6" stroke="#3B231C" stroke-width="2"/>
                         <!-- Tai nhỏ xinh -->
                         <circle cx="34" cy="56" r="4" fill="#FFE7D6" stroke="#3B231C" stroke-width="1.5"/>
@@ -462,7 +462,7 @@
             <div id="karuta-arena-grid" class="grid grid-cols-2 sm:grid-cols-5 gap-3"></div>
         </section>
 
-        <!-- SCREEN MÀN 5: VÒNG 1 ĐIỀN TỪ (8 CÂU) + BẢNG ĐIỂM RIÊNG VÒNG 1 + VÒNG 2 NỐI CỘT + BẢNG ĐIỂM RIÊNG VÒNG 2 -->
+        <!-- SCREEN MÀN 5: VÒNG 1 ĐIỀN TỪ (8 CÂU) + BẢNG ĐIỂM RIÊNG VÒNG 1 + VÒNG 2 NỐI CỘT (TIẾNG NHẬT) + BẢNG ĐIỂM RIÊNG VÒNG 2 -->
         <section id="screen-anime-fill" class="hidden space-y-6 max-w-4xl mx-auto w-full">
             <!-- VÒNG 1: ĐIỀN TỪ CÒN THIẾU -->
             <div id="anime-fill-part1" class="bg-creamCard border-2 border-matchaDark p-6 rounded-3xl shadow-xl text-center space-y-4 max-w-2xl mx-auto">
@@ -525,15 +525,15 @@
                 </button>
             </div>
 
-            <!-- VÒNG 2: NỐI CỘT HÌNH NHÂN VẬT VỚI CÂU NÓI -->
+            <!-- VÒNG 2: NỐI CỘT HÌNH NHÂN VẬT VỚI CÂU NÓI TIẾNG NHẬT -->
             <div id="anime-fill-part2" class="hidden bg-creamCard border-2 border-matchaDark p-5 sm:p-6 rounded-3xl shadow-xl text-center space-y-4">
                 <div class="flex justify-between items-center">
                     <span id="m5-p2-tag" class="text-xs font-bold bg-lemonCream text-matchaDark border border-matchaGreen/40 px-3 py-1 rounded-full">
-                        🎉 MÀN 5 (VÒNG 2): NỐI CỘT NHÂN VẬT & CÂU NÓI
+                        🎉 MÀN 5 (VÒNG 2): NỐI CỘT NHÂN VẬT & CÂU NÓI TIẾNG NHẬT
                     </span>
                     <span id="m5-match-counter" class="text-xs font-mono font-bold text-matchaDark">Đã nối: 0/8</span>
                 </div>
-                <p id="m5-p2-sub" class="text-xs text-stone-600">Bấm chọn 1 Nhân vật ở cột trái, sau đó bấm chọn Câu nói tương ứng ở cột phải!</p>
+                <p id="m5-p2-sub" class="text-xs text-stone-600">Bấm chọn 1 Nhân vật ở cột trái, sau đó bấm chọn Câu nói tiếng Nhật tương ứng ở cột phải!</p>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
                     <!-- CỘT 1: HÌNH ẢNH & TÊN NHÂN VẬT -->
@@ -542,9 +542,9 @@
                         <div id="m5-col-chars" class="space-y-2"></div>
                     </div>
 
-                    <!-- CỘT 2: CÂU NÓI -->
+                    <!-- CỘT 2: CÂU NÓI TIẾNG NHẬT -->
                     <div class="space-y-2">
-                        <h4 id="m5-col2-title" class="text-xs font-bold uppercase text-matchaDark text-center bg-lemonCream py-1.5 rounded-lg border border-matchaDark">Cột 2: Câu Nói Nổi Tiếng</h4>
+                        <h4 id="m5-col2-title" class="text-xs font-bold uppercase text-matchaDark text-center bg-lemonCream py-1.5 rounded-lg border border-matchaDark">Cột 2: Câu Nói Tiếng Nhật</h4>
                         <div id="m5-col-quotes" class="space-y-2"></div>
                     </div>
                 </div>
@@ -554,7 +554,7 @@
             <div id="anime-fill-p2-summary" class="hidden bg-creamCard border-3 border-matchaDark p-6 sm:p-8 rounded-3xl shadow-xl text-center space-y-4 max-w-md mx-auto">
                 <div class="w-14 h-14 mx-auto bg-lemonCream rounded-full flex items-center justify-center text-2xl border-2 border-matchaDark">🎉</div>
                 <h3 id="m5-p2-sum-title" class="font-brush font-black text-2xl text-matchaDark">HOÀN THÀNH VÒNG 2!</h3>
-                <p id="m5-p2-sum-sub" class="text-xs text-stone-600">Kết quả riêng phần Nối Cột Nhân Vật & Câu Nói:</p>
+                <p id="m5-p2-sum-sub" class="text-xs text-stone-600">Kết quả riêng phần Nối Cột Nhân Vật & Câu Nói Tiếng Nhật:</p>
                 <div class="grid grid-cols-2 gap-3 text-left">
                     <div class="bg-lemonCream/50 p-3 rounded-xl border border-matchaDark">
                         <span id="m5-p2-score-lbl" class="text-[10px] text-stone-500 block uppercase font-bold">Điểm Vòng 2</span>
@@ -566,22 +566,39 @@
                     </div>
                 </div>
                 <button onclick="finishGame(true)" id="m5-finish-all-btn" class="w-full bg-matchaDark hover:bg-matchaGreen text-white font-bold py-3 rounded-xl transition text-sm">
-                    Nhận Huy Hiệu & Tổng Kết Màn 5 🏆
+                    Xem Bảng Xếp Hạng & Nhận Huy Hiệu 🏆
                 </button>
             </div>
         </section>
 
-        <!-- SCREEN KẾT QUẢ TỔNG KẾT -->
-        <section id="screen-result" class="hidden text-center space-y-5 max-w-md mx-auto py-4">
-            <div class="bg-creamCard border-3 border-matchaDark p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden">
-                <div class="w-16 h-16 mx-auto bg-lemonCream rounded-full flex items-center justify-center text-matchaDark mb-3 border border-matchaGreen">
+        <!-- SCREEN KẾT QUẢ TỔNG KẾT + BẢNG XẾP HẠNG ĐÁNH GIÁ SAU MỖI LẦN CHƠI -->
+        <section id="screen-result" class="hidden text-center space-y-5 max-w-xl mx-auto py-4">
+            <div class="bg-creamCard border-3 border-matchaDark p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden space-y-4">
+                <div class="w-16 h-16 mx-auto bg-lemonCream rounded-full flex items-center justify-center text-matchaDark border border-matchaGreen">
                     <i data-lucide="award" class="w-8 h-8"></i>
                 </div>
 
-                <h2 id="result-title" class="font-brush font-black text-2xl sm:text-3xl text-matchaDark">HOÀN THÀNH XUẤT SẮC!</h2>
-                <p id="result-subtitle" class="text-xs text-stone-500 mt-1">Ocha-chan rất tự hào về bạn!</p>
+                <div>
+                    <h2 id="result-title" class="font-brush font-black text-2xl sm:text-3xl text-matchaDark">HOÀN THÀNH XUẤT SẮC!</h2>
+                    <p id="result-subtitle" class="text-xs text-stone-500 mt-1">Ocha-chan rất tự hào về bạn!</p>
+                </div>
 
-                <div class="grid grid-cols-2 gap-2.5 my-4 text-left">
+                <!-- THẺ ĐÁNH GIÁ XẾP HẠNG LẦN CHƠI HIỆN TẠI -->
+                <div id="rank-evaluation-box" class="bg-gradient-to-r from-lemonCream to-amber-50 border-2 border-matchaDark p-3.5 rounded-2xl flex items-center justify-between text-left">
+                    <div class="flex items-center gap-3">
+                        <div id="rank-grade-badge" class="w-12 h-12 rounded-2xl bg-matchaDark text-amber-300 font-brush font-black text-2xl flex items-center justify-center shadow-md border border-amber-300">S</div>
+                        <div>
+                            <span id="rank-eval-label" class="text-[10px] font-bold uppercase text-matchaGreen tracking-wider block">ĐÁNH GIÁ XẾP HẠNG</span>
+                            <h4 id="rank-eval-title" class="font-bold text-sm text-matchaDark">Bậc Thầy Trà Đạo</h4>
+                            <p id="rank-eval-comment" class="text-[11px] text-stone-600">Độ chính xác tuyệt đối, Ocha-chan ngưỡng mộ bạn!</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <span id="rank-accuracy-val" class="font-mono font-extrabold text-sm text-matchaDark">100%</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2.5 text-left">
                     <div class="bg-lemonCream/40 p-3 rounded-xl border border-matchaDark">
                         <span id="res-score-lbl" class="text-[10px] text-stone-500 block uppercase font-bold">Tổng Điểm</span>
                         <span id="final-score" class="text-xl font-bold font-mono text-matchaDark">0</span>
@@ -592,7 +609,7 @@
                     </div>
                 </div>
 
-                <div id="badge-reward-box" class="hidden bg-amber-50 border-2 border-amber-300 p-3.5 rounded-2xl mb-4 text-left space-y-1">
+                <div id="badge-reward-box" class="hidden bg-amber-50 border-2 border-amber-300 p-3.5 rounded-2xl text-left space-y-1">
                     <span id="res-badge-unlock-lbl" class="text-[10px] font-bold text-amber-800 uppercase tracking-widest block">🎉 MỞ KHÓA HUY HIỆU TỈNH THÀNH!</span>
                     <div class="flex items-center space-x-3 pt-1">
                         <span id="reward-badge-icon" class="text-3xl">🏯</span>
@@ -603,7 +620,31 @@
                     </div>
                 </div>
 
-                <div class="flex gap-2">
+                <!-- BẢNG XẾP HẠNG LỊCH SỬ CÁC LẦN CHƠI -->
+                <div class="bg-white border-2 border-matchaDark rounded-2xl p-3.5 text-left space-y-2">
+                    <div class="flex justify-between items-center border-b border-beigeBorder pb-1.5">
+                        <h4 id="leaderboard-title" class="text-xs font-extrabold uppercase text-matchaDark flex items-center gap-1.5">
+                            🏆 Bảng Xếp Hạng Các Lần Chơi
+                        </h4>
+                        <span id="leaderboard-sub" class="text-[10px] text-stone-500 font-semibold">Top thành tích gần nhất</span>
+                    </div>
+                    <div class="overflow-x-auto max-h-44 overflow-y-auto">
+                        <table class="w-full text-[11px] text-left border-collapse">
+                            <thead>
+                                <tr class="bg-lemonCream/70 text-matchaDark font-bold border-b border-beigeBorder">
+                                    <th id="lb-th-top" class="py-1.5 px-2">#</th>
+                                    <th id="lb-th-stage" class="py-1.5 px-2">Màn</th>
+                                    <th id="lb-th-score" class="py-1.5 px-2">Điểm</th>
+                                    <th id="lb-th-acc" class="py-1.5 px-2">Đúng</th>
+                                    <th id="lb-th-rank" class="py-1.5 px-2 text-center">Hạng</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leaderboard-body" class="divide-y divide-beigeBorder/60"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 pt-1">
                     <button onclick="restartStage()" class="flex-1 bg-matchaDark hover:bg-matchaGreen text-white font-bold py-2.5 rounded-xl transition text-xs sm:text-sm flex items-center justify-center gap-1.5">
                         <i data-lucide="rotate-ccw" class="w-4 h-4"></i> <span id="res-replay-btn">Chơi Lại</span>
                     </button>
@@ -829,6 +870,14 @@
             document.getElementById('res-replay-btn').innerText = isEn ? 'Replay' : 'Chơi Lại';
             document.getElementById('res-menu-btn').innerText = isEn ? 'Menu' : 'Menu';
 
+            document.getElementById('rank-eval-label').innerText = isEn ? 'RANK EVALUATION' : 'ĐÁNH GIÁ XẾP HẠNG';
+            document.getElementById('leaderboard-title').innerText = isEn ? '🏆 Play History Leaderboard' : '🏆 Bảng Xếp Hạng Các Lần Chơi';
+            document.getElementById('leaderboard-sub').innerText = isEn ? 'Top recent records' : 'Top thành tích gần nhất';
+            document.getElementById('lb-th-stage').innerText = isEn ? 'Stage' : 'Màn';
+            document.getElementById('lb-th-score').innerText = isEn ? 'Score' : 'Điểm';
+            document.getElementById('lb-th-acc').innerText = isEn ? 'Correct' : 'Đúng';
+            document.getElementById('lb-th-rank').innerText = isEn ? 'Rank' : 'Hạng';
+
             document.getElementById('modal-btn-normal').innerText = isEn ? 'Normal Audio' : 'Nghe chuẩn';
             document.getElementById('modal-btn-slow').innerText = isEn ? 'Slow Audio' : 'Đọc chậm';
             document.getElementById('romaji-input').placeholder = isEn ? 'Enter Romaji...' : 'Nhập Romaji...';
@@ -860,16 +909,16 @@
             document.getElementById('m5-p1-correct-lbl').innerText = isEn ? 'Correct Quotes' : 'Số Câu Đúng';
             document.getElementById('m5-goto-p2-btn').innerText = isEn ? 'Continue to Round 2 (Match Columns) ➔' : 'Tiếp tục sang Vòng 2 (Nối Cột) ➔';
 
-            document.getElementById('m5-p2-tag').innerText = isEn ? '🎉 STAGE 5 (ROUND 2): MATCH CHARACTERS & QUOTES' : '🎉 MÀN 5 (VÒNG 2): NỐI CỘT NHÂN VẬT & CÂU NÓI';
-            document.getElementById('m5-p2-sub').innerText = isEn ? 'Click a Character on the left, then click their matching Quote on the right!' : 'Bấm chọn 1 Nhân vật ở cột trái, sau đó bấm chọn Câu nói tương ứng ở cột phải!';
+            document.getElementById('m5-p2-tag').innerText = isEn ? '🎉 STAGE 5 (ROUND 2): MATCH CHARACTERS & JAPANESE QUOTES' : '🎉 MÀN 5 (VÒNG 2): NỐI CỘT NHÂN VẬT & CÂU NÓI TIẾNG NHẬT';
+            document.getElementById('m5-p2-sub').innerText = isEn ? 'Click a Character on the left, then click their matching Japanese Quote on the right!' : 'Bấm chọn 1 Nhân vật ở cột trái, sau đó bấm chọn Câu nói tiếng Nhật tương ứng ở cột phải!';
             document.getElementById('m5-col1-title').innerText = isEn ? 'Column 1: Anime Character' : 'Cột 1: Nhân Vật Anime';
-            document.getElementById('m5-col2-title').innerText = isEn ? 'Column 2: Famous Quote' : 'Cột 2: Câu Nói Nổi Tiếng';
+            document.getElementById('m5-col2-title').innerText = isEn ? 'Column 2: Japanese Quote' : 'Cột 2: Câu Nói Tiếng Nhật';
 
             document.getElementById('m5-p2-sum-title').innerText = isEn ? 'ROUND 2 COMPLETED!' : 'HOÀN THÀNH VÒNG 2!';
-            document.getElementById('m5-p2-sum-sub').innerText = isEn ? 'Separate score for Character Matching round:' : 'Kết quả riêng phần Nối Cột Nhân Vật & Câu Nói:';
+            document.getElementById('m5-p2-sum-sub').innerText = isEn ? 'Separate score for Character Matching round:' : 'Kết quả riêng phần Nối Cột Nhân Vật & Câu Nói Tiếng Nhật:';
             document.getElementById('m5-p2-score-lbl').innerText = isEn ? 'Round 2 Score' : 'Điểm Vòng 2';
             document.getElementById('m5-p2-correct-lbl').innerText = isEn ? 'Matched Pairs' : 'Số Cặp Đúng';
-            document.getElementById('m5-finish-all-btn').innerText = isEn ? 'Claim Badge & Stage 5 Summary 🏆' : 'Nhận Huy Hiệu & Tổng Kết Màn 5 🏆';
+            document.getElementById('m5-finish-all-btn').innerText = isEn ? 'View Leaderboard & Claim Badge 🏆' : 'Xem Bảng Xếp Hạng & Nhận Huy Hiệu 🏆';
 
             document.getElementById('result-title').innerText = isEn ? 'EXCELLENT COMPLETION!' : 'HOÀN THÀNH XUẤT SẮC!';
             document.getElementById('result-subtitle').innerText = isEn ? 'Ocha-chan is so proud of you!' : 'Ocha-chan rất tự hào về bạn!';
@@ -1200,7 +1249,7 @@
         let speedTimeLeft = 10;
         let m4WaitingNext = false;
 
-        // BIẾN CHO MÀN 5 (TÍNH ĐIỂM RIÊNG VÒNG 1 VÀ VÒNG 2 + XÁO TRỘN NGẪU NHIÊN)
+        // BIẾN CHO MÀN 5
         let m5ShuffledQuotes = [];
         let m5FillIndex = 0;
         let m5P1Score = 0;
@@ -1737,7 +1786,7 @@
             if (speedIndex < 10) playJapaneseSpeech(stage4Proverbs[speedIndex].proverb, rate);
         }
 
-        /* MÀN 5: VÒNG 1 (8 CÂU XÁO TRỘN) -> BẢNG ĐIỂM RIÊNG VÒNG 1 -> VÒNG 2 -> BẢNG ĐIỂM RIÊNG VÒNG 2 */
+        /* MÀN 5: VÒNG 1 (8 CÂU XÁO TRỘN) -> BẢNG ĐIỂM RIÊNG VÒNG 1 -> VÒNG 2 (CÂU NÓI TIẾNG NHẬT) -> BẢNG ĐIỂM RIÊNG VÒNG 2 */
         function startAnimeFillStage() {
             document.getElementById('screen-anime-fill').classList.remove('hidden');
             document.getElementById('anime-fill-part1').classList.remove('hidden');
@@ -1746,7 +1795,6 @@
             document.getElementById('anime-fill-p2-summary').classList.add('hidden');
             document.getElementById('game-stats').classList.remove('hidden');
 
-            // Xáo trộn thứ tự 8 câu mỗi lần vào màn để người chơi không nhớ vẹt
             m5ShuffledQuotes = shuffleArray(stage5Quotes);
 
             score = 0;
@@ -1861,7 +1909,7 @@
             confetti({ particleCount: 50, spread: 65 });
         }
 
-        /* VÒNG 2 MÀN 5: NỐI CỘT NHÂN VẬT VỚI CÂU NÓI (8 CẶP XÁO TRỘN) */
+        /* VÒNG 2 MÀN 5: NỐI CỘT NHÂN VẬT VỚI CÂU NÓI TIẾNG NHẬT */
         function startM5MatchingRound() {
             document.getElementById('anime-fill-p1-summary').classList.add('hidden');
             document.getElementById('anime-fill-part2').classList.remove('hidden');
@@ -1912,22 +1960,48 @@
                 colChars.appendChild(btn);
             });
 
+            // CỘT 2 LUÔN HIỂN THỊ CÂU NÓI BẰNG TIẾNG NHẬT
             m5ShuffledQuotesCol.forEach(item => {
                 const isMatched = m5MatchedIds.includes(item.id);
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.disabled = isMatched;
-                btn.className = `w-full p-2.5 rounded-xl border-2 flex items-center justify-between text-left transition min-h-[54px] ${
+                const rowWrap = document.createElement('div');
+                rowWrap.className = `w-full p-2.5 rounded-xl border-2 flex items-center justify-between gap-2 text-left transition min-h-[54px] cursor-pointer ${
                     isMatched
                         ? 'bg-emerald-100 border-emerald-500 text-emerald-900 opacity-60 cursor-default'
-                        : 'bg-white border-matchaDark hover:bg-lemonCream text-inkBlack'
+                        : 'bg-white border-matchaDark hover:bg-lemonCream text-matchaDark'
                 }`;
-                btn.innerHTML = `
-                    <span class="text-xs font-semibold leading-snug">"${isEn ? item.en : item.vi}"</span>
-                    ${isMatched ? '<span class="ml-2 text-xs font-bold">✅</span>' : ''}
-                `;
-                btn.onclick = () => handleM5QuoteMatch(item.id);
-                colQuotes.appendChild(btn);
+
+                const quoteTextEl = document.createElement('span');
+                quoteTextEl.className = "text-xs sm:text-sm font-jp font-extrabold leading-snug flex-1";
+                quoteTextEl.innerText = `「${item.fullJp}」`;
+
+                const rightControls = document.createElement('div');
+                rightControls.className = "flex items-center gap-1.5 flex-shrink-0";
+
+                const audioBtn = document.createElement('button');
+                audioBtn.type = "button";
+                audioBtn.title = "Nghe câu thoại tiếng Nhật";
+                audioBtn.className = "px-2 py-1 rounded-lg bg-lemonCream hover:bg-matchaGreen hover:text-white border border-matchaDark text-[11px] font-bold transition";
+                audioBtn.innerText = "🔊";
+                audioBtn.onclick = (ev) => {
+                    ev.stopPropagation();
+                    playJapaneseSpeech(item.fullJp, 0.85);
+                };
+
+                rightControls.appendChild(audioBtn);
+                if (isMatched) {
+                    const checkSpan = document.createElement('span');
+                    checkSpan.className = "text-xs font-bold";
+                    checkSpan.innerText = "✅";
+                    rightControls.appendChild(checkSpan);
+                }
+
+                rowWrap.appendChild(quoteTextEl);
+                rowWrap.appendChild(rightControls);
+
+                if (!isMatched) {
+                    rowWrap.onclick = () => handleM5QuoteMatch(item.id);
+                }
+                colQuotes.appendChild(rowWrap);
             });
         }
 
@@ -1973,6 +2047,93 @@
             confetti({ particleCount: 60, spread: 70 });
         }
 
+        /* TÍNH TOÁN XẾP HẠNG & LƯU BẢNG XẾP HẠNG SAU MỖI LẦN CHƠI */
+        function computeRankEvaluation(accPercent) {
+            const isEn = (currentLang === 'EN');
+            if (accPercent >= 90) {
+                return {
+                    grade: 'S',
+                    badgeClass: 'bg-matchaDark text-amber-300 border-amber-300',
+                    title: isEn ? 'Tea Ceremony Master' : 'Bậc Thầy Trà Đạo',
+                    comment: isEn ? 'Outstanding accuracy! Ocha-chan admires you!' : 'Độ chính xác tuyệt đối, Ocha-chan ngưỡng mộ bạn!'
+                };
+            } else if (accPercent >= 75) {
+                return {
+                    grade: 'A',
+                    badgeClass: 'bg-emerald-800 text-emerald-100 border-emerald-300',
+                    title: isEn ? 'Karuta Artisan' : 'Nghệ Nhân Karuta',
+                    comment: isEn ? 'Great reflexes and solid Japanese memory!' : 'Phản xạ nhạy bén và ghi nhớ tiếng Nhật rất vững!'
+                };
+            } else if (accPercent >= 50) {
+                return {
+                    grade: 'B',
+                    badgeClass: 'bg-amber-700 text-amber-100 border-amber-300',
+                    title: isEn ? 'Diligent Apprentice' : 'Học Trò Chăm Chỉ',
+                    comment: isEn ? 'Good effort! Practice a bit more to reach Rank S!' : 'Nỗ lực rất tốt! Luyện thêm một chút nữa để chạm hạng S nhé!'
+                };
+            } else {
+                return {
+                    grade: 'C',
+                    badgeClass: 'bg-stone-700 text-stone-100 border-stone-400',
+                    title: isEn ? 'Ochakana Rookie' : 'Tân Binh Ochakana',
+                    comment: isEn ? 'Keep going! Listen carefully to Ocha-chan and try again!' : 'Đừng nản lòng nhé! Lắng nghe Ocha-chan đọc và thử lại nào!'
+                };
+            }
+        }
+
+        function saveAndRenderLeaderboard(stageNum, runScore, runCorrect, runTotal, grade) {
+            const key = 'ochakana_play_leaderboard';
+            let history = [];
+            try {
+                history = JSON.parse(localStorage.getItem(key)) || [];
+            } catch (err) {
+                history = [];
+            }
+
+            const newEntry = {
+                id: Date.now(),
+                stage: stageNum,
+                score: runScore,
+                correct: runCorrect,
+                total: runTotal,
+                grade: grade
+            };
+
+            history.unshift(newEntry);
+            // Sắp xếp ưu tiên điểm cao nhất, giữ tối đa 10 lượt chơi gần/cao nhất
+            const sortedTop = [...history]
+                .sort((a, b) => b.score - a.score || b.id - a.id)
+                .slice(0, 10);
+
+            localStorage.setItem(key, JSON.stringify(sortedTop));
+
+            const isEn = (currentLang === 'EN');
+            const tbody = document.getElementById('leaderboard-body');
+            tbody.innerHTML = sortedTop.map((item, idx) => {
+                const isCurrent = (item.id === newEntry.id);
+                const medal = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : `${idx + 1}`;
+                const gradeColor = item.grade === 'S'
+                    ? 'bg-amber-100 text-amber-900 border-amber-400'
+                    : item.grade === 'A'
+                        ? 'bg-emerald-100 text-emerald-900 border-emerald-400'
+                        : item.grade === 'B'
+                            ? 'bg-sky-100 text-sky-900 border-sky-400'
+                            : 'bg-stone-100 text-stone-800 border-stone-300';
+
+                return `
+                    <tr class="${isCurrent ? 'bg-lemonCream font-bold' : 'bg-white'}">
+                        <td class="py-1.5 px-2 font-mono">${medal}</td>
+                        <td class="py-1.5 px-2">${isEn ? 'Stage' : 'Màn'} ${item.stage} ${isCurrent ? '<span class="text-[9px] text-matchaGreen">(Mới)</span>' : ''}</td>
+                        <td class="py-1.5 px-2 font-mono text-matchaDark">${item.score}</td>
+                        <td class="py-1.5 px-2 font-mono">${item.correct}/${item.total}</td>
+                        <td class="py-1.5 px-2 text-center">
+                            <span class="inline-block px-2 py-0.5 rounded-md border font-brush font-black text-[11px] ${gradeColor}">${item.grade}</span>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
         function finishGame(isWin) {
             clearInterval(timerInterval);
             clearInterval(speedTimerInterval);
@@ -1987,6 +2148,18 @@
 
             document.getElementById('final-score').innerText = score;
             document.getElementById('final-correct').innerText = `${correctCount} / ${totalQuestionsInStage}`;
+
+            const accPercent = totalQuestionsInStage > 0 ? Math.round((correctCount / totalQuestionsInStage) * 100) : 0;
+            const rankInfo = computeRankEvaluation(accPercent);
+
+            const gradeBadge = document.getElementById('rank-grade-badge');
+            gradeBadge.innerText = rankInfo.grade;
+            gradeBadge.className = `w-12 h-12 rounded-2xl font-brush font-black text-2xl flex items-center justify-center shadow-md border ${rankInfo.badgeClass}`;
+            document.getElementById('rank-eval-title').innerText = rankInfo.title;
+            document.getElementById('rank-eval-comment').innerText = rankInfo.comment;
+            document.getElementById('rank-accuracy-val').innerText = `${accPercent}%`;
+
+            saveAndRenderLeaderboard(currentStage, score, correctCount, totalQuestionsInStage, rankInfo.grade);
 
             if (isWin) {
                 confetti({ particleCount: 90, spread: 80 });
