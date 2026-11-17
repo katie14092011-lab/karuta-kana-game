@@ -535,17 +535,17 @@
                 </div>
                 <p id="m5-p2-sub" class="text-xs text-stone-600">Bấm chọn 1 Nhân vật ở cột trái, sau đó bấm chọn Câu nói tiếng Nhật tương ứng ở cột phải!</p>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left items-stretch">
                     <!-- CỘT 1: HÌNH ẢNH & TÊN NHÂN VẬT -->
-                    <div class="space-y-2">
+                    <div class="flex flex-col space-y-2">
                         <h4 id="m5-col1-title" class="text-xs font-bold uppercase text-matchaDark text-center bg-lemonCream py-1.5 rounded-lg border border-matchaDark">Cột 1: Nhân Vật Anime</h4>
-                        <div id="m5-col-chars" class="space-y-2"></div>
+                        <div id="m5-col-chars" class="grid grid-rows-8 gap-2 flex-1"></div>
                     </div>
 
                     <!-- CỘT 2: CÂU NÓI TIẾNG NHẬT -->
-                    <div class="space-y-2">
+                    <div class="flex flex-col space-y-2">
                         <h4 id="m5-col2-title" class="text-xs font-bold uppercase text-matchaDark text-center bg-lemonCream py-1.5 rounded-lg border border-matchaDark">Cột 2: Câu Nói Tiếng Nhật</h4>
-                        <div id="m5-col-quotes" class="space-y-2"></div>
+                        <div id="m5-col-quotes" class="grid grid-rows-8 gap-2 flex-1"></div>
                     </div>
                 </div>
             </div>
@@ -1258,6 +1258,7 @@
         let m5P2Correct = 0;
         let m5SelectedCharId = null;
         let m5MatchedIds = [];
+        let m5WrongIds = [];
         let m5ShuffledCharsCol = [];
         let m5ShuffledQuotesCol = [];
 
@@ -1464,13 +1465,101 @@
             if (selectedCard) playJapaneseSpeech(selectedCard.char, rate);
         }
 
+        /* BỘ XỬ LÝ PHÁT ÂM CHUẨN XÁC CHO TẤT CẢ CÁC MÀN (ĐẶC BIỆT PHÂN BIỆT RÕ P BẬT HƠI / B NHẸ, PI KHÔNG NHẦM KI, DOUGU KHÔNG NHẦM DOUBU) */
+        let cachedJaVoice = null;
+        function resolveJapaneseVoice() {
+            if (!('speechSynthesis' in window)) return null;
+            const voices = window.speechSynthesis.getVoices() || [];
+            if (voices.length === 0) return null;
+            const jaVoices = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith('ja'));
+            if (jaVoices.length === 0) return null;
+            return (
+                jaVoices.find(v => /google|kyoko|haruka|nanami|o-ren|mizuki|ayumi|ichiro/i.test(v.name)) ||
+                jaVoices[0]
+            );
+        }
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = () => {
+                cachedJaVoice = resolveJapaneseVoice();
+            };
+        }
+
+        const singleKanaSpeechMap = {
+            // Âm P (Handakuon - Maru): bật hơi rõ ràng, tách biệt hoàn toàn với K và B
+            'ぱ': { speech: 'ぱっ', pitch: 1.18, rateScale: 0.90 },
+            'パ': { speech: 'ぱっ', pitch: 1.18, rateScale: 0.90 },
+            'ぴ': { speech: 'ぴっ', pitch: 1.22, rateScale: 0.88 },
+            'ピ': { speech: 'ぴっ', pitch: 1.22, rateScale: 0.88 },
+            'ぷ': { speech: 'ぷっ', pitch: 1.18, rateScale: 0.90 },
+            'プ': { speech: 'ぷっ', pitch: 1.18, rateScale: 0.90 },
+            'ぺ': { speech: 'ぺっ', pitch: 1.18, rateScale: 0.90 },
+            'ペ': { speech: 'ぺっ', pitch: 1.18, rateScale: 0.90 },
+            'ぽ': { speech: 'ぽっ', pitch: 1.18, rateScale: 0.90 },
+            'ポ': { speech: 'ぽっ', pitch: 1.18, rateScale: 0.90 },
+            // Âm B (Dakuon - Ten-ten): giọng trầm và nhẹ hơn âm P
+            'ば': { speech: 'ばー', pitch: 0.92, rateScale: 0.95 },
+            'バ': { speech: 'ばー', pitch: 0.92, rateScale: 0.95 },
+            'び': { speech: 'びー', pitch: 0.92, rateScale: 0.95 },
+            'ビ': { speech: 'びー', pitch: 0.92, rateScale: 0.95 },
+            'ぶ': { speech: 'ぶー', pitch: 0.92, rateScale: 0.95 },
+            'ブ': { speech: 'ぶー', pitch: 0.92, rateScale: 0.95 },
+            'べ': { speech: 'べー', pitch: 0.92, rateScale: 0.95 },
+            'ベ': { speech: 'べー', pitch: 0.92, rateScale: 0.95 },
+            'ぼ': { speech: 'ぼー', pitch: 0.92, rateScale: 0.95 },
+            'ボ': { speech: 'ぼー', pitch: 0.92, rateScale: 0.95 },
+            // Một số âm đơn dễ bị TTS nuốt âm tiết đầu
+            'き': { speech: 'きー', pitch: 1.05, rateScale: 0.95 },
+            'キ': { speech: 'きー', pitch: 1.05, rateScale: 0.95 },
+            'ち': { speech: 'ちー', pitch: 1.05, rateScale: 0.95 },
+            'チ': { speech: 'ちー', pitch: 1.05, rateScale: 0.95 },
+            'つ': { speech: 'つー', pitch: 1.05, rateScale: 0.95 },
+            'ツ': { speech: 'つー', pitch: 1.05, rateScale: 0.95 },
+            'ひ': { speech: 'ひー', pitch: 1.05, rateScale: 0.95 },
+            'ヒ': { speech: 'ひー', pitch: 1.05, rateScale: 0.95 },
+            'ふ': { speech: 'ふー', pitch: 1.05, rateScale: 0.95 },
+            'フ': { speech: 'ふー', pitch: 1.05, rateScale: 0.95 },
+            'を': { speech: 'お', pitch: 1.02, rateScale: 0.95 },
+            'ヲ': { speech: 'お', pitch: 1.02, rateScale: 0.95 },
+            'ん': { speech: 'んー', pitch: 1.0, rateScale: 0.90 },
+            'ン': { speech: 'んー', pitch: 1.0, rateScale: 0.90 }
+        };
+
+        const phraseSpeechOverrides = {
+            // Đọc rõ "どうぐ" (dougu - chữ ぐ là GU, ngắt nhịp rõ để TTS không nuốt thành doubu)
+            'ドラえもん、どうぐをかしてよ': 'ドラえもん、どう・ぐを、かしてよ！',
+            // Đọc rõ từng cụm tục ngữ Màn 4 & câu thoại Màn 3/Màn 5
+            'タケコプターだよ、のび太くん': 'タケコプターだよ、のびたくん！',
+            'しんじつはいつもひとつ': 'しんじつは、いつも、ひとつ！',
+            'ピカチュウ、きみにきめた': 'ピカチュウ、きみに、きめた！',
+            'じぶんをかえなければせかいはかえられない': 'じぶんを、かえなければ、せかいは、かえられない',
+            'そこへつれていくよ、あおいをわすれないで': 'そこへ、つれていくよ、あおいを、わすれないで',
+            'おんなのこのいちばんのメイクはえがおだよ': 'おんなのこの、いちばんのメイクは、えがおだよ',
+            'あきらめたらそこでしあいしゅうりょうですよ': 'あきらめたら、そこで、しあい、しゅうりょうですよ'
+        };
+
         function playJapaneseSpeech(text, rate = 0.85) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(text);
+                let spokenText = text;
+                let targetPitch = 1.05;
+                let finalRate = rate;
+
+                if (singleKanaSpeechMap[text]) {
+                    spokenText = singleKanaSpeechMap[text].speech;
+                    targetPitch = singleKanaSpeechMap[text].pitch;
+                    finalRate = Math.max(0.42, rate * singleKanaSpeechMap[text].rateScale);
+                } else if (phraseSpeechOverrides[text]) {
+                    spokenText = phraseSpeechOverrides[text];
+                }
+
+                const utterance = new SpeechSynthesisUtterance(spokenText);
+                const jaVoice = cachedJaVoice || resolveJapaneseVoice();
+                if (jaVoice) {
+                    utterance.voice = jaVoice;
+                }
                 utterance.lang = 'ja-JP';
-                utterance.rate = rate;
-                utterance.pitch = 1.05;
+                utterance.rate = finalRate;
+                utterance.pitch = targetPitch;
                 window.speechSynthesis.speak(utterance);
             }
         }
@@ -1916,6 +2005,7 @@
 
             m5SelectedCharId = null;
             m5MatchedIds = [];
+            m5WrongIds = [];
             m5ShuffledCharsCol = shuffleArray(stage5Quotes);
             m5ShuffledQuotesCol = shuffleArray(stage5Quotes);
 
@@ -1925,9 +2015,10 @@
 
         function renderM5MatchingColumns() {
             const isEn = (currentLang === 'EN');
+            const totalCompleted = m5MatchedIds.length + m5WrongIds.length;
             document.getElementById('m5-match-counter').innerText = isEn
-                ? `Matched: ${m5MatchedIds.length}/8`
-                : `Đã nối: ${m5MatchedIds.length}/8`;
+                ? `Completed: ${totalCompleted}/8 (Correct: ${m5MatchedIds.length})`
+                : `Đã hoàn thành: ${totalCompleted}/8 (Đúng: ${m5MatchedIds.length})`;
 
             const colChars = document.getElementById('m5-col-chars');
             const colQuotes = document.getElementById('m5-col-quotes');
@@ -1936,38 +2027,48 @@
 
             m5ShuffledCharsCol.forEach(item => {
                 const isMatched = m5MatchedIds.includes(item.id);
+                const isWrong = m5WrongIds.includes(item.id);
+                const isLocked = isMatched || isWrong;
                 const isSelected = (m5SelectedCharId === item.id);
 
                 const btn = document.createElement('button');
                 btn.type = 'button';
-                btn.disabled = isMatched;
-                btn.className = `w-full p-2.5 rounded-xl border-2 flex items-center gap-3 text-left transition ${
+                btn.disabled = isLocked;
+                btn.className = `w-full h-full min-h-[60px] p-2.5 rounded-xl border-2 flex items-center gap-3 text-left transition ${
                     isMatched
-                        ? 'bg-emerald-100 border-emerald-500 text-emerald-900 opacity-60 cursor-default'
-                        : isSelected
-                            ? 'bg-matchaDark border-matchaDark text-white shadow-md scale-[1.01]'
-                            : 'bg-white border-matchaDark hover:bg-lemonCream text-matchaDark'
+                        ? 'bg-emerald-100 border-emerald-500 text-emerald-900 opacity-75 cursor-not-allowed'
+                        : isWrong
+                            ? 'bg-red-100 border-red-500 text-red-900 opacity-85 cursor-not-allowed'
+                            : isSelected
+                                ? 'bg-matchaDark border-matchaDark text-white shadow-md scale-[1.01]'
+                                : 'bg-white border-matchaDark hover:bg-lemonCream text-matchaDark'
                 }`;
                 btn.innerHTML = `
                     <span class="w-9 h-9 rounded-full border flex items-center justify-center text-xl flex-shrink-0 ${item.avatarBg}">${item.avatar}</span>
-                    <span class="font-bold text-xs sm:text-sm">${item.charName}</span>
-                    ${isMatched ? '<span class="ml-auto text-xs font-bold">✅</span>' : ''}
+                    <span class="font-bold text-xs sm:text-sm leading-snug">${item.charName}</span>
+                    ${isMatched ? '<span class="ml-auto text-xs font-bold">✅</span>' : isWrong ? '<span class="ml-auto text-xs font-bold">❌</span>' : ''}
                 `;
-                btn.onclick = () => {
-                    m5SelectedCharId = item.id;
-                    renderM5MatchingColumns();
-                };
+                if (!isLocked) {
+                    btn.onclick = () => {
+                        m5SelectedCharId = item.id;
+                        renderM5MatchingColumns();
+                    };
+                }
                 colChars.appendChild(btn);
             });
 
             // CỘT 2 LUÔN HIỂN THỊ CÂU NÓI BẰNG TIẾNG NHẬT
             m5ShuffledQuotesCol.forEach(item => {
                 const isMatched = m5MatchedIds.includes(item.id);
+                const isWrong = m5WrongIds.includes(item.id);
+                const isLocked = isMatched || isWrong;
                 const rowWrap = document.createElement('div');
-                rowWrap.className = `w-full p-2.5 rounded-xl border-2 flex items-center justify-between gap-2 text-left transition min-h-[54px] cursor-pointer ${
+                rowWrap.className = `w-full h-full min-h-[60px] p-2.5 rounded-xl border-2 flex items-center justify-between gap-2 text-left transition ${
                     isMatched
-                        ? 'bg-emerald-100 border-emerald-500 text-emerald-900 opacity-60 cursor-default'
-                        : 'bg-white border-matchaDark hover:bg-lemonCream text-matchaDark'
+                        ? 'bg-emerald-100 border-emerald-500 text-emerald-900 opacity-75 cursor-not-allowed'
+                        : isWrong
+                            ? 'bg-red-100 border-red-500 text-red-900 opacity-85 cursor-not-allowed'
+                            : 'bg-white border-matchaDark hover:bg-lemonCream text-matchaDark cursor-pointer'
                 }`;
 
                 const quoteTextEl = document.createElement('span');
@@ -1993,12 +2094,17 @@
                     checkSpan.className = "text-xs font-bold";
                     checkSpan.innerText = "✅";
                     rightControls.appendChild(checkSpan);
+                } else if (isWrong) {
+                    const wrongSpan = document.createElement('span');
+                    wrongSpan.className = "text-xs font-bold";
+                    wrongSpan.innerText = "❌";
+                    rightControls.appendChild(wrongSpan);
                 }
 
                 rowWrap.appendChild(quoteTextEl);
                 rowWrap.appendChild(rightControls);
 
-                if (!isMatched) {
+                if (!isLocked) {
                     rowWrap.onclick = () => handleM5QuoteMatch(item.id);
                 }
                 colQuotes.appendChild(rowWrap);
@@ -2008,6 +2114,12 @@
         function handleM5QuoteMatch(quoteId) {
             if (!m5SelectedCharId) {
                 alert(currentLang === 'EN' ? 'Please select a Character in Column 1 first!' : 'Hãy bấm chọn 1 Nhân vật ở Cột 1 trước nhé!');
+                return;
+            }
+            if (m5MatchedIds.includes(m5SelectedCharId) || m5WrongIds.includes(m5SelectedCharId)) {
+                return;
+            }
+            if (m5MatchedIds.includes(quoteId) || m5WrongIds.includes(quoteId)) {
                 return;
             }
 
@@ -2024,18 +2136,26 @@
                 updateStatsDisplay();
                 renderM5MatchingColumns();
 
-                if (m5MatchedIds.length === stage5Quotes.length) {
+                if ((m5MatchedIds.length + m5WrongIds.length) === stage5Quotes.length) {
                     clearInterval(timerInterval);
                     setTimeout(() => showM5Part2Summary(), 500);
                 }
             } else {
                 playWrongSound();
                 ochaComfortOnly();
-                m5P2Score = Math.max(0, m5P2Score - 5);
-                score = Math.max(0, score - 5);
-                updateStatsDisplay();
+                // Đánh dấu đỏ cả nhân vật đã chọn lẫn câu thoại vừa chọn sai, khóa lại không cho trả lời lại và không tính điểm câu này
+                m5WrongIds.push(m5SelectedCharId);
+                if (!m5WrongIds.includes(quoteId)) {
+                    m5WrongIds.push(quoteId);
+                }
                 m5SelectedCharId = null;
+                updateStatsDisplay();
                 renderM5MatchingColumns();
+
+                if ((m5MatchedIds.length + m5WrongIds.length) === stage5Quotes.length) {
+                    clearInterval(timerInterval);
+                    setTimeout(() => showM5Part2Summary(), 500);
+                }
             }
         }
 
