@@ -2337,6 +2337,68 @@
             document.getElementById('badge-book-modal').classList.remove('hidden');
         }
         function closeBadgeBook() { document.getElementById('badge-book-modal').classList.add('hidden'); }
+
+// --- BỘ XỬ LÝ ÂM THANH CHUẨN (CHỐNG ĐƠ LAG, TRÒN VÀNH RÕ CHỮ) ---
+
+// 1. Hàm lõi dùng chung cho tất cả các màn
+function playJapaneseSpeech(text, rate = 0.85) {
+    if (!('speechSynthesis' in window)) return;
+    
+    // QUAN TRỌNG NHẤT: Hủy ngay luồng âm thanh cũ đang đọc dở để chống lag, đơ và chồng âm
+    window.speechSynthesis.cancel(); 
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'ja-JP';
+    
+    // CHỈNH PHÁT ÂM RÕ CHỮ:
+    utterance.rate = rate; // 0.85 để tròn chữ, 0.5 để đọc chậm
+    utterance.pitch = 1.0; // Giữ cao độ tự nhiên để không bị chóe
+    utterance.volume = 1.0; // Âm lượng tối đa
+
+    // Ép trình duyệt chọn đúng giọng nữ tiếng Nhật chuẩn (bật hơi rõ, không bị ngọng)
+    const voices = window.speechSynthesis.getVoices();
+    const jaVoice = voices.find(v => v.lang === 'ja-JP' && (v.name.includes('Google') || v.name.includes('Microsoft') || v.name.includes('Siri') || v.name.includes('Haruka')));
+    if (jaVoice) {
+        utterance.voice = jaVoice;
+    }
+
+    // Bắt đầu đọc từ mới
+    window.speechSynthesis.speak(utterance);
+}
+
+// 2. Gắn audio chuẩn vào Màn 1 & Màn 2
+function playAudioCurrent(rate) {
+    if (typeof currentKana !== 'undefined' && currentKana) {
+        // Đọc ký tự hiện tại
+        playJapaneseSpeech(currentKana.hira || currentKana.kata, rate);
+    }
+}
+
+// 3. Gắn audio chuẩn vào Màn 3 (Từ vựng)
+function playS3Audio(rate) {
+    if (typeof currentS3Item !== 'undefined' && currentS3Item) {
+        playJapaneseSpeech(currentS3Item.jp, rate);
+    }
+}
+
+// 4. Gắn audio chuẩn vào Màn 4 (Ca dao Iroha Karuta)
+function playKarutaSpeedAudio(rate) {
+    if (typeof currentM4Proverb !== 'undefined' && currentM4Proverb) {
+        playJapaneseSpeech(currentM4Proverb.proverb, rate);
+    }
+}
+
+// 5. Gắn audio chuẩn vào Màn 5 (Câu thoại Anime)
+function playM5Audio(rate) {
+    if (typeof currentM5Quote !== 'undefined' && currentM5Quote) {
+        playJapaneseSpeech(currentM5Quote.fullJp, rate);
+    }
+}
+
+// Fix thêm: Đảm bảo khi load xong trang, trình duyệt tải sẵn bộ giọng tiếng Nhật để không bị delay ở lần bấm đầu tiên
+window.speechSynthesis.onvoiceschanged = () => {
+    window.speechSynthesis.getVoices();
+};
     </script>
 </body>
 </html>
