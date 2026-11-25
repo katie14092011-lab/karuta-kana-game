@@ -295,7 +295,7 @@
                     HỌC BẢNG CHỮ KHÔNG KHÓ
                 </h2>
                 <p id="ui-menu-desc" class="text-matchaGreen text-xs sm:text-sm max-w-lg mx-auto font-medium">
-                    Vượt qua 6 màn chơi đã được xáo trộn ngẫu nhiên để sưu tập đầy đủ Huy Hiệu Tỉnh Thành!
+                    Đạt tối thiểu 80% ở mỗi màn để mở khóa màn tiếp theo và sưu tập trọn bộ Huy Hiệu Tỉnh Thành!
                 </p>
             </div>
 
@@ -336,7 +336,7 @@
                 <div id="stage-card-2" onclick="selectStage(2)" class="group bg-creamCard hover:bg-lemonCream border-2 border-matchaDark p-4 rounded-2xl cursor-pointer transition-all duration-300 shadow-sm relative overflow-hidden">
                     <div id="lock-overlay-2" class="absolute inset-0 bg-matchaDark/60 backdrop-blur-[1px] flex flex-col items-center justify-center text-white z-10">
                         <i data-lucide="lock" class="w-6 h-6 text-amber-300 mb-1"></i>
-                        <span id="lock-text-2" class="text-[10px] font-bold text-amber-200">ĐANG KHÓA</span>
+                        <span id="lock-text-2" class="text-[10px] font-bold text-amber-200">ĐANG KHÓA (CẦN ≥80% MÀN 1)</span>
                     </div>
                     <div class="flex justify-between items-start mb-2">
                         <div class="w-9 h-9 rounded-xl bg-rose-100 text-rose-800 font-jp font-bold text-lg flex items-center justify-center">が</div>
@@ -350,7 +350,7 @@
                 <div id="stage-card-3" onclick="selectStage(3)" class="group bg-creamCard hover:bg-lemonCream border-2 border-matchaDark p-4 rounded-2xl cursor-pointer transition-all duration-300 shadow-sm relative overflow-hidden">
                     <div id="lock-overlay-3" class="absolute inset-0 bg-matchaDark/60 backdrop-blur-[1px] flex flex-col items-center justify-center text-white z-10">
                         <i data-lucide="lock" class="w-6 h-6 text-amber-300 mb-1"></i>
-                        <span id="lock-text-3" class="text-[10px] font-bold text-amber-200">ĐANG KHÓA</span>
+                        <span id="lock-text-3" class="text-[10px] font-bold text-amber-200">ĐANG KHÓA (CẦN ≥80% MÀN 2)</span>
                     </div>
                     <div class="flex justify-between items-start mb-2">
                         <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-900 font-jp font-bold text-base flex items-center justify-center">きゃ</div>
@@ -364,7 +364,7 @@
                 <div id="stage-card-4" onclick="selectStage(4)" class="group bg-creamCard hover:bg-lemonCream border-2 border-matchaDark p-4 rounded-2xl cursor-pointer transition-all duration-300 shadow-sm relative overflow-hidden">
                     <div id="lock-overlay-4" class="absolute inset-0 bg-matchaDark/60 backdrop-blur-[1px] flex flex-col items-center justify-center text-white z-10">
                         <i data-lucide="lock" class="w-6 h-6 text-amber-300 mb-1"></i>
-                        <span id="lock-text-4" class="text-[10px] font-bold text-amber-200">ĐANG KHÓA</span>
+                        <span id="lock-text-4" class="text-[10px] font-bold text-amber-200">ĐANG KHÓA (CẦN ≥80% MÀN 3)</span>
                     </div>
                     <div class="flex justify-between items-start mb-2">
                         <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-900 font-jp font-bold text-lg flex items-center justify-center">猫</div>
@@ -378,7 +378,7 @@
                 <div id="stage-card-5" onclick="selectStage(5)" class="group bg-creamCard hover:bg-lemonCream border-2 border-matchaDark p-4 rounded-2xl cursor-pointer transition-all duration-300 shadow-sm relative overflow-hidden">
                     <div id="lock-overlay-5" class="absolute inset-0 bg-matchaDark/60 backdrop-blur-[1px] flex flex-col items-center justify-center text-white z-10">
                         <i data-lucide="lock" class="w-6 h-6 text-amber-300 mb-1"></i>
-                        <span id="lock-text-5" class="text-[10px] font-bold text-amber-200">ĐANG KHÓA</span>
+                        <span id="lock-text-5" class="text-[10px] font-bold text-amber-200">ĐANG KHÓA (CẦN ≥80% MÀN 4)</span>
                     </div>
                     <div class="flex justify-between items-start mb-2">
                         <div class="w-9 h-9 rounded-xl bg-lemonCream text-matchaDark font-jp font-bold text-lg flex items-center justify-center">🎴</div>
@@ -392,7 +392,7 @@
                 <div id="stage-card-6" onclick="selectStage(6)" class="group bg-creamCard hover:bg-lemonCream border-2 border-matchaDark p-4 rounded-2xl cursor-pointer transition-all duration-300 shadow-sm relative overflow-hidden">
                     <div id="lock-overlay-6" class="absolute inset-0 bg-matchaDark/60 backdrop-blur-[1px] flex flex-col items-center justify-center text-white z-10">
                         <i data-lucide="lock" class="w-6 h-6 text-amber-300 mb-1"></i>
-                        <span id="lock-text-6" class="text-[10px] font-bold text-amber-200">ĐANG KHÓA</span>
+                        <span id="lock-text-6" class="text-[10px] font-bold text-amber-200">ĐANG KHÓA (CẦN ≥80% MÀN 5)</span>
                     </div>
                     <div class="flex justify-between items-start mb-2">
                         <div class="w-9 h-9 rounded-xl bg-tatamiBase text-tatamiBorder font-jp font-bold text-lg flex items-center justify-center">🧩</div>
@@ -651,6 +651,9 @@
                     </div>
                 </div>
 
+                <!-- THÔNG BÁO TRẠNG THÁI MỞ KHÓA MÀN TIẾP THEO (YÊU CẦU >= 80%) -->
+                <div id="stage-mastery-notice" class="hidden p-3 rounded-2xl border text-left text-xs font-semibold"></div>
+
                 <div class="grid grid-cols-2 gap-2.5 text-left">
                     <div class="bg-lemonCream/40 p-3 rounded-xl border border-matchaDark">
                         <span id="res-score-lbl" class="text-[10px] text-stone-500 block uppercase font-bold">Tổng Điểm</span>
@@ -843,15 +846,14 @@
         let isTimerPaused = false;
         let isAdminSessionUnlocked = false;
         let isPraiseVoiceEnabled = true;
+        const MASTERY_THRESHOLD = 80; // Yêu cầu tối thiểu 80% câu đúng để mở khóa màn tiếp theo
 
-        // HÀM CHỐNG LỖI KÝ TỰ ĐẶC BIỆT / XSS
         function escapeHtml(str) {
             return String(str).replace(/[&<>"']/g, s => ({
                 '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
             }[s]));
         }
 
-        // TỰ ĐỘNG CUỘN MƯỢT KHI BÀN PHÍM ẢO ĐIỆN THOẠI BẬT LÊN
         function scrollInputIntoViewSafe(el) {
             if (!el) return;
             setTimeout(() => {
@@ -946,7 +948,6 @@
                 saveCurrentStudentProgress();
             }
 
-            // Đặt lại kho bốc thẻ không trùng cho phiên học của đồng học mới
             stage1Pool = [];
             stage2Pool = [];
             stage3YoonPool = [];
@@ -1092,8 +1093,8 @@
                 : `🍃 Chào đồng học ${displayName}! Chúc bạn học bảng chữ thật vui!`;
             document.getElementById('ui-menu-title').innerText = isEn ? 'LEARN KANA EASILY' : 'HỌC BẢNG CHỮ KHÔNG KHÓ';
             document.getElementById('ui-menu-desc').innerText = isEn
-                ? 'Conquer all 6 shuffled stages to collect every Japan Province Badge!'
-                : 'Vượt qua 6 màn chơi đã được xáo trộn ngẫu nhiên để sưu tập đầy đủ Huy Hiệu Tỉnh Thành!';
+                ? 'Score at least 80% on each stage to unlock the next and collect all Province Badges!'
+                : 'Đạt tối thiểu 80% ở mỗi màn để mở khóa màn tiếp theo và sưu tập trọn bộ Huy Hiệu Tỉnh Thành!';
             document.getElementById('ui-mode-label').innerText = isEn ? 'Stage 1, 2 & 3 Mode:' : 'Chế độ Màn 1, 2 & 3:';
             document.getElementById('ui-timer-label').innerText = isEn ? 'Countdown Timer:' : 'Thời gian đếm ngược:';
 
@@ -1107,7 +1108,11 @@
                 } else {
                     document.getElementById(`st${i}-badge`).innerText = isEn ? `STAGE ${i}` : `MÀN ${i}`;
                 }
-                if (i >= 2) document.getElementById(`lock-text-${i}`).innerText = isEn ? 'LOCKED' : 'ĐANG KHÓA';
+                if (i >= 2) {
+                    document.getElementById(`lock-text-${i}`).innerText = isEn
+                        ? `LOCKED (NEED ≥80% STAGE ${i - 1})`
+                        : `ĐANG KHÓA (CẦN ≥80% MÀN ${i - 1})`;
+                }
             }
 
             document.getElementById('st1-title').innerText = isEn ? 'Single Kana (All 46 Chars)' : 'Đơn Ký Tự Kana (46 Chữ)';
@@ -1123,7 +1128,6 @@
             document.getElementById('st6-title').innerText = isEn ? 'Fill Hole & Anime Quotes (20 Pool)' : 'Đục Lỗ & Nối Thoại Anime';
             document.getElementById('st6-desc').innerText = isEn ? 'Draws 8 random iconic quotes from a 20-quote Anime pool.' : 'Bốc ngẫu nhiên 8 câu từ kho 20 câu thoại Anime kinh điển.';
 
-            // Kana Chart modal labels
             document.getElementById('kana-chart-title').innerText = isEn ? '📖 Japanese Kana Chart (Tap any character to listen)' : '📖 Bảng Chữ Cái Tiếng Nhật (Bấm vào chữ để nghe)';
             document.getElementById('kana-chart-sub').innerText = isEn ? 'Practice standard pronunciation before entering the stages!' : 'Luyện nghe phát âm chuẩn trước khi bước vào các màn thi đấu!';
             document.getElementById('chart-tab-basic').innerText = isEn ? '46 Basic Kana' : '46 Chữ Cơ Bản';
@@ -1193,8 +1197,8 @@
             document.getElementById('m5-p2-correct-lbl').innerText = isEn ? 'Matched Pairs' : 'Số Cặp Đúng';
             document.getElementById('m5-finish-all-btn').innerText = isEn ? 'View Leaderboard & Claim Badge 🏆' : 'Xem Bảng Xếp Hạng & Nhận Huy Hiệu 🏆';
 
-            document.getElementById('result-title').innerText = isEn ? `EXCELLENT JOB, ${displayName.toUpperCase()}!` : `HOÀN THÀNH XUẤT SẮC, ${displayName.toUpperCase()}!`;
-            document.getElementById('result-subtitle').innerText = isEn ? 'Ocha-chan is so proud of you!' : 'Ocha-chan rất tự hào về đồng học!';
+            document.getElementById('result-title').innerText = isEn ? `STAGE SUMMARY, ${displayName.toUpperCase()}!` : `TỔNG KẾT MÀN CHƠI, ${displayName.toUpperCase()}!`;
+            document.getElementById('result-subtitle').innerText = isEn ? 'Ocha-chan is cheering for your progress!' : 'Ocha-chan luôn đồng hành cùng đồng học!';
             document.getElementById('res-badge-unlock-lbl').innerText = isEn ? '🎉 PROVINCE BADGE UNLOCKED!' : '🎉 MỞ KHÓA HUY HIỆU TỈNH THÀNH!';
             document.getElementById('ui-footer-text').innerText = isEn ? 'Ochakana • Learning Kana is easy • Matcha Green Calligraphy Style' : 'Ochakana • Học bảng chữ không khó • Style Thư Pháp Matcha Green';
 
@@ -1460,12 +1464,12 @@
             { proverb: "ねんにはねんをいれよ", head: "ね", vi: "Cẩn tắc vô áy náy", en: "Make assurance doubly sure" },
             { proverb: "なきっつらにはち", head: "な", vi: "Họa vô đơn chí (Mặt đang khóc lại bị ong đốt)", en: "A bee stings a crying face (Misfortunes never come singly)" },
             { proverb: "らくあればくあり", head: "ら", vi: "Sướng trước khổ sau / Hết vui tới buồn", en: "Where there is pleasure, there is pain" },
-            { proverb: "むり が とおれば どうり ひっこむ", head: "む", vi: "Kẻ mạnh lấn át lẽ phải", en: "Where force prevails, reason retreats" },
+            { proverb: "むりがとおればどうりひっこむ", head: "む", vi: "Kẻ mạnh lấn át lẽ phải", en: "Where force prevails, reason retreats" },
             { proverb: "うそからでたまこと", head: "う", vi: "Lời nói đùa hóa sự thật", en: "Truth emerging from a falsehood" },
             { proverb: "おににかなぼう", head: "お", vi: "Hổ mọc thêm cánh (Quỷ cầm chùy sắt)", en: "Giving an iron club to an oni (Invincible)" }
         ];
 
-        /* KHO DỮ LIỆU MỞ RỘNG MÀN 6: 20 CÂU THOẠI & NHÂN VẬT ANIME */
+        /* KHO DỮ LIỆU MỞ RỘNG MÀN 6: 20 CÂU THOẠI & NHÂN VẬT ANIME (CÓ CHUỖI TTS CHUẨN) */
         const stage5Quotes = [
             {
                 id: 'doraemon',
@@ -1473,6 +1477,7 @@
                 avatar: '🤖',
                 avatarBg: 'bg-sky-100 border-sky-400 text-sky-900',
                 fullJp: 'タケコプターだよ、のび太くん',
+                ttsJp: 'タケコプターだよ、のび太くん！',
                 maskedJp: '＿＿＿＿＿ だよ、のび太くん',
                 maskedRomaji: '[ _______ ] dayo, Nobita-kun',
                 missingWord: 'takekoputa',
@@ -1486,6 +1491,7 @@
                 avatar: '🕵️‍♂️',
                 avatarBg: 'bg-blue-100 border-blue-500 text-blue-900',
                 fullJp: 'しんじつはいつもひとつ',
+                ttsJp: '真実はいつもひとつ！',
                 maskedJp: '＿＿＿＿ は いつも ひとつ',
                 maskedRomaji: '[ _______ ] wa itsumo hitotsu',
                 missingWord: 'shinjitsu',
@@ -1499,6 +1505,7 @@
                 avatar: '⚡',
                 avatarBg: 'bg-amber-100 border-amber-500 text-amber-900',
                 fullJp: 'ピカチュウ、きみにきめた',
+                ttsJp: 'ピカチュウ、君に決めた！',
                 maskedJp: '＿＿＿＿＿、きみにきめた',
                 maskedRomaji: '[ _______ ], kimi ni kimeta!',
                 missingWord: 'pikachu',
@@ -1512,6 +1519,7 @@
                 avatar: '🧥',
                 avatarBg: 'bg-stone-200 border-stone-500 text-stone-900',
                 fullJp: 'じぶんをかえなければせかいはかえられない',
+                ttsJp: '自分を変えなければ、世界は変えられない。',
                 maskedJp: 'じぶんをかえなければ ＿＿＿ はかえられない',
                 maskedRomaji: 'Jibun wo kaenakereba [ _____ ] wa kaerarenai',
                 missingWord: 'sekai',
@@ -1525,6 +1533,7 @@
                 avatar: '👓',
                 avatarBg: 'bg-yellow-100 border-yellow-500 text-yellow-900',
                 fullJp: 'ドラえもん、どうぐをかしてよ',
+                ttsJp: 'ドラえもん、道具を貸してよ！',
                 maskedJp: 'ドラえもん、＿＿＿ をかしてよ',
                 maskedRomaji: 'Doraemon, [ _____ ] wo kashite yo!',
                 missingWord: 'dougu',
@@ -1538,6 +1547,7 @@
                 avatar: '🌿',
                 avatarBg: 'bg-emerald-100 border-emerald-500 text-emerald-900',
                 fullJp: 'そこへつれていくよ、あおいをわすれないで',
+                ttsJp: 'そこへ連れていくよ、青いものを忘れないで。',
                 maskedJp: 'そこへつれていくよ、＿＿＿ をわすれないで',
                 maskedRomaji: 'Soko e tsurete iku yo, [ ______ ] wo wasurenaide',
                 missingWord: 'aoi',
@@ -1551,6 +1561,7 @@
                 avatar: '😊',
                 avatarBg: 'bg-rose-100 border-rose-500 text-rose-900',
                 fullJp: 'おんなのこのいちばんのメイクはえがおだよ',
+                ttsJp: '女の子の一番のメイクは、笑顔だよ。',
                 maskedJp: 'おんなのこのいちばんのメイクは ＿＿＿ だよ',
                 maskedRomaji: 'Onnanoko no ichiban no meiku wa [ _____ ] dayo',
                 missingWord: 'egao',
@@ -1564,6 +1575,7 @@
                 avatar: '🏀',
                 avatarBg: 'bg-orange-100 border-orange-500 text-orange-900',
                 fullJp: 'あきらめたらそこでしあいしゅうりょうですよ',
+                ttsJp: 'あきらめたら、そこで試合終了ですよ。',
                 maskedJp: 'あきらめたらそこで ＿＿＿ しゅうりょうですよ',
                 maskedRomaji: 'Akirametara soko de [ _____ ] shuuryou desu yo',
                 missingWord: 'shiai',
@@ -1577,6 +1589,7 @@
                 avatar: '👒',
                 avatarBg: 'bg-red-100 border-red-500 text-red-900',
                 fullJp: 'かいぞくおうにおれはなる',
+                ttsJp: '海賊王に、俺はなる！',
                 maskedJp: '＿＿＿＿＿ に おれは なる',
                 maskedRomaji: '[ __________ ] ni ore wa naru!',
                 missingWord: 'kaizokuou',
@@ -1590,6 +1603,7 @@
                 avatar: '🍥',
                 avatarBg: 'bg-orange-100 border-orange-500 text-orange-900',
                 fullJp: 'じぶんのことばはまっすぐまげねえ',
+                ttsJp: '自分の言葉は、まっすぐ曲げねえ！',
                 maskedJp: 'じぶんの ＿＿＿ は まっすぐ まげねえ',
                 maskedRomaji: 'Jibun no [ ______ ] wa massugu magenee!',
                 missingWord: 'kotoba',
@@ -1603,6 +1617,7 @@
                 avatar: '🌊',
                 avatarBg: 'bg-teal-100 border-teal-500 text-teal-900',
                 fullJp: 'がんばれ、ひとはこころがげんどうりょくだ',
+                ttsJp: '頑張れ、人は心が原動力だ！',
                 maskedJp: 'がんばれ、ひとは ＿＿＿ が げんどうりょくだ',
                 maskedRomaji: 'Ganbare, hito wa [ ______ ] ga gendouryoku da!',
                 missingWord: 'kokoro',
@@ -1616,6 +1631,7 @@
                 avatar: '🐉',
                 avatarBg: 'bg-amber-100 border-amber-500 text-amber-900',
                 fullJp: 'オラわくわくすっぞ',
+                ttsJp: 'オラ、わくわくすっぞ！',
                 maskedJp: 'オラ ＿＿＿＿ すっぞ',
                 maskedRomaji: 'Ora [ ________ ] suzzo!',
                 missingWord: 'wakuwaku',
@@ -1629,6 +1645,7 @@
                 avatar: '🌙',
                 avatarBg: 'bg-pink-100 border-pink-400 text-pink-900',
                 fullJp: 'つきにかわっておしおきよ',
+                ttsJp: '月に代わってお仕置きよ！',
                 maskedJp: '＿＿ に かわって おしおきよ',
                 maskedRomaji: '[ _____ ] ni kawatte oshioki yo!',
                 missingWord: 'tsuki',
@@ -1642,6 +1659,7 @@
                 avatar: '💪',
                 avatarBg: 'bg-yellow-100 border-yellow-600 text-yellow-900',
                 fullJp: 'もうだいじょうぶ、わたしがきた',
+                ttsJp: 'もう大丈夫、私が来た！',
                 maskedJp: 'もう ＿＿＿＿＿＿、わたしが きた',
                 maskedRomaji: 'Mou [ __________ ], watashi ga kita!',
                 missingWord: 'daijoubu',
@@ -1655,6 +1673,7 @@
                 avatar: '🕶️',
                 avatarBg: 'bg-indigo-100 border-indigo-500 text-indigo-900',
                 fullJp: 'だいじょうぶ、ぼくさいきょうだから',
+                ttsJp: '大丈夫、僕最強だから。',
                 maskedJp: 'だいじょうぶ、ぼく ＿＿＿＿＿ だから',
                 maskedRomaji: 'Daijoubu, boku [ ________ ] dakara.',
                 missingWord: 'saikyou',
@@ -1668,6 +1687,7 @@
                 avatar: '🥜',
                 avatarBg: 'bg-rose-100 border-rose-400 text-rose-900',
                 fullJp: 'アーニャ、ピーナッツがすき',
+                ttsJp: 'アーニャ、ピーナッツが好き！',
                 maskedJp: 'アーニャ、＿＿＿＿＿ が すき',
                 maskedRomaji: 'Anya, [ ________ ] ga suki!',
                 missingWord: 'piinattsu',
@@ -1681,6 +1701,7 @@
                 avatar: '🌱',
                 avatarBg: 'bg-emerald-100 border-emerald-500 text-emerald-900',
                 fullJp: 'ゆめだけど、ゆめじゃなかった',
+                ttsJp: '夢だけど、夢じゃなかった！',
                 maskedJp: '＿＿ だけど、ゆめじゃなかった',
                 maskedRomaji: '[ ____ ] dakedo, yume ja nakatta!',
                 missingWord: 'yume',
@@ -1694,6 +1715,7 @@
                 avatar: '⚔️',
                 avatarBg: 'bg-slate-200 border-slate-500 text-slate-900',
                 fullJp: 'くいのないほうをじぶんでえらべ',
+                ttsJp: '悔いのない方を自分で選べ。',
                 maskedJp: 'くいのないほうを ＿＿＿ で えらべ',
                 maskedRomaji: 'Kui no nai hou wo [ _____ ] de erabe.',
                 missingWord: 'jibun',
@@ -1707,6 +1729,7 @@
                 avatar: '🏐',
                 avatarBg: 'bg-orange-100 border-orange-500 text-orange-900',
                 fullJp: 'まだまけてないよ',
+                ttsJp: 'まだ負けてないよ！',
                 maskedJp: 'まだ ＿＿＿＿ ないよ',
                 maskedRomaji: 'Mada [ ______ ] nai yo!',
                 missingWord: 'makete',
@@ -1720,6 +1743,7 @@
                 avatar: '🧹',
                 avatarBg: 'bg-purple-100 border-purple-500 text-purple-900',
                 fullJp: 'おちこんだりもしたけれど、わたしはげんきです',
+                ttsJp: '落ち込んだりもしたけれど、私は元気です。',
                 maskedJp: 'おちこんだりもしたけれど、わたしは ＿＿＿ です',
                 maskedRomaji: 'Ochikondari mo shita keredo, watashi wa [ _____ ] desu.',
                 missingWord: 'genki',
@@ -1802,7 +1826,9 @@
 
         function selectStage(stageNum) {
             if (!isStageAccessible(stageNum)) {
-                alert(currentLang === 'EN' ? `🔒 Stage ${stageNum} is locked!` : `🔒 Màn ${stageNum} đang bị khóa!`);
+                alert(currentLang === 'EN'
+                    ? `🔒 Stage ${stageNum} is locked! Achieve at least ${MASTERY_THRESHOLD}% in Stage ${stageNum - 1} to unlock it.`
+                    : `🔒 Màn ${stageNum} đang bị khóa! Hãy đạt tối thiểu ${MASTERY_THRESHOLD}% câu đúng ở Màn ${stageNum - 1} để mở khóa nhé!`);
                 return;
             }
 
@@ -1814,8 +1840,8 @@
             if (stageNum === 1) {
                 showIntroModal(isEn ? "🌸 Stage 1: Single Kana (46 Characters)" : "🌸 Màn 1: Đơn Ký Tự Kana (46 Chữ)", 
                     isEn 
-                    ? `<p><b>• Hiragana:</b> Used for native Japanese words.</p><p><b>• Katakana:</b> Used for foreign loanwords.</p><p><b>• Full Deck Shuffle:</b> Each round draws 10 random cards from all 46 characters without repeating until you finish the entire alphabet!</p>`
-                    : `<p><b>• Hiragana:</b> Dùng viết từ thuần Nhật.</p><p><b>• Katakana:</b> Dùng phiên âm từ nước ngoài.</p><p><b>• Xáo trộn toàn bảng:</b> Mỗi lượt bốc ngẫu nhiên 10 thẻ từ đủ 46 chữ cái và không lặp lại cho tới khi đi hết toàn bộ bảng chữ!</p>`);
+                    ? `<p><b>• Hiragana:</b> Used for native Japanese words.</p><p><b>• Katakana:</b> Used for foreign loanwords.</p><p><b>• Mastery Rule:</b> Achieve at least <b>${MASTERY_THRESHOLD}%</b> (8/10) to unlock Stage 2!</p>`
+                    : `<p><b>• Hiragana:</b> Dùng viết từ thuần Nhật.</p><p><b>• Katakana:</b> Dùng phiên âm từ nước ngoài.</p><p><b>• Điều kiện qua màn:</b> Đạt tối thiểu <b>${MASTERY_THRESHOLD}%</b> (8/10 câu đúng) để mở khóa Màn 2!</p>`);
             } else if (stageNum === 2) {
                 showIntroModal(isEn ? "🌸 Stage 2: Ten-ten ( ゛ ) & Maru ( ゜ )" : "🌸 Màn 2: Ten-ten ( ゛ ) và Maru ( ゜ )", 
                     isEn
@@ -1859,8 +1885,8 @@
             const isEn = (currentLang === 'EN');
             const name = currentStudentName || (isEn ? 'Learner' : 'Đồng học');
             document.getElementById('kimono-dialogue').innerText = isEn
-                ? `"Let's do our best, ${name}! Ocha-chan is cheering for you!"`
-                : `"Cùng cố gắng hoàn thành thật xuất sắc nhé đồng học ${name}!"`;
+                ? `"Let's do our best, ${name}! Achieve ${MASTERY_THRESHOLD}%+ to unlock the next stage!"`
+                : `"Cùng cố gắng đạt từ ${MASTERY_THRESHOLD}% trở lên để mở khóa màn tiếp theo nhé đồng học ${name}!"`;
 
             isTimerPaused = false;
 
@@ -1986,6 +2012,7 @@
             selectedCard = card;
             card.flipped = true;
             renderCards();
+            // Đọc đúng 1 lần gọn khi bấm thẻ
             playJapaneseSpeech(card.char, 0.85);
             setTimeout(() => openAnswerModal(card), 280);
         }
@@ -2222,7 +2249,7 @@
             loadStage3Question();
         }
 
-        /* MÀN 5: IROHA KARUTA THẬT SỰ (BỐC NGẪU NHIÊN 10 THẺ TỪ KHO 25 CÂU TỤC NGỮ) */
+        /* MÀN 5: IROHA KARUTA THẬT SỰ */
         function startKarutaArena() {
             document.getElementById('screen-karuta-speed').classList.remove('hidden');
             document.getElementById('game-stats').classList.remove('hidden');
@@ -2424,7 +2451,7 @@
             document.getElementById('m5-feedback-box').classList.add('hidden');
             document.getElementById('m5-form').classList.remove('hidden');
 
-            playJapaneseSpeech(q.fullJp, 0.85);
+            playJapaneseSpeech(q.ttsJp || q.fullJp, 0.85);
             scrollInputIntoViewSafe(document.getElementById('fill-input'));
         }
 
@@ -2568,7 +2595,7 @@
                 audioBtn.innerText = "🔊";
                 audioBtn.onclick = (ev) => {
                     ev.stopPropagation();
-                    playJapaneseSpeech(item.fullJp, 0.85);
+                    playJapaneseSpeech(item.ttsJp || item.fullJp, 0.85);
                 };
 
                 const slowBtn = document.createElement('button');
@@ -2578,7 +2605,7 @@
                 slowBtn.innerText = "🐢";
                 slowBtn.onclick = (ev) => {
                     ev.stopPropagation();
-                    playJapaneseSpeech(item.fullJp, 0.5);
+                    playJapaneseSpeech(item.ttsJp || item.fullJp, 0.5);
                 };
 
                 rightControls.appendChild(audioBtn);
@@ -2674,26 +2701,26 @@
                     title: isEn ? 'Tea Ceremony Master' : 'Bậc Thầy Trà Đạo',
                     comment: isEn ? 'Outstanding accuracy! Ocha-chan admires you!' : 'Độ chính xác tuyệt đối, Ocha-chan ngưỡng mộ bạn!'
                 };
-            } else if (accPercent >= 75) {
+            } else if (accPercent >= 80) {
                 return {
                     grade: 'A',
                     badgeClass: 'bg-emerald-800 text-emerald-100 border-emerald-300',
                     title: isEn ? 'Karuta Artisan' : 'Nghệ Nhân Karuta',
-                    comment: isEn ? 'Great reflexes and solid Japanese memory!' : 'Phản xạ nhạy bén và ghi nhớ tiếng Nhật rất vững!'
+                    comment: isEn ? 'Stage Mastered! Great reflexes and solid Japanese memory!' : 'Đã Master màn chơi! Phản xạ nhạy bén và ghi nhớ rất vững!'
                 };
             } else if (accPercent >= 50) {
                 return {
                     grade: 'B',
                     badgeClass: 'bg-amber-700 text-amber-100 border-amber-300',
                     title: isEn ? 'Diligent Apprentice' : 'Học Trò Chăm Chỉ',
-                    comment: isEn ? 'Good effort! Practice a bit more to reach Rank S!' : 'Nỗ lực rất tốt! Luyện thêm một chút nữa để chạm hạng S nhé!'
+                    comment: isEn ? 'Good effort! Reach 80% to unlock the next stage!' : 'Nỗ lực tốt! Hãy đạt từ 80% trở lên để mở khóa màn tiếp theo nhé!'
                 };
             } else {
                 return {
                     grade: 'C',
                     badgeClass: 'bg-stone-700 text-stone-100 border-stone-400',
                     title: isEn ? 'Ochakana Rookie' : 'Tân Binh Ochakana',
-                    comment: isEn ? 'Keep going! Listen carefully to Ocha-chan and try again!' : 'Đừng nản lòng nhé! Lắng nghe Ocha-chan đọc và thử lại nào!'
+                    comment: isEn ? 'Keep going! Reach 80% to unlock the next stage!' : 'Đừng nản lòng nhé! Luyện thêm để đạt 80% và mở màn tiếp theo!'
                 };
             }
         }
@@ -2784,9 +2811,19 @@
 
             saveAndRenderLeaderboard(currentStage, finalCleanScore, correctCount, totalQuestionsInStage, rankInfo.grade);
 
-            if (isWin) {
+            // ÉP ĐIỀU KIỆN MASTER: Đạt tối thiểu 80% câu đúng mới mở khóa màn tiếp theo & nhận huy hiệu
+            const isMastered = (accPercent >= MASTERY_THRESHOLD);
+            const masteryNoticeEl = document.getElementById('stage-mastery-notice');
+            masteryNoticeEl.classList.remove('hidden');
+
+            if (isMastered) {
                 confetti({ particleCount: 90, spread: 80 });
                 playClapSound();
+
+                masteryNoticeEl.className = "p-3 rounded-2xl border bg-emerald-50 border-emerald-400 text-emerald-950 text-left text-xs font-semibold";
+                masteryNoticeEl.innerText = isEn
+                    ? `🏆 MASTERED (${accPercent}% ≥ ${MASTERY_THRESHOLD}%)! ${currentStage < 6 ? `Stage ${currentStage + 1} is now unlocked!` : 'You have mastered all 6 stages!'}`
+                    : `🏆 ĐÃ MASTER MÀN ${currentStage} (${accPercent}% ≥ ${MASTERY_THRESHOLD}%)! ${currentStage < 6 ? `Màn ${currentStage + 1} đã được mở khóa!` : 'Đồng học đã chinh phục trọn vẹn cả 6 màn chơi!'}`;
 
                 const badge = provinceBadges[(currentStage - 1) % provinceBadges.length];
                 if (!unlockedBadges.includes(badge.id)) {
@@ -2807,6 +2844,10 @@
                 saveCurrentStudentProgress();
             } else {
                 document.getElementById('badge-reward-box').classList.add('hidden');
+                masteryNoticeEl.className = "p-3 rounded-2xl border bg-amber-50 border-amber-400 text-amber-950 text-left text-xs font-semibold";
+                masteryNoticeEl.innerText = isEn
+                    ? `🔒 Not Mastered Yet (${accPercent}% < ${MASTERY_THRESHOLD}%). Score at least ${MASTERY_THRESHOLD}% to unlock Stage ${Math.min(6, currentStage + 1)} and earn the Province Badge!`
+                    : `🔒 Chưa đạt mức Master (${accPercent}% < ${MASTERY_THRESHOLD}%). Hãy đạt tối thiểu ${MASTERY_THRESHOLD}% câu đúng để mở khóa Màn ${Math.min(6, currentStage + 1)} và nhận Huy Hiệu Tỉnh Thành nhé!`;
             }
         }
 
@@ -2897,7 +2938,7 @@
                     <div class="p-3 rounded-2xl border text-center ${isUnlocked ? 'bg-lemonCream border-matchaDark' : 'bg-stone-200 border-stone-400 opacity-60'}">
                         <div class="text-3xl mb-1">${isUnlocked ? b.icon : '🔒'}</div>
                         <h4 class="font-bold text-xs text-matchaDark">${isEn ? b.nameEn : b.nameVi}</h4>
-                        <p class="text-[10px] text-stone-600">${isUnlocked ? (isEn ? b.descEn : b.descVi) : (isEn ? 'Complete stage to unlock' : 'Hoàn thành màn để mở khóa')}</p>
+                        <p class="text-[10px] text-stone-600">${isUnlocked ? (isEn ? b.descEn : b.descVi) : (isEn ? 'Master stage (≥80%) to unlock' : 'Master màn (≥80%) để mở khóa')}</p>
                     </div>
                 `;
             }).join('');
@@ -2905,7 +2946,7 @@
         }
         function closeBadgeBook() { document.getElementById('badge-book-modal').classList.add('hidden'); }
 
-        // --- BỘ XỬ LÝ ÂM THANH CHUẨN XÁC ---
+        // --- BỘ XỬ LÝ ÂM THANH CHUẨN XÁC (ĐỌC GỌN 1 TIẾNG, KHÔNG LẶP) ---
         let cachedJaVoice = null;
 
         function resolveJapaneseVoice() {
@@ -2944,98 +2985,41 @@
             setTimeout(checkJapaneseVoiceAvailability, 500);
         }
 
-        const singleKanaSpeechMap = {
-            'ぱ': { speech: 'ぱー、ぱ', pitch: 1.06, rateScale: 0.88 },
-            'パ': { speech: 'ぱー、ぱ', pitch: 1.06, rateScale: 0.88 },
-            'ぴ': { speech: 'ぴー、ぴ', pitch: 1.08, rateScale: 0.85 },
-            'ピ': { speech: 'ぴー、ぴ', pitch: 1.08, rateScale: 0.85 },
-            'ぷ': { speech: 'ぷー、ぷ', pitch: 1.06, rateScale: 0.88 },
-            'プ': { speech: 'ぷー、ぷ', pitch: 1.06, rateScale: 0.88 },
-            'ぺ': { speech: 'ぺー、ぺ', pitch: 1.06, rateScale: 0.88 },
-            'ペ': { speech: 'ぺー、ぺ', pitch: 1.06, rateScale: 0.88 },
-            'ぽ': { speech: 'ぽー、ぽ', pitch: 1.06, rateScale: 0.88 },
-            'ポ': { speech: 'ぽー、ぽ', pitch: 1.06, rateScale: 0.88 },
-            'が': { speech: 'がー、が', pitch: 0.98, rateScale: 0.88 },
-            'ガ': { speech: 'がー、が', pitch: 0.98, rateScale: 0.88 },
-            'ぎ': { speech: 'ぎー、ぎ', pitch: 0.98, rateScale: 0.88 },
-            'ギ': { speech: 'ぎー、ぎ', pitch: 0.98, rateScale: 0.88 },
-            'ぐ': { speech: 'ぐー、ぐ', pitch: 0.98, rateScale: 0.86 },
-            'グ': { speech: 'ぐー、ぐ', pitch: 0.98, rateScale: 0.86 },
-            'げ': { speech: 'げー、げ', pitch: 0.98, rateScale: 0.88 },
-            'ゲ': { speech: 'げー、げ', pitch: 0.98, rateScale: 0.88 },
-            'ご': { speech: 'ごー、ご', pitch: 0.98, rateScale: 0.88 },
-            'ゴ': { speech: 'ごー、ご', pitch: 0.98, rateScale: 0.88 },
-            'ば': { speech: 'ばー、ば', pitch: 0.96, rateScale: 0.88 },
-            'バ': { speech: 'ばー、ば', pitch: 0.96, rateScale: 0.88 },
-            'び': { speech: 'びー、び', pitch: 0.96, rateScale: 0.88 },
-            'ビ': { speech: 'びー、び', pitch: 0.96, rateScale: 0.88 },
-            'ぶ': { speech: 'ぶー、ぶ', pitch: 0.96, rateScale: 0.88 },
-            'ブ': { speech: 'ぶー、ぶ', pitch: 0.96, rateScale: 0.88 },
-            'べ': { speech: 'べー、べ', pitch: 0.96, rateScale: 0.88 },
-            'ベ': { speech: 'べー、べ', pitch: 0.96, rateScale: 0.88 },
-            'ぼ': { speech: 'ぼー、ぼ', pitch: 0.96, rateScale: 0.88 },
-            'ボ': { speech: 'ぼー、ぼ', pitch: 0.96, rateScale: 0.88 },
-            'ち': { speech: 'ちー、ち', pitch: 1.05, rateScale: 0.85 },
-            'チ': { speech: 'ちー、ち', pitch: 1.05, rateScale: 0.85 },
-            'じ': { speech: 'じー、じ', pitch: 0.97, rateScale: 0.85 },
-            'ジ': { speech: 'じー、じ', pitch: 0.97, rateScale: 0.85 },
-            'ぢ': { speech: 'じー、じ', pitch: 0.97, rateScale: 0.85 },
-            'ヂ': { speech: 'じー、じ', pitch: 0.97, rateScale: 0.85 },
-            'む': { speech: 'むー、む', pitch: 1.02, rateScale: 0.85 },
-            'ム': { speech: 'むー、む', pitch: 1.02, rateScale: 0.85 },
-            'や': { speech: 'やー、や', pitch: 1.03, rateScale: 0.85 },
-            'ヤ': { speech: 'やー、や', pitch: 1.03, rateScale: 0.85 },
-            'ゆ': { speech: 'ゆー、ゆ', pitch: 1.03, rateScale: 0.85 },
-            'ユ': { speech: 'ゆー、ゆ', pitch: 1.03, rateScale: 0.85 },
-            'よ': { speech: 'よー、よ', pitch: 1.03, rateScale: 0.85 },
-            'ヨ': { speech: 'よー、よ', pitch: 1.03, rateScale: 0.85 },
-            'ら': { speech: 'らー、ら', pitch: 1.03, rateScale: 0.85 },
-            'ラ': { speech: 'らー、ら', pitch: 1.03, rateScale: 0.85 },
-            'り': { speech: 'りー、り', pitch: 1.03, rateScale: 0.85 },
-            'リ': { speech: 'りー、り', pitch: 1.03, rateScale: 0.85 },
-            'る': { speech: 'るー、る', pitch: 1.03, rateScale: 0.85 },
-            'ル': { speech: 'るー、る', pitch: 1.03, rateScale: 0.85 },
-            'れ': { speech: 'れー、れ', pitch: 1.03, rateScale: 0.85 },
-            'レ': { speech: 'れー、れ', pitch: 1.03, rateScale: 0.85 },
-            'ろ': { speech: 'ろー、ろ', pitch: 1.03, rateScale: 0.85 },
-            'ロ': { speech: 'ろー、ろ', pitch: 1.03, rateScale: 0.85 },
-            'わ': { speech: 'わー、わ', pitch: 1.03, rateScale: 0.85 },
-            'ワ': { speech: 'わー、わ', pitch: 1.03, rateScale: 0.85 },
-            'き': { speech: 'きー、き', pitch: 1.03, rateScale: 0.88 },
-            'キ': { speech: 'きー、き', pitch: 1.03, rateScale: 0.88 },
-            'つ': { speech: 'つー、つ', pitch: 1.03, rateScale: 0.88 },
-            'ツ': { speech: 'つー、つ', pitch: 1.03, rateScale: 0.88 },
-            'ひ': { speech: 'ひー、ひ', pitch: 1.03, rateScale: 0.88 },
-            'ヒ': { speech: 'ひー、ひ', pitch: 1.03, rateScale: 0.88 },
-            'ふ': { speech: 'ふー、ふ', pitch: 1.03, rateScale: 0.88 },
-            'フ': { speech: 'ふー、ふ', pitch: 1.03, rateScale: 0.88 },
-            'を': { speech: 'おー、お', pitch: 1.02, rateScale: 0.88 },
-            'ヲ': { speech: 'おー、お', pitch: 1.02, rateScale: 0.88 },
-            'ん': { speech: 'んー', pitch: 1.0, rateScale: 0.85 },
-            'ン': { speech: 'んー', pitch: 1.0, rateScale: 0.85 },
-            'ぴゃ': { speech: 'ぴゃー、ぴゃ', pitch: 1.07, rateScale: 0.85 },
-            'ピャ': { speech: 'ぴゃー、ぴゃ', pitch: 1.07, rateScale: 0.85 },
-            'ぴゅ': { speech: 'ぴゅー、ぴゅ', pitch: 1.07, rateScale: 0.85 },
-            'ピュ': { speech: 'ぴゅー、ぴゅ', pitch: 1.07, rateScale: 0.85 },
-            'ぴょ': { speech: 'ぴょー、ぴょ', pitch: 1.07, rateScale: 0.85 },
-            'ピョ': { speech: 'ぴょー、ぴょ', pitch: 1.07, rateScale: 0.85 },
-            'ぎゃ': { speech: 'ぎゃー、ぎゃ', pitch: 0.98, rateScale: 0.85 },
-            'ギャ': { speech: 'ぎゃー、ぎゃ', pitch: 0.98, rateScale: 0.85 },
-            'ぎゅ': { speech: 'ぎゅー、ぎゅ', pitch: 0.98, rateScale: 0.85 },
-            'ギュ': { speech: 'ぎゅー、ぎゅ', pitch: 0.98, rateScale: 0.85 },
-            'ぎょ': { speech: 'ぎょー、ぎょ', pitch: 0.98, rateScale: 0.85 },
-            'ギョ': { speech: 'ぎょー、ぎょ', pitch: 0.98, rateScale: 0.85 }
-        };
-
-        const phraseSpeechOverrides = {
-            'ドラえもん、どうぐをかしてよ': 'ドラえもん、どう・ぐを、かしてよ！',
-            'タケコプターだよ、のび太くん': 'タケコプターだよ、のびたくん！',
-            'しんじつはいつもひとつ': 'しんじつは、いつも、ひとつ！',
-            'ピカチュウ、きみにきめた': 'ピカチュウ、きみに、きめた！',
-            'じぶんをかえなければせかいはかえられない': 'じぶんを、かえなければ、せかいは、かえられない',
-            'そこへつれていくよ、あおいをわすれないで': 'そこへ、つれていくよ、あおいを、わすれないで',
-            'おんなのこのいちばんのメイクはえがおだよ': 'おんなのこの、いちばんのメイクは、えがおだよ',
-            'あきらめたらそこでしあいしゅうりょうですよ': 'あきらめたら、そこで、しあい、しゅうりょうですよ'
+        // Chuẩn hóa âm đơn dễ bị bộ đọc TTS nuốt phụ âm đầu (đọc gọn 1 tiếng, không lặp)
+        const cleanSingleKanaMap = {
+            'り': 'りっ', 'リ': 'りっ',
+            'ら': 'らっ', 'ラ': 'らっ',
+            'る': 'るっ', 'ル': 'るっ',
+            'れ': 'れっ', 'レ': 'れっ',
+            'ろ': 'ろっ', 'ロ': 'ろっ',
+            'だ': 'だっ', 'ダ': 'だっ',
+            'で': 'でっ', 'デ': 'でっ',
+            'ど': 'どっ', 'ド': 'どっ',
+            'ぢ': 'じっ', 'ヂ': 'じっ',
+            'づ': 'ずっ', 'ヅ': 'ずっ',
+            'ず': 'ずっ', 'ズ': 'ずっ',
+            'が': 'がっ', 'ガ': 'がっ',
+            'ぎ': 'ぎっ', 'ギ': 'ぎっ',
+            'ぐ': 'ぐっ', 'グ': 'ぐっ',
+            'げ': 'げっ', 'ゲ': 'げっ',
+            'ご': 'ごっ', 'ゴ': 'ごっ',
+            'ぱ': 'ぱっ', 'パ': 'ぱっ',
+            'ぴ': 'ぴっ', 'ピ': 'ぴっ',
+            'ぷ': 'ぷっ', 'プ': 'ぷっ',
+            'ぺ': 'ぺっ', 'ペ': 'ぺっ',
+            'ぽ': 'ぽっ', 'ポ': 'ぽっ',
+            'ば': 'ばっ', 'バ': 'ばっ',
+            'び': 'びっ', 'ビ': 'びっ',
+            'ぶ': 'ぶっ', 'ブ': 'ぶっ',
+            'べ': 'べっ', 'ベ': 'べっ',
+            'ぼ': 'ぼっ', 'ボ': 'ぼっ',
+            'を': 'お',   'ヲ': 'お',
+            'らーめん': 'ラーメン',
+            'おはよう': 'おはよう！',
+            'こんにちは': 'こんにちは！',
+            'こんばんは': 'こんばんは！',
+            'さようなら': 'さようなら！',
+            'おなまえは': 'お名前は？'
         };
 
         function playJapaneseSpeech(text, rate = 0.85) {
@@ -3043,25 +3027,17 @@
 
             window.speechSynthesis.cancel();
 
-            let spokenText = text;
-            let targetPitch = 1.03;
-            let finalRate = rate;
-
-            if (singleKanaSpeechMap[text]) {
-                spokenText = singleKanaSpeechMap[text].speech;
-                targetPitch = singleKanaSpeechMap[text].pitch;
-                finalRate = Math.max(0.42, rate * singleKanaSpeechMap[text].rateScale);
-            } else if (phraseSpeechOverrides[text]) {
-                spokenText = phraseSpeechOverrides[text];
-            } else if (text.length === 2 && /[ゃゅょャュョ]/.test(text)) {
-                spokenText = `${text}ー、${text}`;
-                finalRate = Math.max(0.42, rate * 0.86);
+            // Tra cứu chuỗi đọc chuẩn (nếu là câu Màn 6 có ttsJp thì ưu tiên dùng ttsJp)
+            let spokenText = cleanSingleKanaMap[text] || text;
+            const quoteObj = stage5Quotes.find(q => q.fullJp === text);
+            if (quoteObj && quoteObj.ttsJp) {
+                spokenText = quoteObj.ttsJp;
             }
 
             const utterance = new SpeechSynthesisUtterance(spokenText);
             utterance.lang = 'ja-JP';
-            utterance.rate = finalRate;
-            utterance.pitch = targetPitch;
+            utterance.rate = rate;
+            utterance.pitch = 1.0;
             utterance.volume = 1.0;
 
             const jaVoice = cachedJaVoice || resolveJapaneseVoice();
@@ -3092,7 +3068,8 @@
 
         function playM5Audio(rate = 0.85) {
             if (m5ShuffledQuotes && m5FillIndex < m5ShuffledQuotes.length) {
-                playJapaneseSpeech(m5ShuffledQuotes[m5FillIndex].fullJp, rate);
+                const q = m5ShuffledQuotes[m5FillIndex];
+                playJapaneseSpeech(q.ttsJp || q.fullJp, rate);
             }
         }
 
